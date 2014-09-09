@@ -1,9 +1,16 @@
 /* ADD YOUR STYLES HERE */
 
 /*Add gray line under each table row*/
-td, th {
-	border-bottom: 1px solid rgb(200, 200, 200);
+.data-table td, .data-table th {
+	border-bottom: 1px solid #CCC;
 }
+
+
+/*DATA TABLE*/
+
+
+
+
 
 /*Remove separation of each element of Data Table*/
 .data-table {
@@ -21,10 +28,27 @@ td, th {
 	padding: 6px;
 }
 
+
+
+
+
+
+
+
+/*STATS TABLE*/
+
+
+
+
+
 /*Give the numbers in the Stats Table a large size and bold*/
 .stats div:first-child {
 	font-weight: bold;
 	font-size: 3em;
+}
+
+.stats td, .stats th {
+	border-bottom: 1px solid #CCC;
 }
 
 /*Dim the phrases under the numbers in the Stats Table*/
@@ -35,10 +59,124 @@ td, th {
 /*Move data in Stats Table to align center and give top & bottom border lines*/
 .stats {
 	text-align: center;
-	border-top: 1px solid rgb(200, 200, 200);
+	border-top: 1px solid #CCC;
 }
 
 /*Give Stats Table specific padding*/
 .stats td {
 	padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+/*BAR CHART*/
+
+
+
+/*Make the table fill the parent width*/
+.bar-chart {
+	width: 100%;
+}
+
+
+/*Specify width of header*/
+.bar-chart th {
+	width: 15%;
+	text-align: right;
+}
+
+/*Give color to the chart data*/
+.bar-chart td div {
+	background-color: #0CAAFF;
+	color: #FFF;
+	padding: 5px;
+	border-radius: 0 8px 8px 0;
+}
+
+
+
+
+
+/*LightBox*/
+
+
+
+
+/*Create Gray Background*/
+.lightbox-back {
+
+	/*Black color but slightly transparent*/
+	background-color: rgba(0, 0, 0, .6);
+
+	/*Force to include child margins*/
+	overflow: hidden;
+}
+
+.lightbox-front {
+
+	/*Make the box white*/
+	background-color: #FFF;
+
+
+	width: 50%;
+	
+	/*display: block;*/
+	border-radius: 10px;
+	
+	/*Give the text room*/
+	padding: 15px;
+
+	/*Center the Lightbox Front*/
+	margin: 15% auto;
+}
+
+/*Move anything at the bottom to the right edge of the lightbox front*/
+.lightbox-foot {
+	text-align: right;
+}
+
+
+
+
+/*Control appearance of clickable buttons*/
+.button {
+
+	/*Make button reddish*/
+	background-color: #EBB;
+
+	/*Make the text white*/
+	color: #FFF;
+
+	padding: 10px 40px;
+
+	border-radius: 5px;
+
+	/*Wrap entire block in parent element*/
+	display: inline-block;
+}
+
+
+
+
+/*MEDIA BLOCK*/
+
+
+
+
+/*Move image to left and force other elements to wrap around it*/
+.media-image {
+	float: left;
+	padding-right: 10px;
+	
+}
+
+/*Text next to image is kept as rectangle next to image*/
+.img-description {
+	overflow: hidden;
 }

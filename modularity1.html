@@ -105,7 +105,7 @@
 	    		<p class="instruction-text">Bar widths are set in the HTML as if they were populated from the back-end. Everything else should be styled with CSS.</p>
 					<div class="instruction-answer">
 			    	<!-- Edit here -->
-			    	<table>
+			    	<table class="bar-chart">
 			    		<tr>
 			    			<th>Javascript</th>
 			    			<td><div style="width: 99%">21%</div></td>
@@ -157,13 +157,13 @@
 	    		<p class="instruction-text">The lightbox should display arbitrary content, centered vertically and horizontally, with everything behind it (the rest of the page) darkened. It should obscure the entire screen, no matter where you are on the page. You may want to disable these styles when you're not actively working on them, otherwise they'll cover the whole page.</p>
 					<div class="instruction-answer">
 			    	<!-- Edit here -->
-			    	<div>
-			    		<div>
-				    		<div>
+			    	<div class="lightbox">
+			    		<div class="lightbox-back">
+				    		<div class="lightbox-front">
 					    		<h3>Hello</h3>
 						    	<p>Cupcake ipsum dolor sit amet. Gummies lemon drops pastry topping wypas jujubes gummi bears. Cotton candy powder topping bear claw halvah jelly beans bear claw. Chocolate cake ice cream gummies apple pie muffin wafer gummi bears. Cupcake ipsum dolor sit amet. Gummies lemon drops pastry topping wypas jujubes gummi bears. Cotton candy powder topping bear claw halvah jelly beans bear claw. Chocolate cake ice cream gummies apple pie muffin wafer gummi bears.</p>
-						    	<div>
-						    		<a>Close</a>
+						    	<div class="lightbox-foot">
+						    		<a class="button">Close</a>
 						    	</div>
 				    		</div>
 				    	</div>
@@ -178,8 +178,8 @@
 	    		<p class="instruction-text">A media block is a left-floated image with some content beside it. Think Facebook updates.</p>
 					<div class="instruction-answer">
 			    	<!-- Edit here -->
-			    	<img src="http://placehold.it/50">
-			    	<p>Cupcake ipsum dolor sit amet. Gummies lemon drops pastry topping wypas jujubes gummi bears. Cotton candy powder topping bear claw halvah jelly beans bear claw. Chocolate cake ice cream gummies apple pie muffin wafer gummi bears.</p>
+			    	<img class="media-image" src="http://placehold.it/50">
+			    	<p class="img-description">Cupcake ipsum dolor sit amet. Gummies lemon drops pastry topping wypas jujubes gummi bears. Cotton candy powder topping bear claw halvah jelly beans bear claw. Chocolate cake ice cream gummies apple pie muffin wafer gummi bears.</p>
 				    <!-- End editable area -->
 			    </div>
 
@@ -188,9 +188,9 @@
 		    	<!-- Edit here -->
 					<div class="instruction-answer">
 			    	<div>
-				    	<img src="http://placehold.it/50">
+				    	<img class="media-image" src="http://placehold.it/50">
 				    </div>
-			    	<div>
+			    	<div class="img-description">
 				    	<h2>Cupcake Ipsum</h2>
 				    	<p>Cupcake ipsum dolor sit amet. Gummies lemon drops pastry topping wypas jujubes gummi bears. Cotton candy powder topping bear claw halvah jelly beans bear claw. Chocolate cake ice cream gummies apple pie muffin wafer gummi bears.</p>
 				    </div>
@@ -202,24 +202,24 @@
 					<div class="instruction-answer">
 			    	<!-- Edit here -->
 			    	<div>
-				    	<img src="http://placehold.it/50">
+				    	<img class="media-image" src="http://placehold.it/50">
 				    </div>
-			    	<div>
+			    	<div class="img-description">
 				    	<h2>Cupcake Ipsum</h2>
 				    	<p>Cupcake ipsum dolor sit amet gummies lemon drops pastry topping wypas jujubes gummi bears. Cotton candy powder topping bear claw halvah jelly beans bear claw. Chocolate cake ice cream gummies apple pie muffin wafer gummi bears.</p>
 
 				    	<div>
-					    	<img src="http://placehold.it/32">
+					    	<img class="media-image" src="http://placehold.it/32">
 					    </div>
-				    	<div>
+				    	<div class="img-description">
 					    	<h2>I like cupcakes!</h2>
 					    	<p>Cupcake ipsum dolor sit amet caramels jelly beans. Faworki donut applicake cookie. Apple pie wafer gummies biscuit cupcake gummies pastry.</p>
 					    </div>
 
 				    	<div>
-					    	<img src="http://placehold.it/32">
+					    	<img class="media-image" src="http://placehold.it/32">
 					    </div>
-				    	<div>
+				    	<div class="img-description">
 					    	<h2>I like cupcakes, too!</h2>
 					    	<p>Cupcake ipsum dolor sit amet donut lemon drops carrot cake topping bonbon powder sweet roll. Lollipop jujubes bonbon chupa chups jelly beans.</p>
 					    </div>
