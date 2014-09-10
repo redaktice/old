@@ -58,4 +58,149 @@
 }
 
 
+
+
+
+
 /*BUTTONS*/
+
+
+/*Give each button a color and rounded edges*/
+.buttons {
+	background: #FA8794;
+	color: #FFF;
+	text-decoration: none;
+	padding: 1em 2em;
+	border-radius: 5px;
+	display: inline-block;
+	border: none;
+}
+
+
+/*Make a larger button*/
+.large {
+	font-size: 1.3em;
+}
+
+/*Make a medium button*/
+.medium {
+	font-size: .8em;
+}
+
+
+/*Make a small button*/
+.small {
+	font-size: .5em;
+	padding: 1em;
+}
+
+
+
+
+
+
+/*NAVIGATION*/
+
+
+
+/*Gives All navigatrion a color and rounded edges*/
+.navigation {
+	float: left;
+	background: #FA8794;
+	border-radius: 5px;
+}
+
+/*Force text changes in the navigation anchors*/
+.navigation a {
+	text-decoration: none;
+	color: #FFF;
+}
+
+
+/*Remove unordered list defaults*/
+.navigation ul {
+	list-style-type: none;
+	padding: 0
+}
+
+
+/*Space navigation elements horizontally*/
+.navigation li {
+	display: inline-block;
+	padding: .5em 2em;
+}
+
+/*Change navigation element color during hover*/
+.navigation li:hover {
+	background: #AAF;
+}
+
+/*Ensure correct border radius for left nav element*/
+.navigation li:first-child {
+	border-radius: 5px 0 0 5px;
+}
+
+/*Ensure correct border radius for right nav element*/
+.navigation li:last-child {
+	border-radius:  0 5px 5px 0;
+}
+
+
+
+/*PAGINATION*/
+
+
+/*Give containing element basic color and remove padding*/
+.pagination {
+	color: #FA8794;
+	list-style-type: none;
+	padding: 0;
+	width: 100%;
+	position: absolute;
+}
+
+/*Move each page number to horizontal with a bottom border and space*/
+.pagination li {
+	display: inline-block;
+	margin: 0 .4em;
+	padding: 0 .2em;
+	border-bottom: 3px solid #FA8794;
+	overflow: hidden;
+}
+
+/*Remove link decoration of anchored elements*/
+.pagination a, .pagination span {
+	text-decoration: none;
+	display: block;
+	padding: .2em .25em;
+	color: #FA8794;
+}
+
+/*Remove bottom-border from page advance/back buttons*/
+.pagination li:first-child, .pagination li:last-child{
+	border-bottom-color: white;
+	padding: 0;
+}
+
+/*Turn the current page number border a different color*/
+.pagination .pagination-selected {
+	color: #AAA;
+	border-bottom-color: #AAA;
+}
+
+/*Turn the current page number border a different color*/
+.pagination-selected span {
+	color: #AAA;
+	text-decoration: none;
+	display: block;
+	padding: .2em .25em;
+}
+
+
+
+
+
+
+/*COMMENT STREAM*/
+
+
