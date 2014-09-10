@@ -204,3 +204,67 @@
 /*COMMENT STREAM*/
 
 
+/*Make each comment container move below each other*/
+.comment-stream {
+	clear: both;
+}
+
+
+/*Move image to the left of the comment container*/
+.comment-stream-img {
+	margin: 10px 10px 0 0;
+	float: left;
+}
+
+/*Prevent text-wrapping for the comment description*/
+.comment-stream-comment {
+	overflow: hidden;
+}
+
+
+
+
+/*TABS*/
+
+/*Get rid of unordered list defaults*/
+.tab {
+	list-style-type: none;
+	padding: 0;
+}
+
+
+/*Give each tab container a border and display in a line*/
+.tab li {
+	display: inline-block;
+	margin: .25em 0 0 .5em;
+
+	padding: .4em .5em;
+
+	border: 1px solid #AAF;
+	border-radius: 5px 5px 0 0;
+
+	/*Move rendering down to cover line of tab-description*/
+	position: relative;
+	top: 1px;
+}
+
+/*Alter text in each tab*/
+.tab a {
+	text-decoration: none;
+	font-weight: bold;
+	color: #00F;
+}
+
+
+/*Change border for selected tab*/
+.tab .tab-selected {
+	border-bottom: 1px solid #FFF;
+}
+
+
+/*Giv tab description a border*/
+.tab-description {
+	padding: .5em;
+	border: 1px solid #AAF;
+	border-radius: 5px;
+}
