@@ -1,0 +1,43 @@
+/*Background*/
+body {
+	background-color: #889091;
+}
+
+.page-container {
+	position: relative;
+	width: 50%;
+	height: 100%;
+	margin: auto;
+}
+
+/*HEADER BLOCK*/
+
+
+/*Adjust the header box*/
+.page-header {
+	height: 200px;
+
+	background-color: #58C977;
+	color: #FFF;
+
+	position: relative;
+	padding: 10px;
+	border-bottom: 10px solid #4A6;
+}
+
+/*Give the page header a color and move to bottom left*/
+.page-header h1 {
+	position: absolute;
+	bottom: 0;
+}
+
+
+/*SIDE NAVIGATION*/
+.side-navigation {
+	background-color: #DDD;
+	overflow: hidden;
+}
+
+.side-navigation ul, .side-navigation a {
+	list-style-type: none;
+}
