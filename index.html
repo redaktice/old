@@ -108,52 +108,80 @@
 				</li>
 			</ol>
 		</div>
-		<p class="faded-text"><br><br>Posted by <span>Author</span> under <span>Web > Dev</span> on <span>January13, 2014.</span></p>
+		<p class="faded-text"><br><br>Posted by <span class="bold">Author</span> under <span class="bold">Web > Dev</span> on <span class="bold">January13, 2014.</span></p>
+
+		<!-- Bottom Of Page/Input Area -->
+		<br><br><br>
 		<div class="interface">
-			<h2 class="page-header">Comments</h2>
+			<h2>Comments</h2>
 			<form action="placeholder" class="feedback">
 				<fieldset>
-					<legend>USER INFO</legend>
-					Email: <input type="text"><br>
-					Disdplay Name: <input type="text"><br>
-					Website: <input type="text"><br>
+					<legend><span class="faded-text">USER INFO</span></legend>
+					<div class="input-section">
+						<div class="input-field">
+							<span class="field">Email</span>
+							<input type="text"><br>
+						</div>
+						<div class="input-field">
+							<span class="field">Display Name</span>
+							<input type="text"><br>
+						</div>
+						<div class="input-field">
+							<span class="field">Website</span>
+							<input type="text"><br>
+						</div>
+					</div>
 				</fieldset>
 			</form>
 			<form action="placeholder" class="feedback">
 				<fieldset>
-					<legend>COMMENT</legend>
-					<textarea></textarea>
+					<legend><span class="faded-text">COMMENT</span></legend>
+					<textarea class="textarea-comment"></textarea>
 				</fieldset>
 			</form>
 		</div>
 		<button class="button wide-button default-button">SUBMIT</button>
 		<div class="section">
-			<ul class="unstyled">
-				<li class="user-input">
-					<img class="dynamic-image" src="http://placehold.it/50x50" />
-					<span class="user">User 1</span>
-					<span class="faded-text">January 13, 2014</span>
-					<p class="section-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta incidunt doloremque provident corrupti commodi ipsam quod numquam fugit. Delectus velit, rerum ullam libero tempore quia officia ex deleniti dolor excepturi.</p>
-					<ul class="unstyled">
-						<li class="user-input">
-							<img class="dynamic-image" src="http://placehold.it/50x50" />
-							<span class="user">User 1</span>
-							<span class="faded-text">January 13, 2014</span>
-							<p class="section-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta incidunt doloremque provident corrupti commodi ipsam quod numquam fugit. Delectus velit, rerum ullam libero tempore quia officia ex deleniti dolor excepturi.</p>
+			<ul class="unstyled unstyled-flat">
+				<li>
+					<div class="user-content">
+						<img class="dynamic-image" src="http://placehold.it/50x50" />
+						<div class="user-info">
+							<h4>User 1</h4>
+							<span class="faded-text italics">January 13, 2014</span>
+							</div>
+						<p class="user-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta incidunt doloremque provident corrupti commodi ipsam quod numquam fugit. Delectus velit, rerum ullam libero tempore quia officia ex deleniti dolor excepturi.</p>
+					</div>
+					<ul class="unstyled sub-user-content">
+						<li>
+							<div class="user-content">
+								<img class="dynamic-image" src="http://placehold.it/50x50" />
+								<div class="user-info">
+								<h4>User 1</h4>
+									<span class="faded-text italics">January 13, 2014</span>
+								</div>
+								<p class="user-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta incidunt doloremque provident corrupti commodi ipsam quod numquam fugit. Delectus velit, rerum ullam libero tempore quia officia ex deleniti dolor excepturi.</p>
+							</div>
 						</li>
-						<li class="user-input">
-							<img class="dynamic-image" src="http://placehold.it/50x50" />
-							<span class="user">User 1</span>
-							<span class="faded-text">January 13, 2014</span>
-							<p class="section-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta incidunt doloremque provident corrupti commodi ipsam quod numquam fugit. Delectus velit, rerum ullam libero tempore quia officia ex deleniti dolor excepturi.</p>
+						<li>
+							<div class="user-content">
+								<img class="dynamic-image" src="http://placehold.it/50x50" />
+								<div class="user-info">
+									<h4>User 3</h4>
+									<span class="faded-text italics">January 13, 2014</span>
+								</div>
+								<p class="user-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta incidunt doloremque provident corrupti commodi ipsam quod numquam fugit. Delectus velit, rerum ullam libero tempore quia officia ex deleniti dolor excepturi.</p>
+							</div>
 						</li>
 					</ul>
 				</li>
-				<li class="user-input">
-					<img class="dynamic-image" src="http://placehold.it/50x50" />
-					<span class="user">User 1</span>
-					<span class="faded-text">January 13, 2014</span>
-					<p class="section-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta incidunt doloremque provident corrupti commodi ipsam quod numquam fugit. Delectus velit, rerum ullam libero tempore quia officia ex deleniti dolor excepturi.</p>
+				<li>
+					<div class="user-content">
+						<img class="dynamic-image" src="http://placehold.it/50x50" />
+						<h4 class="user">User 2</h4>
+						<span class="faded-text italics">January 13, 2014</span>
+						<p class="user-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta incidunt doloremque provident corrupti commodi ipsam quod numquam fugit. Delectus velit, rerum ullam libero tempore quia officia ex deleniti dolor excepturi.</p>
+					</div>
 				</li>
 			</ul>
 		</div>
@@ -161,32 +189,32 @@
 	
 	<!-- Side-Navigation-->
 	<nav class="side-navigation">
-		<ul class="unstyled">
+		<ul class="unstyled unstyled-flat navigation-main">
 			<li>
 				<span class="navigation-header">Recent Posts</span>
-				<ul class="unstyled">
+				<ul class="unstyled navigation-subclass">
 					<li>
-						<a href="#">Another Post</a>
+						<a href="#" class="faded-text">Another Post</a>
 					</li>
 					<li>
-						<a href="#">A Cool Story</a>
+						<a href="#" class="faded-text">A Cool Story</a>
 					</li>
 					<li>
-						<a href="#">Useful Tips and Tricks</a>
+						<a href="#" class="faded-text">Useful Tips and Tricks</a>
 					</li>
 				</ul>
 			</li>
 			<li>
 				<span class="navigation-header">Categories</span>
-				<ul class="unstyled">
+				<ul class="unstyled navigation-subclass">
 					<li>
-						<a href="#">Web</a>
+						<a href="#" class="faded-text">Web</a>
 					</li>
 					<li>
-						<a href="#">Dev</a>
+						<a href="#" class="faded-text">Dev</a>
 					</li>
 					<li>
-						<a href="#">CSS</a>
+						<a href="#" class="faded-text">CSS</a>
 					</li>
 				</ul>
 			</li>

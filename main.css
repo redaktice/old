@@ -1,27 +1,34 @@
 /*Background*/
 
-/*ELEMENTS*/
+/*-----------------------------ELEMENTS-------------------------*/
 
 /*Change page background*/
 body {
 	background-color: #889091;
 }
 
-
-/*Remove default margin ordered lists*/
-.default-list {
-	/*margin: 0;*/
-	/*padding: 0;*/
+/*Indent Legens by a little-bit*/
+legend {
+	margin: 0 1em;
+	padding: 0 1em;
 }
 
+
+/*Make all legends only have the top bar*/
+fieldset {
+	border: none;
+	border-top: 1px solid #AAA;
+}
+
+
+
+
+/*----------------------SUB-CLASSES------------------------------*/
+
+/*Remove unncecessary margins for ordered lists*/
 .default-list li {
 	margin: 0 0 1em 0;
 }
-
-/*SUB-CLASSES*/
-
-
-
 
 
 /*Container of all elements except side-navigation*/
@@ -51,17 +58,6 @@ body {
 
 
 
-
-/*Create unordered and unstyled list*/
-	.unstyled {
-		list-style-type: none;
-	}
-
-	.unstyled a {
-		text-decoration: none;
-	}
-
-
 /*Give unordered list headers a weight*/
 .navigation-header {
 	font-weight: bold;
@@ -77,12 +73,27 @@ body {
 
 
 
-/*CLASSES*/
+/*--------------------------CLASSES---------------------------*/
 
 
 
+/*Create unordered and unstyled list*/
+	.unstyled {
+		list-style-type: none;
+	}
 
-/*TITLE BLOCK*/
+	.unstyled a {
+		text-decoration: none;
+	}
+
+	/*Remove padding from main lists*/
+	.unstyled-flat {
+		padding-left: 0;
+	}
+
+/*===================================================
+TITLE BLOCK
+===================================================*/
 
 
 /*Adjust the title box*/
@@ -122,14 +133,15 @@ line-height: 1.5em
 
 
 
-/*BAR NAVIGATION*/
+/*===================================================
+BAR NAVIGATION
+===================================================*/
 
-/**/
+/*Make container for bar navigation*/
 .bar-navigation {
 	background-color: #40445A;
 	border-bottom: 7px solid #224;
 	overflow: hidden;
-
 }
 
 /*Move buttons to the right side*/
@@ -147,7 +159,9 @@ line-height: 1.5em
 
 
 
-/*SPECIAL TEXT*/
+/*===================================================
+SPECIAL TEXT
+===================================================*/
 
 /*Bold text*/
 .bold {
@@ -164,13 +178,16 @@ line-height: 1.5em
 	font-style: italic;
 }
 
+/*Grey text*/
 .faded-text {
-	color: #CCC;
+	color: #AAA;
 }
 
 
 
-/*SECTIONS*/
+/*===================================================
+SECTIONS
+===================================================*/
 
 /*Create a section header with an underline*/
 .section-head {
@@ -182,7 +199,9 @@ line-height: 1.5em
 
 
 
-/*TABLES*/
+/*===================================================
+TABLES
+===================================================*/
 
 /*Space out tables*/
 .boxed-table {
@@ -195,7 +214,6 @@ line-height: 1.5em
 	background-color: #C4C5C8;
 	border: 1px solid #999;
 	padding: .5em 1em;
-
 }
 
 /*Give table borders*/
@@ -208,7 +226,9 @@ line-height: 1.5em
 
 
 
-/*BUTTONS*/
+/*===================================================
+BUTTONS
+===================================================*/
 
 
 /*Make buttons align center with white text*/
@@ -218,6 +238,7 @@ line-height: 1.5em
 	color: #FFF;
 }
 
+/*Makes a button sized according to contents*/
 .small-button {
 	background-color: #59E;
 	padding: .5em 1.5em;
@@ -235,7 +256,11 @@ line-height: 1.5em
 
 
 
-/*EXAMPLE CODES*/
+/*===================================================
+EXAMPLE CODES
+===================================================*/
+
+
 
 /*Give background color*/
 .example-code{
@@ -251,31 +276,130 @@ line-height: 1.5em
 
 
 
-/*IMAGES*/
+/*===================================================
+IMAGES
+===================================================*/
+
+
+/*Create an image that spans the page*/
 .section-img {
-	margin: 0;
+	margin: 1em 0 0 0;
 	width: 100%;
 }
 
 
-/*SIDE NAVIGATION*/
+
+
+/* ================================================
+INPUT SECTION
+===================================================*/
+
+/*Give the input fields spacing*/
+.input-section {
+	margin: 25px 0;
+}
+
+
+/*Create separate container for names of input-fields*/
+.field {
+	text-align: right;
+	display: inline-block;
+	width: 25%;
+	margin: 0 .5em .5em 0;
+}
+
+/*Create a container for the inputs that sit next to the input-fields*/
+.input-section input {
+	display: inline-block;
+	width: 50%;
+}
+
+/*Specify the size of the textarea*/
+.textarea-comment {
+	width: 100%;
+	height: 150px;
+}
 
 
 
+/*===================================================
+USER COMMENTS
+===================================================*/
+
+
+/*Separate each user comment*/
+.user-content {
+	position: relative;
+	margin-top: 2em;
+}
+
+/*Keep user image to the left and give it space*/
+.dynamic-image {
+	display: inline-block;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
+/*Move user and user date against image*/
+.user-info {
+	float: left;
+}
+
+
+/*Change spacing around user name*/
+.user-info h4 {
+	margin: .25em 0 .5em 0;
+
+}
+
+/*Keep user comments below user info/image*/
+.user-text {
+	margin-top: .5em;
+	clear: both;
+}
+
+/*Create sub-comment division*/
+.sub-user-content {
+	margin-left: 5%;
+	padding-left: 10px;
+	border-left: 1px solid #AAA;
+}
+
+
+
+
+
+/* ===================================================
+SIDE NAVIGATION
+======================================================*/
+
+
+/*Create a side navigation to scroll with window*/
 .side-navigation {
-	background-color: #DDD;
+	background-color: #EEE;
 	overflow: hidden;
 	position: fixed;
 	border-bottom: 5px solid #444;
-	top: 300px;
+	top: 200px;
 
 	/*Move side-navigation to right of content*/
 	left: 50%;
 	margin-left: 28%;
 }
 
+/*Move sub-navigation left*/
+.navigation-subclass {
+	padding: .25em 0;
+	margin: 0 .25em;
+}
 
+/*Give each navigation item padding*/
+.side-navigation li {
+	padding: .5em 0;
+}
 
-
-/*USEFUL TAGS*/
-/*<nav><code><pre><fieldset><legend><input><textarea>*/
+/*Give the entire navigation room inside its container*/
+.navigation-main{
+	margin: 1em;
+}
