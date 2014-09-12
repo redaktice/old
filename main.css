@@ -8,8 +8,15 @@ body {
 }
 
 
+/*Remove default margin ordered lists*/
+.default-list {
+	/*margin: 0;*/
+	/*padding: 0;*/
+}
 
-
+.default-list li {
+	margin: 0 0 1em 0;
+}
 
 /*SUB-CLASSES*/
 
@@ -22,13 +29,19 @@ body {
 	width: 50%;
 	height: 100%;
 	margin: 15px auto 0 auto;
-	background-color: #FFF;
+	background-color: #EEE;
 }
 
-.section-box {
+/*Give padding to section containers*/
+.section-container {
 	padding: 10px;
 }
 
+
+/*Give a padding to the main body of the page*/
+.main-body {
+	padding: 0 25px 25px 25px;
+}
 
 
 /*Make a list display horizontal*/
@@ -42,15 +55,11 @@ body {
 /*Create unordered and unstyled list*/
 	.unstyled {
 		list-style-type: none;
-		padding: 0 10px;
-		margin: 0 0 10px 0;
 	}
 
 	.unstyled a {
 		text-decoration: none;
 	}
-
-
 
 
 /*Give unordered list headers a weight*/
@@ -63,19 +72,20 @@ body {
 
 
 
+
+
+
+
+
 /*CLASSES*/
 
 
 
 
+/*TITLE BLOCK*/
 
 
-
-
-/*HEADER BLOCK*/
-
-
-/*Adjust the header box*/
+/*Adjust the title box*/
 .page-title {
 	position: relative;
 	height: 200px;
@@ -86,10 +96,26 @@ body {
 	border-bottom: 10px solid #40A955;
 }
 
-/*Give the page header a color and move to bottom left*/
+/*Give the page title a color and move to bottom left*/
 .page-title .title-text {
 	position: absolute;
 	bottom: 0;
+}
+
+/*Give padding to the text inside the main page body*/
+.body-text {
+	padding: 0 3em;
+}
+
+/*Space out the text*/
+.spaced-text {
+line-height: 1.5em
+}
+
+
+/*Makes larger spacing for main page header*/
+.page-header {
+	padding: 1em 0;
 }
 
 
@@ -98,8 +124,9 @@ body {
 
 /*BAR NAVIGATION*/
 
+/**/
 .bar-navigation {
-	background-color: #44445C;
+	background-color: #40445A;
 	border-bottom: 7px solid #224;
 	overflow: hidden;
 
@@ -107,17 +134,128 @@ body {
 
 /*Move buttons to the right side*/
 .bar-navigation .unstyled {
-	/*right: 0;*/
+	text-align: right;
+	padding: 0;
+	margin: 0 1em 0 0;
 }
 
+/*Alter the nav bar buttons*/
 .bar-navigation li {
-	color: #FFF;
-	padding: 0 5px 0 3em;
-	float: right;
-
+	padding: 0 5px 0 2em;
 }
 
 
+
+
+/*SPECIAL TEXT*/
+
+/*Bold text*/
+.bold {
+	font-weight: bold;
+}
+
+/*Highlighted text*/
+.highlighted {
+	color: #DC7070;
+}
+
+/*Italics*/
+.italics {
+	font-style: italic;
+}
+
+.faded-text {
+	color: #CCC;
+}
+
+
+
+/*SECTIONS*/
+
+/*Create a section header with an underline*/
+.section-head {
+	border-bottom: 1px solid #CCC;
+	padding: .5em;
+	margin-top: 2em;
+}
+
+
+
+
+/*TABLES*/
+
+/*Space out tables*/
+.boxed-table {
+	margin: 20px;
+}
+
+/*Differentiate table headers*/
+.boxed-table th {
+	text-align: left;
+	background-color: #C4C5C8;
+	border: 1px solid #999;
+	padding: .5em 1em;
+
+}
+
+/*Give table borders*/
+.boxed-table td {
+	border: 1px solid #999;
+	text-align: left;
+	padding: .5em 1em;
+}
+
+
+
+
+/*BUTTONS*/
+
+
+/*Make buttons align center with white text*/
+.button {
+	text-align: center;
+	display: inline-block;
+	color: #FFF;
+}
+
+.small-button {
+	background-color: #59E;
+	padding: .5em 1.5em;
+}
+
+
+/*Makes full width buttons*/
+.wide-button {
+	display: block;
+	background-color: #F00;
+	padding: .5em;
+	width: 100%;
+}
+
+
+
+
+/*EXAMPLE CODES*/
+
+/*Give background color*/
+.example-code{
+	background-color: #C4C5C8;
+}
+
+/*Add padding to example-code text*/
+.example-code pre {
+	padding: 2em 2.5em;
+}
+
+
+
+
+
+/*IMAGES*/
+.section-img {
+	margin: 0;
+	width: 100%;
+}
 
 
 /*SIDE NAVIGATION*/
@@ -129,26 +267,15 @@ body {
 	overflow: hidden;
 	position: fixed;
 	border-bottom: 5px solid #444;
-	top: 100px;
+	top: 300px;
 
 	/*Move side-navigation to right of content*/
 	left: 50%;
 	margin-left: 28%;
 }
 
-.section-example {
-	background-color: #C4C5C8;
-}
+
 
 
 /*USEFUL TAGS*/
 /*<nav><code><pre><fieldset><legend><input><textarea>*/
-
-
-/*CLASSES*/
-
-/*section-box - used to create a containing box with a small bottom border*/
-/*unstyled - creates unordered lists with no text decoration or style*/
-/*.side-navigation - contains side navigation box*/
-/*bar-navigation - contains bar navigator at top*/
-/*navigation-header - contains unordered list headers

@@ -8,73 +8,107 @@
 </head>
 <body>
 	<div class="page-container">
-		<div class="section-box page-title">
+		<div class="section-container page-title">
 			<h1 class="title-text">My Website</h1>
 		</div>
-
+		
 		<!-- Sub-Head Navigation -->
-		<nav class="section-box bar-navigation">
+		<nav class="section-container bar-navigation">
 			<ul class="unstyled horizontal-list">
-				<li>HOME</li>
-				<li>ALL POSTS</li>
-				<li>ABOUT US</li>
+				<li>
+				<a href="#" class="button">HOME</a>
+				</li>
+				<li>
+					<a href="#" class="button">ALL POSTS</a>
+				</li>
+				<li>
+					<a href="#" class="button">ABOUT US</a>
+				</li>
 			</ul>
 		</nav>
+		<div class="main-body">
 		<h2 class="page-header">Article Title</h2>
-		<p class="main-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias temporibus, dignissimos doloribus. Porro magni commodi pariatur laborum beatae a adipisci modi illo iure, ipsa obcaecati quibusdam impedit eos minus! Rem.
+		<p class="body-text spaced-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias temporibus, dignissimos doloribus. Porro magni commodi pariatur laborum beatae a adipisci modi illo iure, ipsa obcaecati quibusdam impedit eos minus! Rem.
 		</p>
-		<p class="main-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span>Alias</span> temporibus, dignissimos doloribus. Porro magni commodi pariatur laborum beatae a <span>adipisci modi</span> illo iure, ipsa obcaecati quibusdam impedit eos minus! Rem.</p>
-		<div class="section">
-			<div class="section-head">
-				<h3>Section Title</h3>
-			</div>
-			<div class="section-text">
+		<p class="body-text spaced-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span class="bold">Alias</span> temporibus, dignissimos doloribus. Porro magni commodi pariatur laborum beatae a <span class="highlighted">adipisci modi</span> illo iure, ipsa obcaecati <span class="italics">quibusdam impedit eos</span> minus! Rem.</p>
+		<div class="section">			
+			<h3 class="section-head">Section Title</h3>
+			<div class="body-text spaced-text">
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, est modi! Tempora hic nisi totam magni facilis eos mollitia, ipsum id quis? Nemo laborum illum praesentium culpa, inventore, error quas?
 			</div>
-			<div class="section-table">
-				<table>
+			<table class="boxed-table section-table">
+				<tr>
 					<th>What</th>
 					<th>Where</th>
 					<th>How</th>
-				</table>
-			</div>
-			<div class="section-text">
+				</tr>
+				<tr>
+					<td>HTML</td>
+					<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique cupiditate et numquam ducimus adipisci, libero aliquid, voluptates minus ipsum consequatur distinctio asperiores harum doloremque. Iste magni in, praesentium iusto velit?</td>
+					<td>
+						<button class="button small-button">Go!</button>
+					</td>
+				</tr>	
+				<tr>
+					<td>CSS</td>
+					<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, autem, vel. Nam alias nesciunt porro rem, hic ipsum qui optio, excepturi quod quas facilis similique veritatis. Unde obcaecati, necessitatibus delectus.</td>
+					<td>
+						<button class="button small-button">Try!</button
+					</td>
+				</tr>
+				<tr>
+					<td>JS</td>
+					<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ad aperiam, quos sapiente labore, repudiandae aliquid mollitia, vero officia dolorum illo veniam in voluptate aspernatur molestias maxime enim numquam nulla.</td>
+					<td>
+						<button class="button small-button">View!</button>
+					</td>
+				</tr>	
+			</table>
+			<div class="body-text spaced-text">
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, dolorum! Deserunt iure quos accusantium impedit, eveniet perferendis laborum repellat minus, voluptate veritatis perspiciatis. Facere id molestias, maxime perspiciatis impedit rem.
 			</div>
 		</div>
 		<div class="section">
-			<div class="section-head">
-				<h3>Section Title</h3>
-			</div>
-			<div class="section-text">
+			<h3 class="section-head">Section Title</h3>
+			<div class="body-text spaced-text">
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, est modi! Tempora hic nisi totam magni facilis eos mollitia, ipsum id quis? Nemo laborum illum praesentium culpa, inventore, error quas?
 			</div>
 			<div class="section-example">
 				<div class="example-code">
 					<code>
-						<pre>
-$('#myElement').click(function()) {
+<pre>$('#myElement').click(function()) {
   console.log('Clicked!')
-});
-						</pre>
+});</pre>
 					</code>
 				</div>
-			<p class="section-text">
+			<p class="body-text spaced-text">
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni optio, est ea ullam! Doloribus natus unde, dicta distinctio, fuga dolor earum, porro excepturi perspiciatis perferendis, velit id corporis cum delectus!
 			</p>
-			<p class="section-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil magnam nesciunt, porro ex quod praesentium non ullam eos veritatis repellendus quidem. Ab vel, esse velit quo quam deleniti modi facere.
+			<p class="body-text spaced-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil magnam nesciunt, porro ex quod praesentium non ullam eos veritatis repellendus quidem. Ab vel, esse velit quo quam deleniti modi facere.
 			</p>
 		</div>
 		<div class="section">
-			<div class="section-head">
-				<h3>Section Title</h3>
-			</div>
-			<div class="section-text">
+			<h3 class="section-head">Section Title</h3>
+			<div class="body-text spaced-text">
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, est modi! Tempora hic nisi totam magni facilis eos mollitia, ipsum id quis? Nemo laborum illum praesentium culpa, inventore, error quas?
 			</div>
-			<img class="section-img" src="http://placehold.it/350x150" />
+			<img class="section-img" src="http://placehold.it/650x150" />
+			<ol class="default-list">
+				<li class="spaced-text">
+				<span class="bold">Create HTML:</span>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus recusandae, aliquid adipisci magni incidunt! Dolore molestiae tenetur consectetur quas, molestias, repellendus temporibus. Facere iste ducimus dolorum dolorem. Sint quasi, possimus.
+				</li>
+				<li class="spaced-text">
+				<span class="bold">Make Pretty with CSS:</span>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus recusandae, aliquid adipisci magni incidunt! Dolore molestiae tenetur consectetur quas, molestias, repellendus temporibus. Facere iste ducimus dolorum dolorem. Sint quasi, possimus.
+				</li>
+				<li class="spaced-text">
+				<span class="bold">Profit:</span>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus recusandae, aliquid adipisci magni incidunt! Dolore molestiae tenetur consectetur quas, molestias, repellendus temporibus. Facere iste ducimus dolorum dolorem. Sint quasi, possimus.
+				</li>
+			</ol>
 		</div>
-		<p class="faded-text">Posted by <span>Author</span> under <span>Web>Dev</span> on <span>January13, 2014.</span></p>
+		<p class="faded-text"><br><br>Posted by <span>Author</span> under <span>Web > Dev</span> on <span>January13, 2014.</span></p>
 		<div class="interface">
 			<h2 class="page-header">Comments</h2>
 			<form action="placeholder" class="feedback">
@@ -92,7 +126,7 @@ $('#myElement').click(function()) {
 				</fieldset>
 			</form>
 		</div>
-		<div class="button">SUBMIT</div>
+		<button class="button wide-button default-button">SUBMIT</button>
 		<div class="section">
 			<ul class="unstyled">
 				<li class="user-input">
@@ -124,7 +158,7 @@ $('#myElement').click(function()) {
 			</ul>
 		</div>
 	</div>
-
+	
 	<!-- Side-Navigation-->
 	<nav class="side-navigation">
 		<ul class="unstyled">
