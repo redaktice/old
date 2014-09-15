@@ -1,0 +1,192 @@
+/* ==================================================
+BACKGROUND
+====================================================*/
+
+/*Background Color*/
+body {
+	background-color: #ECB;
+	margin: 0;
+	padding: 0
+}
+
+
+
+
+
+
+/* ==================================================
+GENERAL-CLASSES
+====================================================*/
+
+/*Create a list without any bullet-points*/
+.unstyled-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+
+/*Remove default margin for header elements*/
+.header {
+	margin: .5em 0;
+	border-bottom: 1px solid #AAA;
+	padding: 0 1em;
+	display: inline-block;
+}
+
+
+
+
+
+
+/* ==================================================
+MAIN BODY
+====================================================*/
+
+/*Give main body color and scaling*/
+.page-body {
+	background-color: #EEE;
+	width: 50%;
+	height: 100%;
+	margin: auto;
+	border: 2px solid #000;
+
+	max-width: 960px;
+}
+
+/*Indent the content of the main container*/
+.main-body {
+	padding: 0 5%;
+}
+
+/*Indent the text from the headers*/
+.main-text {
+	padding: 0 2em;
+}
+
+
+/*Space out each section*/
+.section {
+	margin-bottom: 4em;
+}
+
+/* ==================================================
+PAGE TITLE
+====================================================*/
+
+/*Give box around the page title*/
+.page-title {
+	background-color: #CDC;
+
+	position: relative;
+	padding: 1em;
+	border: 5px solid #AAA;
+
+	text-align: center;
+}
+
+
+/*Remove margins from the title text*/
+.title {
+	margin: 0;
+}
+
+
+
+
+
+/* ==================================================
+NAVIGATION BAR
+====================================================*/
+
+/*Give navigation section a color and area*/
+.nav-section {
+	background-color: #ABC;
+	padding: .5em .5em;
+	overflow: hidden;
+
+	text-align: center;
+}
+
+/*Place nav buttons in a row and give padding*/
+.nav-section li {
+	display: inline-block;
+	padding: .2em 0;
+}
+
+/*Change the color of the nav buttons*/
+.nav-section .button {
+	background-color: #DCA0B3;
+}
+
+
+/* ==================================================
+PAGE HEADER
+====================================================*/
+
+/*Center the page header*/
+.main-header {
+	padding: 1em 0;
+	margin-bottom: 2em;
+
+	text-align: center;
+}
+
+
+/*Align the sub-text*/
+.qualifier {
+	margin: 0;
+}
+
+
+
+/* ==================================================
+BUTTONS
+====================================================*/
+
+/*Default buttons have padding and bold text*/
+.button {
+	margin: 0;
+	padding: .3em .8em;
+	display: inline-block;
+	font-weight: bold;
+}
+
+
+/* ==================================================
+IMAGES
+====================================================*/
+
+/*Create a container to control each image*/
+.image-container {
+	padding: 1em;
+	text-align: center;
+}
+
+/*Scale large image*/
+.large-image {
+	max-width: 100%;
+	margin: 0;
+}
+
+/*Make small images align horizontally*/
+.image-array {
+	display: inline-block;
+}
+
+/*Stack images and make them full width at break point*/
+@media all and (max-width: 1205px) {
+	.image-array {
+		max-width: 100%;
+		display: block;
+	}
+
+	.small-image {
+		width: 100%;
+	}
+}
+
+/*Create a series of images that align horizontally*/
+.horizontal-images {
+	text-align: center;
+}
