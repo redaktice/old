@@ -1,6 +1,6 @@
 
 // Gather information about the victims
-var totalVictims = prompt("How many victims are there?");
+var totalVictims = (prompt("How many victims are there?"));
 
 var victimNameArray = [];
 var victimPhoneArray = [];
