@@ -1,5 +1,6 @@
-$(document).on('ready', function() {
- 
+$(document).on('ready', function(e) {
+
+
 /* ================================================
 					SHELL
 ================================================
@@ -16,8 +17,8 @@ var innerShell = $("<div class='inner-shell'></div>");
  */
 
 var freqBox = $("<div class='empty-box frequencies'></div>");
-var freqAM = $("<ul class='horizontal-list unstyled label'></ul>");
-var freqFM = $("<ul class='horizontal-list unstyled label'></ul>");
+var freqAM = $("<ul class='unstyled label'></ul>");
+var freqFM = $("<ul class='unstyled label'></ul>");
 
 // Declare arrays to store frequencies
 var freqAMList = ["AM", 53, 60, 70, 110, 140, 170];
@@ -45,7 +46,12 @@ freqAM.append(frequenciesAM);
 freqFM.append(frequenciesFM);
 
 
+/* ================================================
+					ALL VISUALS
+================================================
+ */
 
+var visualContainer = $("<div class='visual-container'></div>")
 
 
 
@@ -54,9 +60,9 @@ freqFM.append(frequenciesFM);
 ================================================
  */
 
-var externalLabels = $("<div class='empty-box'></div>");
-var timeLabel = $("<div class='label'>AM/PM</div>")
-var autoLabel = $("<div class='label'>Auto</div>")
+var externalLabels = $("<div class='label-box'></div>");
+var timeLabel = $("<div class='external label'>AM/PM</div>")
+var autoLabel = $("<div class='external label'>Auto</div>")
 
 
 
@@ -73,13 +79,41 @@ externalLabels.append(autoLabel);
 ================================================
  */
 
-var display = $("<div class='solid-box screen'></div>");
-var indicator = $("<h1 class = 'clock-display indicator unspaced'>.</h1>")
-var time = $("<h1 class = 'clock-display unspaced'>12:17</h1>")
+
+
+var display = $("<div class='screen'></div>");
+var indicator = $("<h1 class = 'clock-display indicator'>.</h1>");
+var time = $("<h1 class = 'clock-display'></h1>");
 
 
 display.append(indicator);
 display.append(time);
+
+// Creates a text value for the time
+var getTime = function() {
+
+	var date = new Date();
+
+	// Ensure a two digit minute representation
+		if (date.getMinutes() < 10) {
+
+			var timeVar = date.getHours() + ":0" + date.getMinutes();
+		}
+
+		else {
+			var timeVar = date.getHours() + ":" + date.getMinutes();
+		};
+
+	time.text(timeVar);
+
+};
+
+// Update time every second
+setInterval(getTime, 1000);
+
+// Call to get time without first 1 second delay
+getTime();
+
 
 
 
@@ -89,10 +123,11 @@ display.append(time);
  */
 
 // Build Inside-Out
+innerShell.append(visualContainer);
 
-innerShell.append(externalLabels);
-innerShell.append(display);
-innerShell.append(freqBox);
+visualContainer.append(externalLabels);
+visualContainer.append(display);
+visualContainer.append(freqBox);
 
 freqBox.append(freqAM);
 freqBox.append(freqFM);

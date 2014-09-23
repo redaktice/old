@@ -6,6 +6,14 @@
 }
 
 
+/*Box containing all labels and times*/
+.visual-container {
+	position: relative;
+	display: block;
+	margin: 0 10%;
+	padding-top: 1em;
+	overflow: hidden;
+}
 
 /* ================================================
 					SHELL
@@ -15,7 +23,7 @@
 
 /*Make the outer part of the clock*/
 .outer-shell {
-	background-color: #333;
+	background-color: #444;
 	position: relative;
 	overflow: hidden;
 	width: 100%;
@@ -38,33 +46,33 @@
 .screen {
 	background-color: #400;
 	position: relative;
-	margin: 0 10%;
+	width: 88%;
+	display: inline-block;
 	overflow: hidden;
 	text-align: center;
 	font-size: 2em;
-	/*height: 25%;*/
-	/*padding: 15% 10%;*/
 }
 
 /*Display text on the clock screen*/
 .clock-display {
 	color: #D22;
 	font-weight: bolder;
-}
-
-.unspaced {
 	margin: 0;
-	padding: 0;
+
 }
 
 
+/*Move AM/PM Auto indicator to the left*/
 .indicator {
-	/*display: inline;*/
 	float: left;
+	margin: 0 0 0 10px;
 }
 
+/*Adjust the displayed clock time*/
 .time {
 	display: inline;
+	margin: 0;
+	padding: 0;
 }
 
 
@@ -74,29 +82,45 @@
 ================================================
  */
 
+
+/*Center the frequency indicators*/
 .frequencies {
-	margin: auto;
-}
-.unstyled {
-	list-style-type: none;
-	text-align: center;
 	margin: 0;
-	/*width: 100%;*/
+	padding-left: 12%;
+	width: 100%;
 }
 
-.unstyled li {
-	display: inline-block;
-	margin: 0 3em 0 0;
-}
+/*Creates an unordered list with no markings*/
+	.unstyled {
+		list-style-type: none;
+		/*text-align: center;*/
+		padding: 0;
+		margin: 0;
+	}
 
-.horizontal-list {
-	/*float: left;*/
-}
+	.unstyled li {
+		display: inline-block;
+		margin: 0 2.75em 0 0;
+	}
 
 /* ================================================
 					EXTERNAL LABELS
 ================================================
  */
+
+/*Create a container for the AM/PM Auto Labels*/
+.label-box {
+	display: inline-block;
+	overflow: hidden;
+	width: 12%;
+}
+
+/*Space out the AM/PM Auto labels*/
+.external {
+	margin: 1.5em 0 .5em 0;
+}
+
+/*Create the AM/PM Auto label*/
 .label {
-	color: #FFF
+	color: #FFF;
 }
