@@ -1,0 +1,102 @@
+/*Create the basic clock*/
+.container {
+	width: 40%;
+	height: 150px;
+	margin: auto;
+}
+
+
+
+/* ================================================
+					SHELL
+================================================
+ */
+
+
+/*Make the outer part of the clock*/
+.outer-shell {
+	background-color: #333;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+}
+
+/*Make the inner part of the clock*/
+.inner-shell {
+	background-color: #000;
+	position: relative;
+	margin: 10%;
+}
+
+
+/* ================================================
+					CLOCK FACE
+================================================
+ */
+
+/*Create the basic screen*/
+.screen {
+	background-color: #400;
+	position: relative;
+	margin: 0 10%;
+	overflow: hidden;
+	text-align: center;
+	font-size: 2em;
+	/*height: 25%;*/
+	/*padding: 15% 10%;*/
+}
+
+/*Display text on the clock screen*/
+.clock-display {
+	color: #D22;
+	font-weight: bolder;
+}
+
+.unspaced {
+	margin: 0;
+	padding: 0;
+}
+
+
+.indicator {
+	/*display: inline;*/
+	float: left;
+}
+
+.time {
+	display: inline;
+}
+
+
+
+/* ================================================
+					FREQUENCIES
+================================================
+ */
+
+.frequencies {
+	margin: auto;
+}
+.unstyled {
+	list-style-type: none;
+	text-align: center;
+	margin: 0;
+	/*width: 100%;*/
+}
+
+.unstyled li {
+	display: inline-block;
+	margin: 0 3em 0 0;
+}
+
+.horizontal-list {
+	/*float: left;*/
+}
+
+/* ================================================
+					EXTERNAL LABELS
+================================================
+ */
+.label {
+	color: #FFF
+}
