@@ -175,16 +175,64 @@ var vowels = function (newString) {
 // Check if array pair is the same
 var twins = function (nArray) {
 
-	for (var i = 0; i<nArray.length; i+= 2);
+	for (var i = 0; i<nArray.length; i+= 2) {
 
-		if (nArray[i] === nArray[i+1]) {
-			return true;
+		if (nArray[i] !== nArray[i+1]) {
+			return false;
 		}
-
-		return false;
+	}
+	return true;
 };
 
-twins(['a', 'd', 'b', 'b', 'c', 'c'])
+twins(['a', 'a', 'b', 'b', 'c', 'c']);
+
+
+
+
+
+
+
+
+
+
+// PROBLEM 9
+
+// Check if there is a true boolean in an array
+var or = function (boolArray) {
+
+	for (var i = 0; i<boolArray.length; i++) {
+
+		if (boolArray[i]) {
+			return true;
+		}
+	}
+	return false;
+};
+
+or([false, false, true]);
+
+
+
+
+
+
+
+// PROBLEM 10
+
+// Creates an array of only unique items in an array of strings
+var unique = function (stringsArray) {
+
+	var uniqueArray = [];
+
+	for (var i = 0; i<stringsArray.length; i++) {
+			if (uniqueArray.indexOf(stringsArray[i]) === -1) {
+				uniqueArray.push(stringsArray[i]);
+			}
+	}
+	 return uniqueArray;
+};
+
+unique(['a', 'a', 'b', 'b', 'c', 'c']);
 
 
 
