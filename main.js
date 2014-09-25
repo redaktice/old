@@ -45,5 +45,17 @@ for (var i=0; i<students.length; i++) {
 // Print out the name "is from" city for the students form Boulder
 
 for (var i=0; i<students.length; i++) {
-	console.log(students[i].name + ' is from', students[i].city === "Boulder");
+	if (students[i].city === 'Boulder')
+	console.log(students[i].name + ' is from', students[i].city);
+};
+
+
+
+
+// PROBLEM 4
+// Print out the name "is older than" age for the students older than 25
+
+for (var i=0; i<students.length; i++) {
+	if (students[i].age > 25)
+	console.log(students[i].name + ' is older than 25');
 };
