@@ -35,6 +35,7 @@
 	padding: 2em 0;
 }
 
+/*Underline the title text*/
 .title-section .underliner {
 		border-bottom: .2em solid #AAA;
 }
@@ -51,6 +52,8 @@
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				ADD QUOTE AREA
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*Container for where quotes can be added*/
 .add {
 	background-color: #6EAA6E;
 }
@@ -64,7 +67,10 @@
 	witdh: 100%;
 }
 
-
+#quote-form {
+	display: none;
+}
+/**/
 .horizontal {
 	display: inline-block;
 }
@@ -80,7 +86,27 @@
 	padding: .5em 0 .1em 0;
 }
 
-
+/*Give a background color to where the ranked quotes go*/
 .main-body {
 	background-color: #AA6E6E;
+}
+
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				LISTS
+++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*Remove Default Style for ul*/
+.unstyled {
+	list-style-type: none;
+}
+
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				TEMPLATES
+++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*Keep all templates hidden*/
+.hidden {
+	display: none;
 }
