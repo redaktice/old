@@ -24,12 +24,17 @@ Quote.prototype.render = function() {
 
 	this.element = $('#quote-template').clone();
 
+	this.dataTag = _.uniqueId();
+
 	this.element.attr('id', ''); //.addClass('quote');
 
-	this.element.find('.text').text(this.quote);
+	this.element.find('.text').text('"' + this.quote + '"');
 	this.element.find('.author').text('- ' + this.author);
-	this.element.find('.rank').text(this.rank);
+	this.element.find('.rank').attr('data-tag', this.dataTag);
 
+	for (var i = 0; i < 5; i++) {
+		this.element.find('.rank').append($('<span class="star">☆</span>'));//this.rank);
+	}
 
 	// console.log(this.element);
 	return this.element;
@@ -52,9 +57,14 @@ var getAuthor = function (quote) {
 
 
 
+
+
+
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 						QUOTATION IMPLEMENTATION
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
 
 /*++++++++++++++++++++ORGANIZE QUOTES BY AUTHOR+++++++++++++++++*/
 
@@ -91,7 +101,7 @@ var getAuthor = function (quote) {
 		quotesByAuthor.map(function (quotation) {
 			var listItem = $('<li>');
 			authorsQuoteList.append(listItem);
-			listItem.append(quotation.quote);
+			listItem.append('<span class="bullet">●</span>' + '"' + quotation.quote + '"');
 		});
 
 	////////////////////////////////////////
@@ -113,15 +123,80 @@ $('footer').on('click', '.show-quotes', function () {
 
 	// Toggle what the button says using a ternary
 	thisButton.text((quotesHidden) ? 'Hide Quotes': 'Show Quotes');
-/*
-	(RENDER THE QUOTES FROM THE ARRAY authoredQuotes)
+});
 
-	*/
+
+
+/*++++++++++++++++++++ORGANIZE QUOTES BY RANK+++++++++++++++++*/
+
+var rankThis = false;
+
+
+	/**
+	 * Highlight this star and the stars before it 
+	 * @return {[DOM element]} [Change the star]
+	 */
+	$('.main-body').on('mouseover', '.star', function() {
+	if (rankThis) {
+			$(this).text('★');
+			$(this).closest('.rank').find('.star:lt(' + $(this).index() + ')').text('★');
+	}
+		});
+
+
+	/**
+	 * Un-highlight this star and the stars before it 
+	 * @return {[DOM element]} [Change the star]
+	 */
+	$('.main-body').on('mouseout', '.star', function() {
+	if (rankThis) {	
+			$(this).text('☆');
+			$(this).closest('.rank').find('.star:lt(' + $(this).index() + ')').text('☆');
+	}
+		});
+
+
+$('.main-body').on('click', '.star', function () {
+
+if (rankThis) {
+	var thisInformation = $(this).closest('.rank').attr('data-tag');
+	var associatedQuote;
+
+	for (var i = 0; i < quoteArray.length; i++) {
+		if (quoteArray[i].dataTag === thisInformation) {
+			associatedQuote = quoteArray[i];
+		}
+	}
+
+		associatedQuote.rank = $(this).index() + 1;
+
+		console.log(quoteArray);
+		quoteArray.sort(function(a, b) {return a.rank-b.rank});
+
+
+		$(this).closest('.rank').find('.star:lt(' + $(this).index() + ')').text();
+
+
+	}
+
+	console.log(quoteArray);
+	// console.log(associatedQuote);
+	rankThis = !rankThis;
+
+	console.log(rankThis);
+
+
+
+	// Add Quote instance to the ranked order of the quotes
+	$('.main-body .unstyled').append(newQuote.render());
 });
 
 
 
 
+
+
+/////////////////////////////////////////////////////////////////
 /*----------------------Create a new Quote---------------------*/ 
 
 var addButton = $('.add button');
@@ -144,9 +219,11 @@ addButton.on('click', function () {
 
 	quoteForm.toggle();
 	$(this).toggle();
+	$('input[name=Author]').focus();
 });
 
 
+///////////////////////////////////////////////////////////////////
 /*----------------------Submit the new Quote---------------------*/ 
 
 /**
@@ -167,8 +244,12 @@ $('body').on ('submit', 'form', function(e) {
 
 
 	// Add Quote instance to the array of quotes
-	quoteArray.push(newQuote);
-
+	if (newAuthor !== '' && newQuoteText !== '') {
+		quoteArray.push(newQuote);
+	}
+	else {
+		return;
+	}
 
 	var authorArray = quoteArray.map(getAuthor);
 	var uniqueAuthorArray = _.uniq(authorArray);

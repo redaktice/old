@@ -13,17 +13,17 @@
 /*Align Text to the center of the page*/
 .container {
 	width: 100%;
-	text-align: center;
-	padding: 1em;
+	padding: 1em 20%;
 }
 
 /*Underline the section headers*/
 .underliner {
-	display: inline-block;
+	text-align: center;
 }
 
-
-
+.centered-container {
+	text-align: center;
+}
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				TITLE SECTION
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -32,7 +32,6 @@
 .title-section {
 	background-color: #AA6EAA;
 	border: 1em solid #000;
-	padding: 2em 0;
 }
 
 /*Underline the title text*/
@@ -44,9 +43,9 @@
 /*The title text*/
 .title {
 	color: #AAA;
-	font-size: 2.5em;
+	font-size: 1.25em;
 	padding-bottom: .2em;
-	margin: 0;
+	/*margin: auto;*/
 }
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -56,6 +55,7 @@
 /*Container for where quotes can be added*/
 .add {
 	background-color: #6EAA6E;
+	text-align: center;
 }
 
 
@@ -82,7 +82,7 @@
 
 /*Customize padding and dimensions of headers*/
 .section-head {
-	margin: 0;
+	/*margin: 0;*/
 	padding: .5em 0 .1em 0;
 }
 
@@ -92,6 +92,11 @@
 }
 
 
+#quote-form input, #quote-form textarea {
+	display: block;
+	margin: auto;
+}
+
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				LISTS
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -99,6 +104,12 @@
 /*Remove Default Style for ul*/
 .unstyled {
 	list-style-type: none;
+	padding: 0;
+	/*display: inline-block;*/
+}
+
+.unstyled li {
+	padding-left: 0;
 }
 
 
@@ -109,4 +120,18 @@
 /*Keep all templates hidden*/
 .hidden {
 	display: none;
+}
+
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				FONT STYLING
+++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.italics {
+	font-style: italic;
+}
+
+
+.author {
+	font-size: .8em;
 }

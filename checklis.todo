@@ -11,12 +11,13 @@ QUOTE CLASS:
 ORGANIZING QUOTES:
   ✔ Create Array Of Quotes @done (14-10-01 13:41)
   ✔ Create Array Of Authors From Quote Array @done (14-10-01 15:13)
+  ☐ Create Array by 
   ☐ Rank css-class
   ☐ Rank Value
   ☐ Author css-class
-  ☐ Author grouping
+  ✔ Author grouping @done (14-10-02 11:42)
 
 SYTLING:
-  ☐ Align Inputs In Quote-Entering Form
+  ✔ Align Inputs In Quote-Entering Form @done (14-10-02 11:42)
   ☐ Align Quotes In Quotes-By-Rank Section
   ☐ Align Quotes In Quotes-By-Author Section
