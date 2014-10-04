@@ -25,35 +25,11 @@
 			<textarea rows="5" cols="30" name="Quote" placeholder="Enter Quote Here"></textarea>
 			<input type="submit" value="Add Quote">
 		</form>
-		<button class="horizontal">Quote</button>
+		<button class="horizontal add-quote">Quote</button>
+		<div class="random">
+			<button>Random Quote</button>
+		</div>
 	</section>
-
-
-
-<!-- --------TEMPLATES---------- -->
-	<!-- Quote Template -->
-	<div class="template hidden">
-		<li id="quote-template" class="rank-organized">
-			<div class="text italics"></div>
-			<span class="author"></span>
-			<p class="rank" data-tag=""></p>
-		</li>
-	</div>
-	<!-- End Quote Template -->
-
-	<!-- Authored Template -->
-	<div class="template hidden">
-			<li id="authored-template" class="author-organized">
-				<h3 class="author"></h3>
-			
-				<ul class="unstyled authored-quotes hidden">
-					 <!-- quotes by this author go here -->
-				</ul>
-				<button class="show-quotes">Show Quotes</button>
-			</li>
-	</div>
-	<!-- End Authored Template -->
-
 
 
 
@@ -63,6 +39,7 @@
 			<h1 class="section-head">Quotes</h1>
 			<h3 class="section-head">By Rank</h3>
 		</div>
+
 		<!-- General Quote List Goes Here  -->
 		<div class="centered-container">
 			<ul class="unstyled ranked">
@@ -71,8 +48,6 @@
 		</div>
 	</section>
 	
-
-
 
 	<!-- Quotes by Author -->
 
@@ -90,6 +65,54 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
 	<script src="main.js"></script>
-
+<div class="grey"></div>
 </body>
 </html>
+
+
+
+
+<!-- --------TEMPLATES---------- -->
+	<!-- Quote Template -->
+	<div class="template hidden">
+		<li id="quote-template" class="rank-organized">
+			<div class="quote-container">
+				<div class="text italics"></div>
+				<span class="author"></span>
+				<p class="rank" data-tag=""></p>
+			</div>
+		<button class="options">Rank/Remove</button>
+		<button class="delete hidden">Delete</button>
+		</li>
+	</div>
+	<!-- End Quote Template -->
+
+
+
+	<!-- Authored Template -->
+	<div class="template hidden">
+			<li id="authored-template" class="author-organized">
+				<h3 class="author"></h3>
+			
+				<ul class="unstyled authored-quotes hidden">
+					 <!-- quotes by this author go here -->
+				</ul>
+				<button class="show-quotes">Show Quotes</button>
+			</li>
+	</div>
+	<!-- End Authored Template -->
+
+
+
+
+	<!-- Random Quote Template -->
+	<div class="template hidden">
+		<div id="popup-template" class="popup-container">
+		<div class="popup-box">
+			<div class="popup">
+			</div>
+			<button class="close">Close</button>
+			</div>
+		</div>
+	</div>
+	<!-- End Random Quote Template -->
