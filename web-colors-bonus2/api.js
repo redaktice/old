@@ -1,6 +1,9 @@
 var request = require('request');
 
-
+/**
+ * Get RGB values for a color
+ * @return {String} RGB color values
+ */
 var webColorsAPI = function() {
 
 
@@ -11,25 +14,15 @@ var webColorsAPI = function() {
 
 		var allColors =  JSON.parse(body);
 
-		// return allColors;
-				
 		allColors.map(function(obj) {
-			for (var key in obj) {
-				if (obj[key] === userColor) {
-					var colors = [obj.rgb.r, obj.rgb.g, obj.rgb.b];
-					componentColors = colors.join(' ');
-				}
+			if (obj.name.toLowerCase() === userColor.toLowerCase()) {
+				var colors = [obj.rgb.r, obj.rgb.g, obj.rgb.b];
+				componentColors = colors.join(' ');
+				console.log(componentColors);
 			}
 		});
 	});
-
-	return componentColors;
 };
 
-
-// console.log (allColors);
-
-
 webColorsAPI();
-// console.log(webColorsAPI());
 
