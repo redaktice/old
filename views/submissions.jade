@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	div.text-center
+		h1 Here are the videos!
+		h2 Vote for your favorite
+	div(class="row")
+		for entry in allEntries
+			div(class="col-sm-6")
+				ul.list-group.text-center
+					li.list-group-item Submitted by: #{entry.name}
+					li.list-group-item Link: #{entry.url}
+					li.list-group-item Title: #{entry.title}
+					li.list-group-item Description: #{entry.description}
+					li.list-group-item: iframe(width="540", height="395", src="#{entry.url}", frameborder="0" allowfullscreen)
+					li.list-group-item Votes: #{entry.score}
+					li.list-group-item: form(method="post", action="/vote/" + "#{entry.entryNumber}"): button.btn.btn-success Like
+	p.text-center: a(href='/') Go Home
