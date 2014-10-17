@@ -1,0 +1,59 @@
+/*Create a circular button*/
+.btn-circle {
+	width: 3.5em;
+	height: 3.5em;
+	overflow: hidden;
+	border-radius: 50%;
+	line-height: 3.5em;
+}
+
+.btn-circle-xs {
+	width: 1.65em;
+	height: 1.65em;
+	overflow: hidden;
+	border-radius: 50%;
+	line-height: .65em;
+}
+
+.facebook {
+	background-color: #55A;
+}
+
+.pop-up-container {
+	position: fixed;
+	top: 30%;
+}
+
+/*Icon shape*/
+	.media-circle-md {
+		color: #EEE;
+		height: 1em;
+		width: 1em;
+		font-size: 3.5em;
+		border-radius: 50%;
+	}
+
+	.media-circle-sm {
+		color: #EEE;
+		height: 1em;
+		width: 1em;
+		font-size: 2.5em;
+		border-radius: 50%;
+	}
+
+	.media-circle-xs {
+		/*color: #EEE;*/
+		height: 1em;
+		width: 1em;
+		font-size: 1.5em;
+		border-radius: 50%;
+	}
+
+.pop-up {
+	background-color: #C00;
+	border: 3px solid #000;
+	border-radius: .5em;
+	/*display: inline-block;*/
+	width: 3.5em;
+	height: 200px;
+}
