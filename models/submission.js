@@ -4,6 +4,7 @@ var Submission = function (name, url, title, description, score, entryNumber) {
 		this.title = title;
 		this.description = description;
 		this.score = score || 0;
+		this.isWinner = null;
 		this.entryNumber = entryNumber || 0;
 };
 

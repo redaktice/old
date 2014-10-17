@@ -1,4 +1,3 @@
-var allEntries = [];
 var Submission = require('../models/submission.js');
 var contest = require('../models/contest.js');
 
@@ -13,38 +12,81 @@ var entryController = {
 
 						var newEntry = new Submission(name, url, title, description, 0, contest.entryCount);
 
-						allEntries.push(newEntry);
+						contest.allEntries.push(newEntry);
 
 						contest.entryCount ++;
 
 						res.redirect('/');
 					}
-
 					else {
 						res.send("We are sorry, the contest is full");
 					}
 				},
 	allEntries: function(req, res) {
 					res.render('submissions', {
-						allEntries: allEntries
+						allEntries: contest.allEntries
 					});
 				},
 	addVote: function(req, res) {
-				
-				var submissionNumber = req.params.entryNumber;
-
-				for (var i=0; i<allEntries.length; i++) {
-
-// console.log(submissionNumber);
-					if (allEntries[i].entryNumber == submissionNumber) {
-// console.log(allEntries[i].entryNumber);
-						allEntries[i].score ++;
+				for (var k=0; k<contest.allEntries.length; k++) {
+					if (contest.allEntries[k].isWinner === "lose") {
+						contest.allEntries.splice(k, 1);
 					}
 				}
+				for (var i = 0; i < contest.allEntries.length; i ++) {
+					contest.allEntries[i].isWinner = null;
+				}
+				var submissionNumber = req.params.entryNumber;
 
-				res.redirect('/currentEntries');
+				for (var j=0; j<contest.allEntries.length; j++) {
 
+// console.log(submissionNumber);
+					if (contest.allEntries[j].entryNumber == submissionNumber) {
+// console.log(allEntries[j].entryNumber);
+						contest.allEntries[j].score ++;
+					}
+				}
+				if (contest.allEntries.length > 1) {
+					res.redirect('/currentEntries');
+				}
+				else {
+					res.redirect('/winner');
+				}
+			},
+	compete: function (req, res) {
+
+	
+			for (var k=0; k<contest.allEntries.length; k++) {
+				contest.allEntries[k].isWinner = null;
 			}
+
+			for (var i = 0; i < contest.allEntries.length; i += 2) {
+				if (contest.allEntries[i+1]) {
+
+					if (contest.allEntries[i].score > contest.allEntries[i+1].score) {
+						contest.allEntries[i].isWinner = "win";
+						contest.allEntries[i+1].isWinner = "lose";
+
+					}
+
+					else if (contest.allEntries[i].score < contest.allEntries[i+1].score) {
+						contest.allEntries[i+1].isWinner = "win";
+						contest.allEntries[i].isWinner = "lose";
+
+					}
+
+					else {
+						contest.allEntries[i].isWinner = contest.allEntries[i+1].isWinner = "win";
+					}
+				}
+			}
+			if (contest.allEntries.length > 1) {
+				res.redirect('/currentEntries');
+			}
+			else {
+				res.redirect('/winner');
+			}
+	}
 };
 
 

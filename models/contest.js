@@ -1,5 +1,6 @@
 var contest = {
-	entryCount: 0
+	entryCount: 0,
+	allEntries: []
 };
 
 

@@ -19,6 +19,15 @@ app.post('/addSubmission', entryController.newSubmission);
 app.post('/vote/:entryNumber', entryController.addVote);
 
 
+app.post('/compete', entryController.compete);
+
+app.get('/winner', indexController.winner);
+
+app.post('/reset', indexController.reset);
+
+
+
+
 var server = app.listen(3110, function() {
 	console.log('Express server listening on port ' + server.address().port);
 });
