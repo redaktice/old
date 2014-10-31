@@ -4,7 +4,7 @@ ul {
 }
 
 #btn-container {
-	width: 15%;
+	/*width: 15%;*/
 	height: 800px;
 	border-right: 5px solid #000;
 	float: left;
@@ -23,10 +23,10 @@ ul {
 
 #animation-container {
 	height: 400px;
-	width: 100%;
+	/*width: 100%;*/
 	position: relative;
 	text-align: center;
-	top: 250px;
+	/*top: 250px;*/
 }
 
 #box {
@@ -41,4 +41,9 @@ ul {
 .ani-btn {
 	margin-top: 2em;
 	margin-bottom: 3em;
+}
+
+#animation-container {
+	margin: auto;
+	top: 200px;
 }
