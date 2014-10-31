@@ -32,6 +32,38 @@ $(document).on('ready', function() {
 
 
 
+//we'll use a window.onload for simplicity, but typically it is best to use either jQuery's $(document).ready() or $(window).load() or cross-browser event listeners so that you're not limited to one.
+$('#pikachu-btn').on('click', function(){
+    var pikachu = document.getElementById("pikachu");
+    TweenLite.to(pikachu, 1, {left:"632px"});
+
+// var tl = new TimelineLite(yoyo:true);
+//     tl.to(pokeball, .5, {top:"-150px"})
+//     .to(pikachu, .5, {top:"-150px"})
+//     .to(pokeball, .5, {top:"-10px"})
+//     .to(pikachu, .5, {top:"-10px"});
+
+    var pokeball = document.getElementById("pokeball");
+    TweenLite.to(pokeball, 2, {left:"632px", delay: 1});
+  TweenMax.to(pokeball, 0.2, {top:"-50px", delay: 1});
+  TweenMax.to(pokeball, 0.2, {top:"-90px", delay: 1.2});
+  TweenMax.to(pokeball, 0.2, {top:"-120px", delay: 1.4});
+  TweenMax.to(pokeball, 0.2, {top:"-140px", delay: 1.6});
+  TweenMax.to(pokeball, 0.2, {top:"-150px", delay:1.8});
+  TweenMax.to(pokeball, 0.2, {top:"-140px", delay: 2.0});
+  TweenMax.to(pokeball, 0.2, {top:"-120px", delay: 2.2});
+  TweenMax.to(pokeball, 0.2, {top:"-90px", delay: 2.4});
+  TweenMax.to(pokeball, 0.2, {top:"-50px", delay: 2.6});
+  TweenMax.to(pokeball, 0.2, {top:"-10px", delay: 2.8});
+  TweenMax.to(pokeball, 2, {left:"0px", delay: 3});
+  TweenLite.to(pikachu, 2, {left:"0px", delay: 3});
+
+    // tl.play();
+
+
+});
+
+
 // GREEN PULSE
 
 	$('#green-pulse').on('mouseenter', function(){

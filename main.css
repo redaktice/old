@@ -11,7 +11,7 @@ body {
 /* -------- Control Button Container -------- */
 
 #btn-container {
-	height: 800px;
+	height: 830px;
 	border-right: 5px solid #000;
 	/*float: left;*/
 }
@@ -27,7 +27,7 @@ body {
 }
 
 #animation-container {
-	height: 400px;
+	height: 600px;
 	position: relative;
 	text-align: center;
 }
@@ -41,6 +41,29 @@ body {
 	margin-bottom: 3em;
 }
 
+
+/*MAC*/
+
+
+#demo {
+    width: 100%;
+    height: 300px;
+    background-color: #333;
+    /*padding: 8px;*/
+}
+#pikachu {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin-top:240px;
+    background: url(http://cdn.bulbagarden.net/upload/7/77/Spr_1y_025.png) no-repeat;
+}
+#pokeball {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background: url(http://cdn.bulbagarden.net/upload/9/93/Bag_Pok%C3%A9_Ball_Sprite.png) no-repeat;
+}
 
 /* -------- Animated Box -------- */
 
