@@ -1,0 +1,28 @@
+body{
+/*    background-color: grey;*/
+/*background: url(http://cdn.bulbagarden.net/upload/7/77/Spr_1y_025.png) no-repeat;*/
+},
+
+#container {
+    width: 692px;
+    height: 300px;
+    margin-right: fixed;
+    margin-left: fixed;
+    background-color: red;
+    padding: 8px;
+},
+
+#tween {
+    width: 500px;
+    background-color: green;
+    margin-right: auto;
+    margin-left: auto;
+    border-right: 1px dashed #CCC;
+    border-left: 1px dashed #CCC;
+},
+
+#sprite{
+    position: relative;
+    width: 56px;
+    height: 56px;
+}
