@@ -7,10 +7,36 @@
     <link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
+    <header class="page-head container text-center">
+      <h1 class="h1">3D Animations</h1>
+    </header>
+
+  <!-- Side Navigation -->
+    <aside class="text-center" id="btn-container">
+      <ul class="list-group">
+        <li class="list-item btn-wrapper">
+          <button id="card-flip" class="btn btn-danger ani-btn">Card Flip</button>
+        </li>
+        <li class="list-item btn-wrapper">
+          <button id="axis-card-flip" class="btn btn-danger ani-btn">Card Flip Off Axis</button>
+        </li>
+        <li class="list-item btn-wrapper"> 
+          <button id="orbiting" class="btn btn-danger ani-btn">Orbiting</button>
+        </li>
+        <li class="list-item btn-wrapper">
+          <button id="" class="btn btn-danger ani-btn">Animation Four</button>
+        </li>
+      </ul>
+    </aside>
+    <div id="animation-container" class="">
+      <div id="box" class="to_box">This is cool</div>
+    </div>
     
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
     <script src="main.js"></script>
 
   </body>
