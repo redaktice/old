@@ -3,39 +3,36 @@ ul {
 	background-color: #AAA;
 }
 
+body {
+	background-color: #CCC;
+}
+
+/* -------- Control Button Container -------- */
+
 #btn-container {
-	/*width: 15%;*/
 	height: 800px;
 	border-right: 5px solid #000;
-	float: left;
+	/*float: left;*/
 }
 
 .page-head {
 	background-color: #AAA;
 	width: 100%;
 	border-bottom: 5px solid #000;
-
-
 }
+
 .btn-wrapper {
 	background-color: #AAA;
 }
 
 #animation-container {
 	height: 400px;
-	/*width: 100%;*/
 	position: relative;
 	text-align: center;
-	/*top: 250px;*/
 }
 
-#box {
-	background-color: #C11;
-	border: 3px solid #CA5;
-	border-radius: 10px;
+.control-btn {
 	margin: auto;
-	height: 100px;
-	width: 100px;
 }
 
 .ani-btn {
@@ -43,7 +40,30 @@ ul {
 	margin-bottom: 3em;
 }
 
+
+/* -------- Animated Box -------- */
+
+#box {
+	background-color: #C11;
+	border: 3px solid #CA5;
+	border-radius: 10px;
+	margin: auto;
+	height: 200px;
+	width: 200px;
+	/*overflow: hidden;*/
+	padding-top: 80px;
+}
+
+#box h4 {
+	color: #CCC;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+
+
 #animation-container {
 	margin: auto;
 	top: 200px;
+	/*postion: static;*/
 }
