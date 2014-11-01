@@ -1,0 +1,37 @@
+extends layout
+
+block content
+	div.container
+		//- Navigation
+		nav.navbar.navbar-default
+			div.container.container-fluid
+				div.navbar-header
+					button.navbar-toggle.collapsed (data-toggle="collapse", data-target="#collapse-section")
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href="#") Media
+				div#collapse-section.collapse.navbar-collapse
+					div.centering
+						ul.nav.navbar-nav.inline-block.centered
+							li.pad-md-right: i.facebook.media-circle-md.fa.fa-facebook
+							li.pad-md-right: i.twitter.media-circle-md.fa.fa-twitter
+							li.pad-md-right: i.instagram.media-circle-md.fa.fa-instagram
+							li.pad-md-right: i.linkedin.media-circle-md.fa.fa-linkedin
+		//- End Navigation
+
+		//- Main Content
+		div.relative.centering
+
+			//- Login
+			div.absolute.form-container.form-container-avg
+				div.inline-block.centering
+					form#sign-in.center-form.form(action="form")
+						div.absent.failed-login
+							p.bg-danger No matching username/password found
+							p.bg-danger Try again or create an account
+						div.form-group
+							input.input-username(required, type="username", placeholder="Username")
+						div.form-group
+							input.input-password(required, type="password", placeholder="Password")
+						div.form
