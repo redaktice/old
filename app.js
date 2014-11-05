@@ -4,9 +4,16 @@ var cookeParser = require('cookie-parser');
 var flash = require('connect-flash');
 var passport = require('passport');
 var passportConfig = require('./config/passport');
+var mongoose = require('mongoose');
 
 var bodyParser = require('body-parser');
+
+// Controllers
 var indexController = require('./controllers/index.js');
+var authenticationController = require('./controllers/authentication.js');
+
+// Establish and connect to database
+mongoose.connect('mongodb://localhost/social-vibe');
 
 var app = express();
 app.set('view engine', 'jade');
@@ -19,15 +26,45 @@ app.use(session({secret: '5=-098ejhl;p864irrejfuy8][-0o'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/facebook', passport.authenticate('facebook', {scope: [
-	'read_stream'
-	]}), function(req, res) { 
-// This is not run because of the passport.authenticate('facebook') redirct
-});
-app.get('/auth/facebookcallback', passport.authenticate('facebook', {failureRedirect: '/'}), indexController.getProfile);
-app.get('/', indexController.login);
 
-app.post('/login', indexController.getLogin);
+
+// LOGIN AUTHENTICATION
+
+app.get('/auth/login', authenticationController.login);
+
+app.get('/auth/facebook',
+		passport.authenticate('facebook',
+			{scope: [
+				'read_stream',
+				'read_friendlists',
+				'user_photos',
+				'manage_notifications'
+				]
+
+				// LOOK HERE https://developers.facebook.com/docs/facebook-login/permissions/v2.2
+			}
+		),
+		function(req, res) {
+// This is not run because of the passport.authenticate('facebook') redirect to facebook
+}
+);
+
+// Called by Facebook after confirming login
+app.get('/auth/facebookcallback',
+		passport.authenticate('facebook', {failureRedirect: '/auth/login'}), 
+		authenticationController.sendToProfile
+);
+
+
+// UNAUTHORIZED PROTECTION
+app.use(passportConfig.ensureAuthentication);
+
+app.get('/auth/logout', authenticationController.logout);
+
+
+// app.get('/sendToProfile', authenticationController.sendToProfile);
+
+// app.post('/auth/login', indexController.getLogin);
 // app.get('/profile/:user', indexController.getProfile);
 
 var server = app.listen(9609, function() {

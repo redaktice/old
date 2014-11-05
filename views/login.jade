@@ -45,6 +45,7 @@ block content
 				//- Login
 				div.absolute.form-container.form-container-avg
 					div.inline-block.centering
+						a(href='/auth/facebook'): button.btn.btn-primary.btn-lg Login with Facebook
 						form#sign-in.center-form.form(action="/login", method="post")
 							div.absent.failed-login
 								p.bg-danger No matching username/password found
@@ -55,36 +56,39 @@ block content
 								//- input.input-password(required, name="password", type="password", placeholder="Password")
 							div.form-group.container-fluid
 								//- button#login.btn.btn-primary.btn-lg Login with Face
-								a(href='/auth/facebook'): button.btn.btn-primary.btn-lg Login with Facebook
+								//div.fb-login-button(data-size="xlarge", data-show-faces="false", data-auto-logout-link="false")
+								//- 
+							//- if error
+							//- 	p.bg-danger No matching username/password found
 							div.page-header
 							//- button#sign-up.btn.btn-success.btn-sm Sign Up
 							div.form-group.container-fluid
 								button.terms-of-use.btn.btn-info.btn-xs Terms of Use
 				//- Create Account
-				div.absolute.form-container.form-container-tall
-					div.inline-block.centering.form-container-wide
-						form#new-user.absent.center-form.form-wide(action="form", mehtod="post")
-							div.signup-prompt
-								p.bg-success Welcome!
-								p.bg-success Please Complete
-							div.form-group
-								input.centering.input-firstname(required, name="firstName", type="text", placeholder="First Name")
-							div.form-group
-								input.centering.input-lastname(required, name="lastName", type="text", placeholder="Last Name")
-							div.form-group
-								input.centering.input-age(required, name="age", type="text", placeholder="Age")
-							div.form-group
-								input.centering.input-email(required, type="email", placeholder="example@beingawesome.com")
-							div.form-group
-								input.centering.input-username(required, name="email", type="username", placeholder="Username")
-							div.form-group
-								input.centering.input-password(required, name="new-Passsword", type="password", placeholder="Password: At least 8 characters")
-								div.absent.form-group.failed-signup
-									p.bg-danger Please make password 8 or more characters
-							div.form-group.container-fluid
-								button#create.btn.btn-success.btn-lg Create!
-							div.form-group.container-fluid
-								a.terms-of-use.btn.btn-info.btn-xs(href="#") Terms of use
+				//- div.absolute.form-container.form-container-tall
+				//- 	div.inline-block.centering.form-container-wide
+				//- 		form#new-user.absent.center-form.form-wide(action="form", mehtod="post")
+				//- 			div.signup-prompt
+				//- 				p.bg-success Welcome!
+				//- 				p.bg-success Please Complete
+				//- 			div.form-group
+				//- 				input.centering.input-firstname(required, name="firstName", type="text", placeholder="First Name")
+				//- 			div.form-group
+				//- 				input.centering.input-lastname(required, name="lastName", type="text", placeholder="Last Name")
+				//- 			div.form-group
+				//- 				input.centering.input-age(required, name="age", type="text", placeholder="Age")
+				//- 			div.form-group
+				//- 				input.centering.input-email(required, type="email", placeholder="example@beingawesome.com")
+				//- 			div.form-group
+				//- 				input.centering.input-username(required, name="email", type="username", placeholder="Username")
+				//- 			div.form-group
+				//- 				input.centering.input-password(required, name="new-Passsword", type="password", placeholder="Password: At least 8 characters")
+				//- 				div.absent.form-group.failed-signup
+				//- 					p.bg-danger Please make password 8 or more characters
+				//- 			div.form-group.container-fluid
+				//- 				button#create.btn.btn-success.btn-lg Create!
+				//- 			div.form-group.container-fluid
+				//- 				a.terms-of-use.btn.btn-info.btn-xs(href="#") Terms of use
 				//- Carousel
 				div#login-page.carousel.slide(data-ride="carousel")
 					div.carousel-inner
