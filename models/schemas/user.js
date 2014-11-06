@@ -2,6 +2,16 @@ var mongoose = require ('mongoose');
 
 // Schema
 var userSchema = mongoose.Schema({
+	vibeID: {
+		type: Number,
+		required: true,
+		unique: true
+	},
+	image: {
+		type: String,
+		required: true,
+		unique: false
+	},
 	fbID: {
 		type: String,
 		required: true,

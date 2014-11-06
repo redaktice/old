@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 // Controllers
 var indexController = require('./controllers/index.js');
 var authenticationController = require('./controllers/authentication.js');
+var facebookController = require('./api-actions/facebook-actions.js');
 
 // Establish and connect to database
 mongoose.connect('mongodb://localhost/social-vibe');
@@ -37,7 +38,7 @@ app.get('/auth/facebook',
 			{scope: [
 				'read_stream',
 				'read_friendlists',
-				'user_photos',
+				// 'user_photos',
 				'manage_notifications'
 				]
 
@@ -52,12 +53,22 @@ app.get('/auth/facebook',
 // Called by Facebook after confirming login
 app.get('/auth/facebookcallback',
 		passport.authenticate('facebook', {failureRedirect: '/auth/login'}), 
-		authenticationController.sendToProfile
+		authenticationController.attemptLogin
 );
+
 
 
 // UNAUTHORIZED PROTECTION
 app.use(passportConfig.ensureAuthentication);
+
+
+
+
+
+app.get('/auth/sendToProfile/:uniqueUser', authenticationController.sendToProfile);
+app.get('/posts', authenticationController.displayStatus);
+
+
 
 app.get('/auth/logout', authenticationController.logout);
 

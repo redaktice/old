@@ -1,0 +1,55 @@
+script#fb-template(type="text/x-handlebars-template").
+	<div class="post template-post centering" data-post-id="" id="template">
+		<div class="col post-head">
+			<div class="col-sm-4 col-xs-12 inline-block post-icons">
+				<ul class="list-unstyled list-inline media-list">
+					<!-- Template -->
+					<li id="icon-template" class="template"><i class="icon media-circle-xs fa"></i></li>
+					<li class="btn-group dropup minus-media-xs" id="">
+						<h4 class="btn dropdown-toggle" data-toggle="dropdown"><span class="icon inline-block no-mgn"><i class="fa fa-minus-circle"></i></span></h4>
+
+						<!-- REMOVE icons -->
+						<div id="" class="dropdown-menu relative" role="menu">
+							<div class="media inline-block">
+								<ul class="list-unstyled list-inline text-right alter-media-list">
+								
+								<!-- MEDIA ALREADY VIBED GOES HERE -->
+									<li><i class="icon icon-btn facebook media-circle-md fa fa-facebook"></i></li>
+									<li><button type="button" class="re-vibe btn btn-success btn-circle-xs">V</button></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+
+					<li class="btn-group dropup add-media-xs" id="">
+						<h4 class="btn dropdown-toggle" data-toggle="dropdown"><span class="icon inline-block no-mgn"><i class="fa fa-plus-circle"></i></span></h4>
+
+						<!-- ADD icons -->
+						<div id="" class="dropdown-menu relative" role="menu">
+							<div class="media inline-block">
+								<ul class="list-unstyled list-inline alter-media-list">
+
+								<!-- MEDIA NOT VIBED GOES HERE -->
+									<li><button type="button" class="re-vibe btn btn-success btn-circle-xs">V</button></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-4 col-xs-12">
+				<span><img class="img-circle img-post-user" src="{{status.data[0].from.id}}" alt=""><span class="post-author">{{status.data[0].from.name}}</span></span>
+			</div>
+			<div class="col-sm-4 col-xs-12 date inline-block">
+				{{status.data[0].updated_time}}
+			</div>
+		</div>
+
+
+		<!-- Main Post Content -->
+		<div class="post-content">
+			<p class="post-text">{{status.data[0].message}}</p>
+		</div>
+		<div class="page-header"></div>
+		<h5 class="">Tags</h5>
+	</div>

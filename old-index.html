@@ -55,8 +55,8 @@
 							</ul>
 						</div>
 					</div>
-				</nav>
-			
+				</nav>			
+
 
 		
 
@@ -142,7 +142,7 @@
 
 															<!-- MEDIA ALREADY VIBED GOES HERE -->
 
-
+																<li><i class="icon icon-btn facebook media-circle-md fa fa-facebook"></i></li>
 																<li><button type="button" class="re-vibe btn btn-success btn-circle-xs">V</button></li>
 															</ul>
 														</div>
@@ -169,10 +169,10 @@
 									</ul>
 								</div>
 								<div class="col-sm-4 col-xs-12">
-									<span><img class="img-circle img-post-user" src="http://placehold.it/40x40" alt=""><span class="post-author">ME</span></span>
+									<span><img class="img-circle img-post-user" src="{{user.image}}" alt=""><span class="post-author">{{user.profile.displayName}}</span></span>
 								</div>
 								<div class="col-sm-4 col-xs-12 date inline-block">
-									Date
+									{{status.data[0].update_time}}
 								</div>
 							</div>
 
@@ -181,7 +181,7 @@
 							<!-- Main Post Content -->
 							<div class="post-content">
 								
-									<p class="post-text">This is a post. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe omnis sequi voluptatum nesciunt, obcaecati ipsam eum fuga itaque nobis, esse sunt corporis dolores explicabo animi voluptates? Repellendus eos dicta labore.</p>
+									<p class="post-text">{{status.data[0].message}}</p>
 							</div>
 							<div class="page-header"></div>
 							<h5 class="">Tags</h5>
