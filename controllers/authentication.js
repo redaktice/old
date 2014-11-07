@@ -9,11 +9,10 @@ var authenticationController = {
 	},
 	// Generate a unique user URL and redirect to that URL
 	attemptLogin: function(req, res, next) {
-	console.log("USER", req.user);
-		var uniqueUser = req.user.profile.name.familyName + '.' + req.user.profile.name.givenName + '.' + req.user.vibeID;
+console.log("USER", req.user);
+		var uniqueUser = req.user.profile.lastName + '.' + req.user.profile.lastName + '.' + req.user.vibeID;
 		res.redirect('/auth/sendToProfile/' + uniqueUser);
 	},
-
 	// Grab all of the Facebook status information and render the user's profile
 	sendToProfile: function(req, res) {
 console.log("Test");

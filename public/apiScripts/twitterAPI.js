@@ -5,7 +5,9 @@
 // 	}
 // 	js.src="https://platform.twitter.com/widgets.js";
 // 	fs.parentNode.insertBefore(js, fjs);
-// 	return window.twttr || (t = { _e: [], ready: function (f) {
-// 		t._e.push(f)}
-// 	});
-// } (document, "script", "twitter-wjs"));
+// 	return window.twttr || (t = {
+// 		 _e: [],
+// 		 ready: function (f) {
+// 			t._e.push(f);
+// 		}
+// 	}), (document, "script", "twitter-wjs")};

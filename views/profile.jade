@@ -20,10 +20,12 @@ block content
 					div.centering
 						ul.nav.navbar-nav.inline-block.centered
 							li: i.icon.facebook.media-circle-md.fa.fa-facebook
-							li: i.icon.twitter.media-circle-md.fa.fa-twitter
-							li: i.icon.instagram.media-circle-md.fa.fa-instagram
+							li#user-twitter
+								a(href="/auth/twitter")
+									button: i.icon.twitter.media-circle-md.fa.fa-twitter
+							//- li: i.icon.instagram.media-circle-md.fa.fa-instagram
 							li
-								button.icon.icon-btn.btn-default.btn-circle
+								button#incorporate-media.icon.icon-btn.btn-default.btn-circle
 									h1: i.fa.fa-plus-circle
 						ul.nav.navbar-nav.navbar-right
 							li.dropdown
@@ -42,11 +44,11 @@ block content
 			//- Profile
 			div.container.profile
 				div.user
-					img.user-img.img-circle(src='#{user.image}')
+					img.user-img.img-circle(src='#{user.profile.image}')
 					div.user-info
 						h2
-							span.user-firstName #{user.profile.name.givenName} 
-							small.user-lastName #{user.profile.name.familyName}
+							span.user-firstName #{user.profile.firstName} 
+							small.user-lastName #{user.profile.lastName}
 						h3.user-age age
 						div.progress
 							div.progress-bar(role="progressbar", aria-valuenow-"2", aria-valuemin="0", aria-valuemax="30%", style="width: 20%") Facebook
@@ -69,53 +71,15 @@ block content
 						li: i.icon-btn.media-filter.twitter.media-circle-md.fa.fa-twitter
 						li: i.icon-btn.media-filter.instagram.media-circle-md.fa.fa-instagram
 			div#feed.box-center
-				span: img.img-circle.img-post-user(src="http://graph.facebook.com/#{status.data[0].from.id}/picture?type=large")
-				h2=status.data[0].from.name
-				h4=status.data[0].updated_time
-				h2=status.data[0].message
+				//- span: img.img-circle.img-post-user(src="http://graph.facebook.com/#{status.data[0].from.id}/picture?type=large")
+				//- h2=status.data[0].from.name
+				//- h4=status.data[0].updated_time
+				//- h2=status.data[0].message
 					//- p=status.data[0].update_time
 					//- for var i= 0; i<data.length; i++
 					//- Posts Go Here
 				//- div(class="fb-activity", data-site="http://www.facebook.com", data-action="likes, recommends," data-colorscheme="light", data-header="true") Hello
-			
-
-			//- Post Template
-			div#template.post.template-post.centering
-				div.col.post-head
-					div.col-sm-4.col-xs-12.inline-block.post-icons
-						ul.list-unstyled.list-inline.media-list
-							li#icon-template.template
-								i.icon.media-circle-xs.fa
-							li.btn-group.dropup.minus-media-xs
-								h4.btn.dropdown-toggle(data-toggle="dropdown")
-									span.icon.inline-block.no-mgn
-										i.fa.fa-minus-circle
-								//- Remove Icons
-								div.dropdown-menu.relative(role="menu")
-									div.media.inline-block
-										ul.list-unstyled.list-inline.text-right.alter-media-list
-											//- Media already vibed goes here
-											li: button.re-vibe.btn.btn-success.btn-circle-xs(type="button")
-							li.btn-group.dropup.add-media-xs
-								h4.btn.dropdown-toggle(data-toggle="dropdown")
-									span.icon.inline-block.no-mgn
-										i.fa.fa-plus-circle
-								//- Add Icons
-								div.dropdown-menu.relative(role="menu")
-									div.media.inline-block
-										ul.list-unstyled.list-inline.alter-media-list
-											//- Media NOT vibed goes here
-											li: button.re-vibe.btn.btn-success.btn-circle-xs(type="button") V
-					div.col-sm-4.col-xs-12
-						span
-							img.img-circle.img-post-user(src="http://placehold.it/40x40")
-							span.post-author ME
-					div.col-sm-4.col-xs-12.date.inline-block Date
-				//- Main Post Content
-				div.post-content
-					p.post-text This is a post.  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident eaque optio nihil, sequi magnam rem dolorem repellendus, sunt sint eveniet sed ullam quidem recusandae atque repellat dolores aperiam voluptas. Perferendis.
-				div.page-header
-				h5 Tags
+	
 			//- Template?
 			li#add-media-template.template: i.to-media.media-circle-xs.fa
 			
@@ -178,10 +142,10 @@ block content
 
 
 
-		
+		//- script(src="/scripts/feed.js")
 		script.
 			//- var key = #{key}
-			var status = #{status}
+			var responseStatus = !{JSON.stringify(status)}
 
 
 

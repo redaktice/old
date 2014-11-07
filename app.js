@@ -28,7 +28,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
+app.get('/', function(req, res) {
+	res.redirect('/auth/login');
+});
 // LOGIN AUTHENTICATION
 
 app.get('/auth/login', authenticationController.login);
@@ -38,6 +40,8 @@ app.get('/auth/facebook',
 			{scope: [
 				'read_stream',
 				'read_friendlists',
+				// 'user_activities',
+				'user_status',
 				// 'user_photos',
 				'manage_notifications'
 				]
@@ -62,7 +66,31 @@ app.get('/auth/facebookcallback',
 app.use(passportConfig.ensureAuthentication);
 
 
+app.get('/auth/twitter',
+		passport.authenticate('twitter'//,
+			// {scope: [
+			// 	'read_stream',
+			// 	'read_friendlists',
+			// 	// 'user_activities',
+			// 	'user_status',
+			// 	// 'user_photos',
+			// 	'manage_notifications'
+			// 	]
 
+			// 	// LOOK HERE https://github.com/BoyCook/TwitterJSClient/blob/master/lib/Twitter.js
+			// 	https://dev.twitter.com/overview/api/twitter-ids-json-and-snowflake
+			// }
+		),
+		function(req, res) {
+// This is not run because of the passport.authenticate('facebook') redirect to facebook
+}
+);
+
+// Called by Facebook after confirming login
+app.get('/auth/twittercallback',
+		passport.authenticate('twitter', {failureRedirect: '/auth/sendToProfile/:uniqueUser'}), 
+		authenticationController.attemptLogin
+);
 
 
 app.get('/auth/sendToProfile/:uniqueUser', authenticationController.sendToProfile);
