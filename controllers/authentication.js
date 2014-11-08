@@ -1,7 +1,23 @@
 var keys = require('../private/keys');
 var User = require('../models/schemas/user');
-var facebookAPI = require('../api-actions/facebook-actions.js');
 var keys = require('../private/keys');
+var facebookControl = require('../api-actions/facebook-actions.js');
+var twitterControl = require('../api-actions/twitter-actions.js');
+var async = require('async');
+var _ = require('underscore');
+var moment = require('moment');
+
+// var signedIn = {
+// 	facebook: false,
+// 	twitter: true,
+// };
+
+
+// Function called when the user does not have a media
+//  or is not signed-in to the media
+var noAccount = function(callback) {
+	callback(null, []);
+};
 
 var authenticationController = {
 	login: function(req, res) {
@@ -10,21 +26,61 @@ var authenticationController = {
 	// Generate a unique user URL and redirect to that URL
 	attemptLogin: function(req, res, next) {
 console.log("USER", req.user);
-		var uniqueUser = req.user.profile.lastName + '.' + req.user.profile.lastName + '.' + req.user.vibeID;
+		var uniqueUser = req.user.profile.lastName + '.' + req.user.profile.firstName + '.' + req.user.vibeID;
+		// signedIn.facebook = true;
 		res.redirect('/auth/sendToProfile/' + uniqueUser);
 	},
 	// Grab all of the Facebook status information and render the user's profile
 	sendToProfile: function(req, res) {
-console.log("Test");
+/*		
+	res.send(twitterControl.getTwitterStatus.bind(null, req.user));
+	/*/	async.auto({
+			facebook: facebookControl.getFacebookStatus.bind(null, req.user),
+			twitter: (req.user.media.twitter && req.user.media.twitter.isActive) ? twitterControl.getTwitterStatus.bind(null, req.user) : function(callback) {callback(null, []);}
+		}, function(err, results){
 
-		facebookAPI.getStatus(req.user, function(err, response) {
-			res.render('profile', {user: req.user, key: keys.facebookAppID, status: response});
+/*
+ res.send(results.twitter);
+
+/*/			var allPosts = results.facebook.concat(results.twitter);
+			var organizedPosts = _.sortBy(allPosts, function(post) {
+				return -1 * moment(post.postTime).valueOf();
+			});
+			// Concatenate the facebook and twitter data
+			res.render('profile', {user: req.user, userData: organizedPosts});
+
+//*/
+
 		});
 
+// console.log("Test");
+
+		// if (!signedIn.twitter) {
+		// 	facebookControl.getStatus(req.user, function(err, response) {
+		// 		res.render('profile', {user: req.user, key: keys.facebookAppID, facebookStatus: response});
+		// 	});
+		// }
+		// if(signedIn.twitter) {
+		// 	facebookControl.getStatus(req.user, function(err, response) {
+		// 		twitterControl.getHomeTimeline(req.user, function(err, result) {
+		// 			res.render('profile', {
+		// 				user: req.user,
+		// 				key: keys.facebookAppID,
+		// 				facebookStatus: response,
+		// 				twitterTimeline: result
+		// 			});
+		// 		});
+		// 	});
+		// }
 	},
 	displayStatus: function(req, res) {
-		facebookAPI.getStatus(req.user, function(err, response) {
+		facebookControl.getStatus(req.user, function(err, response) {
 			res.send(response);
+		});
+	},
+	displayTwitterTime: function (req, res) {
+		twitterControl.getHomeTimeline(req.user, function(err, result) {
+			res.send(result);
 		});
 	},
 	logout: function(req, res) {

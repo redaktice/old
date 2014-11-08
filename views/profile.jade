@@ -2,7 +2,9 @@ extends layout
 
 block content
 
-	include templates/posts/facebook-post-tpl
+	//- include templates/posts/facebook-post-tpl
+	//- include templates/posts/twitter-post-tpl
+	include templates/posts/status-post-tpl
 
 	div.main-body
 		div.container
@@ -145,8 +147,9 @@ block content
 		//- script(src="/scripts/feed.js")
 		script.
 			//- var key = #{key}
-			var responseStatus = !{JSON.stringify(status)}
-
+			//- var facebookStatus = !{JSON.stringify(facebookStatus)}
+			//- var twitterTimeline = !{JSON.stringify(twitterTimeline)}
+			var userPosts = !{JSON.stringify(userData)}
 
 
 

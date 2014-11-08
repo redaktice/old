@@ -14,7 +14,9 @@ var twitterStrategy = new TwitterStrategy({
 			return done(null, false);
 		}
 		req.user.media.twitter = {
-			twitterToken: accessToken
+			isActive: true,
+			twitterToken: accessToken,
+			twitterSecret: secretToken
 		};
 
 		req.user.markModified('media');

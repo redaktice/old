@@ -67,19 +67,9 @@ app.use(passportConfig.ensureAuthentication);
 
 
 app.get('/auth/twitter',
-		passport.authenticate('twitter'//,
-			// {scope: [
-			// 	'read_stream',
-			// 	'read_friendlists',
-			// 	// 'user_activities',
-			// 	'user_status',
-			// 	// 'user_photos',
-			// 	'manage_notifications'
-			// 	]
-
+		passport.authenticate('twitter'
 			// 	// LOOK HERE https://github.com/BoyCook/TwitterJSClient/blob/master/lib/Twitter.js
 			// 	https://dev.twitter.com/overview/api/twitter-ids-json-and-snowflake
-			// }
 		),
 		function(req, res) {
 // This is not run because of the passport.authenticate('facebook') redirect to facebook
@@ -95,6 +85,7 @@ app.get('/auth/twittercallback',
 
 app.get('/auth/sendToProfile/:uniqueUser', authenticationController.sendToProfile);
 app.get('/posts', authenticationController.displayStatus);
+app.get('/twittertime', authenticationController.displayTwitterTime);
 
 
 

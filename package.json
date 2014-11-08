@@ -11,6 +11,8 @@
     "passport-facebook": "~1.0.3",
     "facebook-node-sdk": "~0.2.0",
     "node-twitter": "~0.5.2",
-    "passport-twitter": "~1.0.2"
+    "passport-twitter": "~1.0.2",
+    "underscore": "~1.7.0",
+    "moment": "~2.8.3"
   }
 }
