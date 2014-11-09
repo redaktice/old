@@ -1,0 +1,45 @@
+@Functionality:
+   Facebook:
+      ☐ Delete personal status posts
+      ☐ Link hashtags
+      ☐ Incorporate links and images
+   Twitter:
+      ☐ Delete personal tweets
+      ☐ Create own hashtag filter
+      ☐ Incoroporate links and images
+   General:
+       ☐ Create a general post area
+       ☐ Use general post to share to other media
+       ☐ Use existing posts to share to other media
+       ☐ Display post time in correct format
+   Advanced:
+      ☐ Create a popularity filtering system
+      ☐ Create a tag filtering system
+      ☐ Create a favorite (most used media) system
+      ☐ Create (iframes?) to display media in native format when needed
+@Design
+  Layout:
+      ☐ Choose main layout for 3 sections:
+            ☐ Header
+            ☐ Feed
+                ☐ Filtering system area
+            ☐ New post area
+      ☐ Pick main font
+      ☐ Pick main color scheme
+      ☐ Location of external links
+  Advanced Design:
+      ☐ Animations (greensock)
+      ☐ Options appear/disappear when mouse-over
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+Archive:
+ ✔ Login with Facebook @done (14-11-09 00:26)
+ ✔ Access Twitter @done (14-11-09 00:26)
+ ✔ View personal status posts @done (14-11-09 00:26) @project(Facebook)
+ ✔ Post personal status posts @done (14-11-09 00:26) @project(Facebook)
+ ✔ Display hashtags @done (14-11-09 00:28) @project(Facebook)
+ ✔ Display comments @done (14-11-09 00:28) @project(Facebook)
+ ✔ View personal status tweets @done (14-11-09 00:26) @project(Twitter)
+ ✔ Post tweets @done (14-11-09 00:26) @project(Twitter)
+ ✔ Display hashtags @done (14-11-09 00:27) @project(Twitter)
+ ✔ Link hashtags to twitter @done (14-11-09 00:27) @project(Twitter)

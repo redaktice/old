@@ -52,49 +52,10 @@ var authenticationController = {
 
 		});
 
-// console.log("Test");
-
-		// if (!signedIn.twitter) {
-		// 	facebookControl.getStatus(req.user, function(err, response) {
-		// 		res.render('profile', {user: req.user, key: keys.facebookAppID, facebookStatus: response});
-		// 	});
-		// }
-		// if(signedIn.twitter) {
-		// 	facebookControl.getStatus(req.user, function(err, response) {
-		// 		twitterControl.getHomeTimeline(req.user, function(err, result) {
-		// 			res.render('profile', {
-		// 				user: req.user,
-		// 				key: keys.facebookAppID,
-		// 				facebookStatus: response,
-		// 				twitterTimeline: result
-		// 			});
-		// 		});
-		// 	});
-		// }
-	},
-	displayStatus: function(req, res) {
-		facebookControl.getStatus(req.user, function(err, response) {
-			res.send(response);
-		});
-	},
-	displayTwitterTime: function (req, res) {
-		twitterControl.getHomeTimeline(req.user, function(err, result) {
-			res.send(result);
-		});
 	},
 	logout: function(req, res) {
 		req.logout();
 		res.redirect('/auth/login');
-	},
-	createPost: function(req, res) {
-		facebookControl.writeStatus(req.user, function(err, response) {
-			res.redirect('auth/sendToProfile/' + req.user.uniqueURL);
-		});
-	},
-	createTweet: function(req, res) {
-		twitterControl.newTweet(req.user, function(err, response) {
-			res.redirect('auth/sendToProfile/' + req.user.uniqueURL);
-		});
 	}
 };
 

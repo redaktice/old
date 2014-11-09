@@ -1,6 +1,6 @@
 var express = require('express');
 var session = require('express-session');
-var cookeParser = require('cookie-parser');
+var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
 var passport = require('passport');
 var passportConfig = require('./config/passport');
@@ -12,6 +12,7 @@ var bodyParser = require('body-parser');
 var indexController = require('./controllers/index.js');
 var authenticationController = require('./controllers/authentication.js');
 var facebookController = require('./api-actions/facebook-actions.js');
+var statusController = require('./controllers/statusController.js');
 
 // Establish and connect to database
 mongoose.connect('mongodb://localhost/social-vibe');
@@ -21,7 +22,7 @@ app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookeParser());
+app.use(cookieParser());
 app.use(flash());
 app.use(session({secret: '5=-098ejhl;p864irrejfuy8][-0o'}));
 app.use(passport.initialize());
@@ -83,22 +84,19 @@ app.get('/auth/twittercallback',
 		authenticationController.attemptLogin
 );
 
-
+// Go to user home page
 app.get('/auth/sendToProfile/:uniqueUser', authenticationController.sendToProfile);
-app.get('/posts', authenticationController.displayStatus);
-app.get('/twittertime', authenticationController.displayTwitterTime);
-app.get('/newstatus', authenticationController.createPost);
-app.get('/newtweet', authenticationController.createTweet);
+app.get('/newstatus', statusController.createPost);
+app.get('/newtweet', statusController.createTweet);
 
+
+// USED ONLY FOR TESTING
+app.get('/posts', statusController.displayStatus);
+app.get('/twittertime', statusController.displayTwitterTime);
 
 
 app.get('/auth/logout', authenticationController.logout);
 
-
-// app.get('/sendToProfile', authenticationController.sendToProfile);
-
-// app.post('/auth/login', indexController.getLogin);
-// app.get('/profile/:user', indexController.getProfile);
 
 var server = app.listen(9609, function() {
 	console.log('Express server listening on port ' + server.address().port);

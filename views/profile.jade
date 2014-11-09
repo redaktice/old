@@ -32,9 +32,9 @@ block content
 						ul.nav.navbar-nav.navbar-right
 							li.dropdown
 								a.dropdown-toggle(href="#", data-toggle="dropdown")
-								h3.inline-block
-									i.fa.fa-cog.fa-spin
-									span.caret
+									h3.inline-block
+										i.fa.fa-cog.fa-spin
+										span.caret
 								ul.dropdown-menu(role="menu")
 									li: a(href="#") Settings
 									li: a(href="#") Privacy
@@ -106,31 +106,32 @@ block content
 								p Friend 3
 
 			//- Create New Post
-			aside
+			aside#generate-post
 				div.box-side-left.inline-block
 
 					//- Popup
-					div.btn-group.dropup
+					//- div.btn-group.dropup
 						button#btn-post.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown")
 							h4.inline-block.no-mgn Post
 								span.caret
-						div#post-menu.dropdown-menu(role="menu")
-							form.post-form(action="form")
-								div.form-group
-									textarea#new-post(name="post", cols="30", rows="5", placeholder="Share your thoughts")
-									textarea#tag-post(name="", cols="30", rows="2", placeholder="#It")
-								h2.no-mgn: i.btn.fa.fa-camera
-								div.page-header.no-mgn
-								//- Share icons
-								div.media.inline-block
-									ul.list-unstyled.list-inline
-										li: h3 ALL
-										li: i.to-media.media-circle-md.fa.fa-facebook.facebook
-										li: i.to-media.media-circle-md.fa.fa-twitter.twitter
-										li: i.to-media.media-circle-md.fa.fa-instagram.instagram
-								//- Submit
-								div.form-group
-									button.btn.btn-success.vibe(type="button") Vibe
+					div#post-menu
+						form.post-form(action="form")
+							div.form-group
+								textarea#new-post(name="post", cols="30", rows="5", placeholder="Share your thoughts")
+								p: span#character-count
+								textarea#tag-post(name="", cols="30", rows="2", placeholder="#It")
+							h2.no-mgn: i.btn.fa.fa-camera
+							div.page-header.no-mgn
+							//- Share icons
+							div.media.inline-block
+								ul.list-unstyled.list-inline
+									li: h3 ALL
+									li: i.to-media.media-circle-md.fa.fa-facebook.facebook
+									li: i.to-media.media-circle-md.fa.fa-twitter.twitter
+									li: i.to-media.media-circle-md.fa.fa-instagram.instagram
+							//- Submit
+							div.form-group
+								button.btn.btn-success.vibe(type="button") Vibe
 
 			//- Footer
 			footer.text-center

@@ -3,6 +3,14 @@ script#status-post-template(type="text/x-handlebars-template").
 		<div class="tw-status post template-post centering" data-post-id="" id="">
 			<div class="col post-head">
 				<div class="col-sm-4 col-xs-12 inline-block post-icons">
+					{{#if this.mediaType.facebook}}
+						<i class="icon icon-btn facebook media-circle-md fa fa-facebook"></i>
+					{{/if}}
+
+					{{#if this.mediaType.twitter}}
+						<i class="icon icon-btn twitter media-circle-md fa fa-twitter"></i>
+					{{/if}}
+
 					<ul class="list-unstyled list-inline media-list">
 						<!-- Template -->
 						<li id="icon-template" class="template"><i class="icon media-circle-xs fa"></i></li>
@@ -48,19 +56,9 @@ script#status-post-template(type="text/x-handlebars-template").
 				</div>
 				<div class="col-sm-4 col-xs-12">
 					<span><img class="img-circle img-post-user" src="{{this.userImage}}" alt="">
-						{{!-- {{this.mediaType.facebook}} --}}
-					{{#if this.mediaType.facebook}}
-					{{!-- if (this.media.facebook) { --}}
+				
 						<span class="post-author">{{this.user}}</span>
-					{{!-- } --}}
-					{{/if}}
 
-
-			{{!-- 		{{#if this.mediaType.twitter}}
-						<span class="post-author">@{{this.user}}</span>
-					{{/if}} --}}
-
-					
 					</span>
 				</div>
 				<div class="col-sm-4 col-xs-12 date inline-block">
@@ -73,7 +71,30 @@ script#status-post-template(type="text/x-handlebars-template").
 				<p class="post-text">{{this.text}}</p>
 			</div>
 			<div class="page-header"></div>
+			<h5 class="">Tags</h5>
+				{{#if this.mediaType.facebook}}
+					{{#each hashtag}}
+						<a href="#">{{this}}</a>
+					{{/each}}
+
+				{{/if}}
+
+				{{#if this.mediaType.twitter}}
+				{{#each hashtag}}
+					<a href="https://twitter.com/hashtag/{{this.text}}?src=hash&lang=en"><span>#</span>{{this.text}}</a>
+				{{/each}}
+				
+				{{/if}}
+
+			<div class="page-header"></div>
 			<h5 class="">Comments</h5>
+				{{#if this.mediaType.facebook}}
+				
+					{{#each comment.data}}
+						<span><img class="img-circle img-post-user" src="http://graph.facebook.com/{{this.from.id}}/picture?type=large", alt=""/>{{this.from.name}}</span>
+						<p>{{this.message}}</p>
+					{{/each}}
+				{{/if}}
 
 		</div>
 	{{/each}}

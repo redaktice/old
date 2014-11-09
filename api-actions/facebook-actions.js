@@ -1,8 +1,19 @@
 var Facebook = require('facebook-node-sdk');
 var keys = require('../private/keys');
 var StatusPost = require('../models/status-posts.js');
+var _ = require('underscore');
+
 
 var FB = new Facebook({appId: keys.facebook.appID, secret: keys.facebook.appSecret});
+var findHashtags = function(post) {
+	var postWords = post.split(' ');
+console.log('Post Words', postWords);
+	var hashtags = postWords.filter(function(word) {
+console.log('Hashtag found', word[0] === '#');
+		return word[0] === '#';
+	});
+	return hashtags;
+};
 
 // https://developers.facebook.com/docs/graph-api/reference/v2.2/post
 // https://developers.facebook.com/docs/javascript/reference/FB.api
@@ -27,24 +38,23 @@ var facebookController = {
 				 		post.updated_time,
 				 		post.message,
 				 		post.image,
-				 		'hashtags go here',
+				 		findHashtags(post.message),
 				 		post.comments,
 				 		{facebook: true}
 				 		);
+				 console.log('Facebook hashtags', statusPost.hashtag);
 				 	return statusPost;
 				 });
 				
 				callback(err, allPosts);
-				// }
 			});
 	},
-	writeStatus: function(statusPost, callback) {
-		FB.setAccessToken(user.media.facebook.facebookToken);
-		var data = "This is another test post from my awesome web app";
+	writeStatus: function(req, callback) {
+		FB.setAccessToken(req.user.media.facebook.facebookToken);
 		FB.api(
 			"/me/feed",
 			'post',
-			{message: data}, function(response) {
+			{message: req.status}, function(response) {
 				if (!response || response.error) {
 					console.log("POST:", response);			
 					console.log("There was a post error", response);
@@ -52,7 +62,27 @@ var facebookController = {
 				console.log("POST:", response);
 				callback(response);
 			});
-	}
+	},
+
+
+
+// USED ONLY FOR TESTING
+					showFacebookStatus: function(user, callback) {
+						FB.setAccessToken(user.media.facebook.facebookToken);
+						FB.api(
+							"/me/statuses",
+							function(err, response) {
+								if(err) {
+									console.log("Facebook Status Error:", err);
+								}
+								callback(err, response);
+							});
+	},
+
+// END USED ONLY FOR TESTING
+
+
+
 };
 
 

@@ -21,5 +21,30 @@ console.log('facebook status', userPosts);
 	// 	var statusText = $(this).find('post-text').text();
 	// };
 
+
+
+
+// Creating a new Vibe post
+
+$('#new-post').on('keyup', function() {
+	var message = $('#new-post').val();
+	if (message.length > 0) {
+		$('#character-count').text(message.length + ' Char.');
+	} else {
+		$('#character-count').text('');
+	}
+});
+
+$('#generate-post .vibe').on('click', function(e) {
+	var newMessage = $('#new-post').val();
+	e.preventDefault();
+	if (newMessage.length > 140  /* && TWITTER IS SELECTED */) {
+		alert('PLEASE MODIFY TO 140 CHARACTERS FOR TWITTER');
+	} else {
+		// VIBE TO THE SELECTED MEDIA
+		$.post();
+	}
+});
+
 });
 
