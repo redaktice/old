@@ -7,6 +7,10 @@ var userSchema = mongoose.Schema({
 		required: true,
 		unique: true
 	},
+	uniqueURL: {
+		type: String,
+		unique: true
+	},
 	vibeID: {
 		type: Number,
 		unique: true

@@ -26,9 +26,8 @@ var authenticationController = {
 	// Generate a unique user URL and redirect to that URL
 	attemptLogin: function(req, res, next) {
 // console.log("USER", req.user);
-		var uniqueUser = req.user.profile.lastName + '.' + req.user.profile.firstName + '.' + req.user.vibeID;
 		// signedIn.facebook = true;
-		res.redirect('/auth/sendToProfile/' + uniqueUser);
+		res.redirect('/auth/sendToProfile/' + req.user.uniqueURL);
 	},
 	// Grab all of the Facebook status information and render the user's profile
 	sendToProfile: function(req, res) {
@@ -89,7 +88,12 @@ var authenticationController = {
 	},
 	createPost: function(req, res) {
 		facebookControl.writeStatus(req.user, function(err, response) {
-			res.redirect('auth/sendToProfile/' + req.user.profile.lastName + '.' + req.user.profile.firstName + '.' + req.user.vibeID);
+			res.redirect('auth/sendToProfile/' + req.user.uniqueURL);
+		});
+	},
+	createTweet: function(req, res) {
+		twitterControl.newTweet(req.user, function(err, response) {
+			res.redirect('auth/sendToProfile/' + req.user.uniqueURL);
 		});
 	}
 };

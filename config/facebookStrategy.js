@@ -22,6 +22,7 @@ var facebookStrategy = new FacebookStrategy({
 			if(!user) {
 				delete profile._raw;
 				delete profile._json;
+				var randomNumber = (10* Math.random()).toFixed(2);
 				// profile.facebookToken = accessToken;
 				var newUser = new User({
 					profile: {
@@ -29,7 +30,8 @@ var facebookStrategy = new FacebookStrategy({
 						lastName: profile.name.familyName,
 						image: 'http://graph.facebook.com/' + profile.id + '/picture?type=large'
 					},
-					vibeID: (10* Math.random()).toFixed(2),
+					uniqueURL: (profile.name.familyName + '.' + profile.name.givenName + '.' + randomNumber),
+					vibeID: randomNumber,
 					// image: 'http://graph.facebook.com/' + profile.id + '/picture?type=large',
 					fbID: profile.id,
 					// profile: profile,

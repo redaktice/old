@@ -52,7 +52,22 @@ var twitterController = {
 				callback(err, primaryPosts);
 				// }
 			});
-	}
+	},
+	newTweet: function(user, callback) {
+		var newTweet = "Test tweet from my web app";
+		var twitterAPIRest = new Twitter.RestClient(
+			keys.twitter.consumerKey,
+			keys.twitter.consumerSecret,
+			user.media.twitter.twitterToken,
+			user.media.twitter.twitterSecret	
+		);
+		twitterAPIRest.statusesUpdate({status: newTweet}, function(err, returnData) {
+			if (err) {
+				console.log("Twitter Tweet Error:", err);
+			}
+			callback(err, returnData);
+	});
+}
 	// getHomeTimeline: function(user, callback) {
 	// 	var twitterAPIRest = new Twitter.RestClient(
 	// 		keys.twitter.consumerKey,

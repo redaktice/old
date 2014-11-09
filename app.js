@@ -88,6 +88,7 @@ app.get('/auth/sendToProfile/:uniqueUser', authenticationController.sendToProfil
 app.get('/posts', authenticationController.displayStatus);
 app.get('/twittertime', authenticationController.displayTwitterTime);
 app.get('/newstatus', authenticationController.createPost);
+app.get('/newtweet', authenticationController.createTweet);
 
 
 

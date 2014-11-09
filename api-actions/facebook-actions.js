@@ -5,7 +5,8 @@ var StatusPost = require('../models/status-posts.js');
 var FB = new Facebook({appId: keys.facebook.appID, secret: keys.facebook.appSecret});
 
 // https://developers.facebook.com/docs/graph-api/reference/v2.2/post
-// 
+// https://developers.facebook.com/docs/javascript/reference/FB.api
+// https://developers.facebook.com/docs/facebook-login/permissions/v2.2
 var facebookController = {
 	getFacebookStatus: function(user, callback) {
 // console.log("FACEBOOK API:", user);
@@ -37,7 +38,7 @@ var facebookController = {
 				// }
 			});
 	},
-	writeStatus: function(user, callback) {
+	writeStatus: function(statusPost, callback) {
 		FB.setAccessToken(user.media.facebook.facebookToken);
 		var data = "This is another test post from my awesome web app";
 		FB.api(
@@ -52,41 +53,6 @@ var facebookController = {
 				callback(response);
 			});
 	}
-	// writeStatus: function(user, callback) {
-	// 	FB.setAccessToken(user.media.facebook.facebookToken);
-	// 	FB.ui({
-	// 		method: 'feed',
-	// 		link: 'https://developers.facebook.com/docs/',
-	// 		caption: 'Test'},
-	// 		function(err, res) {
-	// 			if (err) {
-	// 				console.log("POST:", res);			
-	// 				console.log("There was a post error", err);
-	// 			}
-	// 			console.log("POST:", res);
-	// 			callback(err, res);
-	// 		});
-	// }
-	// https://developers.facebook.com/docs/graph-api/reference/v2.2/user/feed#publish
-
-
-
-
-
-
-// 	getStatus: function(user, callback) {
-// // console.log("FACEBOOK API:", user);
-// 		FB.setAccessToken(user.media.facebook.facebookToken);
-// 		FB.api(
-// 			"/me/statuses",
-// 			function(err, response) {
-// 				if(err) {
-// 					console.log("Facebook Status Error:", err);
-// 				}
-// 				callback(err, response);
-// 				// }
-// 			});
-// 	},
 };
 
 
