@@ -13,6 +13,7 @@ var indexController = require('./controllers/index.js');
 var authenticationController = require('./controllers/authentication.js');
 var facebookController = require('./api-actions/facebook-actions.js');
 var statusController = require('./controllers/statusController.js');
+var apiController = require('./controllers/apiController.js');
 
 // Establish and connect to database
 mongoose.connect('mongodb://localhost/social-vibe');
@@ -32,10 +33,14 @@ app.use(passport.session());
 app.get('/', function(req, res) {
 	res.redirect('/auth/login');
 });
-// LOGIN AUTHENTICATION
 
+
+// LOGIN AUTHENTICATION
 app.get('/auth/login', authenticationController.login);
 
+
+
+/*+++++++++++++++++++++++++++++ FACEBOOK API +++++++++++++++++++++++++++++*/
 app.get('/auth/facebook',
 		passport.authenticate('facebook',
 			{scope: [
@@ -61,6 +66,8 @@ app.get('/auth/facebookcallback',
 		passport.authenticate('facebook', {failureRedirect: '/auth/login'}), 
 		authenticationController.attemptLogin
 );
+/*-------------------------- END FACEBOOK API -----------------------------*/
+
 
 
 
@@ -68,15 +75,16 @@ app.get('/auth/facebookcallback',
 app.use(passportConfig.ensureAuthentication);
 
 
+
+
+
+/*+++++++++++++++++++++++++++++ TWITTER API +++++++++++++++++++++++++++++*/
 app.get('/auth/twitter',
-		passport.authenticate('twitter'
+		passport.authenticate('twitter'), function(req, res) {
+// This is not run because of the passport.authenticate('facebook') redirect to facebook
+});
 			// 	// LOOK HERE https://github.com/BoyCook/TwitterJSClient/blob/master/lib/Twitter.js
 			// 	https://dev.twitter.com/overview/api/twitter-ids-json-and-snowflake
-		),
-		function(req, res) {
-// This is not run because of the passport.authenticate('facebook') redirect to facebook
-}
-);
 
 // Called by Facebook after confirming login
 app.get('/auth/twittercallback',
@@ -84,10 +92,21 @@ app.get('/auth/twittercallback',
 		authenticationController.attemptLogin
 );
 
+/*-------------------------- END TWITTER API -----------------------------*/
+
+
+
+
 // Go to user home page
 app.get('/auth/sendToProfile/:uniqueUser', authenticationController.sendToProfile);
 app.get('/newstatus', statusController.createPost);
 app.get('/newtweet', statusController.createTweet);
+
+
+// RE-VIBE ACTIONS
+app.post('/api/pushFacebook', apiController.pushFacebook);
+
+
 
 
 // USED ONLY FOR TESTING

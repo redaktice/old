@@ -1,5 +1,6 @@
-	var StatusPost = function(user, userImage, id, postTime, text, image, hashtag, comment, mediaType) {
+	var StatusPost = function(user, userID, userImage, id, postTime, text, image, hashtag, comment, mediaType) {
 		this.user = user;
+		this.userID = userID;
 		this.userImage = userImage;
 		this.postID = id;
 		this.postTime = postTime;

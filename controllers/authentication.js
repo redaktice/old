@@ -1,12 +1,11 @@
 var keys = require('../private/keys');
 var User = require('../models/schemas/user');
-var keys = require('../private/keys');
-var facebookControl = require('../api-actions/facebook-actions.js');
-var twitterControl = require('../api-actions/twitter-actions.js');
 var async = require('async');
 var _ = require('underscore');
 var moment = require('moment');
 
+var facebookControl = require('../api-actions/facebook-actions.js');
+var twitterControl = require('../api-actions/twitter-actions.js');
 // var signedIn = {
 // 	facebook: false,
 // 	twitter: true,
@@ -46,7 +45,7 @@ var authenticationController = {
 				return -1 * moment(post.postTime).valueOf();
 			});
 			// Concatenate the facebook and twitter data
-			res.render('profile', {user: req.user, userData: organizedPosts});
+			res.render('profile', {user: req.user, userPosts: organizedPosts});
 
 //*/
 

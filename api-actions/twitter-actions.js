@@ -40,6 +40,7 @@ var twitterController = {
 				 	// each incoming Twitter status
 				 	var statusPost = new StatusPost(
 				 		'@' + post.user.screen_name,
+				 		user.uniqueURL,
 				 		post.user.profile_image_url,
 				 		post.id,
 				 		post.created_at,

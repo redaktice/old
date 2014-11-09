@@ -7,9 +7,9 @@ var _ = require('underscore');
 var FB = new Facebook({appId: keys.facebook.appID, secret: keys.facebook.appSecret});
 var findHashtags = function(post) {
 	var postWords = post.split(' ');
-console.log('Post Words', postWords);
+// console.log('Post Words', postWords);
 	var hashtags = postWords.filter(function(word) {
-console.log('Hashtag found', word[0] === '#');
+// console.log('Hashtag found', word[0] === '#');
 		return word[0] === '#';
 	});
 	return hashtags;
@@ -33,6 +33,7 @@ var facebookController = {
 				 var allPosts = response.data.map(function(post) {
 				 	var statusPost = new StatusPost(
 				 		post.from.name,
+				 		user.uniqueURL,
 				 		'http://graph.facebook.com/' + post.from.id + '/picture?type=large',
 				 		post.id,
 				 		post.updated_time,
@@ -42,7 +43,7 @@ var facebookController = {
 				 		post.comments,
 				 		{facebook: true}
 				 		);
-				 console.log('Facebook hashtags', statusPost.hashtag);
+				 // console.log('Facebook hashtags', statusPost.hashtag);
 				 	return statusPost;
 				 });
 				
@@ -59,7 +60,7 @@ var facebookController = {
 					console.log("POST:", response);			
 					console.log("There was a post error", response);
 				}
-				console.log("POST:", response);
+				// console.log("POST:", response);
 				callback(response);
 			});
 	},

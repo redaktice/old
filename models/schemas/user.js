@@ -35,7 +35,8 @@ var userSchema = mongoose.Schema({
 	// 	required: true,
 	// 	unique: true
 	// },
-	media: Object
+	media: Object,
+	posts: Array
 });
 
 // Model

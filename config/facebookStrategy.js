@@ -43,7 +43,7 @@ var facebookStrategy = new FacebookStrategy({
 					}
 				});
 				newUser.save(function(err, user){
-					console.log({"Errors": err, "User": user});
+					// console.log({"Errors": err, "User": user});
 					return done(err, user);
 				});
 			}
@@ -52,7 +52,7 @@ var facebookStrategy = new FacebookStrategy({
 				user.media.facebook.facebookToken = accessToken;
 				user.markModified('facebook');
 				user.save(function(err, user){
-					console.log({"Errors": err, "User": user});
+					// console.log({"Errors": err, "User": user});
 					return done(null, user);
 				});
 			}
