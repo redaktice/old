@@ -36,8 +36,37 @@ var facebookController = {
 				callback(err, allPosts);
 				// }
 			});
+	},
+	writeStatus: function(user, callback) {
+		FB.setAccessToken(user.media.facebook.facebookToken);
+		var data = "This is another test post from my awesome web app";
+		FB.api(
+			"/me/feed",
+			'post',
+			{message: data}, function(response) {
+				if (!response || response.error) {
+					console.log("POST:", response);			
+					console.log("There was a post error", response);
+				}
+				console.log("POST:", response);
+				callback(response);
+			});
 	}
-	// writeStatus: function()
+	// writeStatus: function(user, callback) {
+	// 	FB.setAccessToken(user.media.facebook.facebookToken);
+	// 	FB.ui({
+	// 		method: 'feed',
+	// 		link: 'https://developers.facebook.com/docs/',
+	// 		caption: 'Test'},
+	// 		function(err, res) {
+	// 			if (err) {
+	// 				console.log("POST:", res);			
+	// 				console.log("There was a post error", err);
+	// 			}
+	// 			console.log("POST:", res);
+	// 			callback(err, res);
+	// 		});
+	// }
 	// https://developers.facebook.com/docs/graph-api/reference/v2.2/user/feed#publish
 
 

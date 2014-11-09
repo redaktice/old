@@ -32,7 +32,7 @@ var twitterController = {
 				 	// }
 					return post.in_reply_to_screen_name === null;
 				 });
-				 console.log('====================ALL POSTS FROM TWITTER YO================', allPosts);
+				 // console.log('====================ALL POSTS FROM TWITTER YO================', allPosts);
 				 var primaryPosts = allPosts.map(function(post) {
 
 				 	var statusPost = new StatusPost(

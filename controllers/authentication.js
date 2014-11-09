@@ -25,7 +25,7 @@ var authenticationController = {
 	},
 	// Generate a unique user URL and redirect to that URL
 	attemptLogin: function(req, res, next) {
-console.log("USER", req.user);
+// console.log("USER", req.user);
 		var uniqueUser = req.user.profile.lastName + '.' + req.user.profile.firstName + '.' + req.user.vibeID;
 		// signedIn.facebook = true;
 		res.redirect('/auth/sendToProfile/' + uniqueUser);
@@ -86,6 +86,11 @@ console.log("USER", req.user);
 	logout: function(req, res) {
 		req.logout();
 		res.redirect('/auth/login');
+	},
+	createPost: function(req, res) {
+		facebookControl.writeStatus(req.user, function(err, response) {
+			res.redirect('auth/sendToProfile/' + req.user.profile.lastName + '.' + req.user.profile.firstName + '.' + req.user.vibeID);
+		});
 	}
 };
 

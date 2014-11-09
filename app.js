@@ -42,6 +42,7 @@ app.get('/auth/facebook',
 				'read_friendlists',
 				// 'user_activities',
 				'user_status',
+				'publish_actions',
 				// 'user_photos',
 				'manage_notifications'
 				]
@@ -86,6 +87,7 @@ app.get('/auth/twittercallback',
 app.get('/auth/sendToProfile/:uniqueUser', authenticationController.sendToProfile);
 app.get('/posts', authenticationController.displayStatus);
 app.get('/twittertime', authenticationController.displayTwitterTime);
+app.get('/newstatus', authenticationController.createPost);
 
 
 
