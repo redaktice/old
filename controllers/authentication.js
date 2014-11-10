@@ -45,7 +45,7 @@ var authenticationController = {
 				return -1 * moment(post.postTime).valueOf();
 			});
 			// Concatenate the facebook and twitter data
-			res.render('profile', {user: req.user, userPosts: organizedPosts});
+			res.render('profile', {user: req.user, renderedPosts: organizedPosts});
 
 //*/
 

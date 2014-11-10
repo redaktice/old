@@ -9,33 +9,30 @@ var apiController = {
 	pushFacebook: function(req, res) {
 		var postID;
 console.log('Facebook push called');
-		// console.log(req);
-		User.findOne({uniqueURL: req.body.userID}, function(err, user) {
-			if (err) {
-				console.log("There was a facebook post error", err);
-			}
 
-			for (var i = 0; i < user.posts.length; i++) {
-				if (user.posts[i].originalID === req.body.postID) {
-					postID = user.posts[i];
-					break;
-				}
+		var user = req.user;
+		for (var i = 0; i < user.posts.length; i++) {
+			if (user.posts[i].originalID === req.postID) {
+				postID = user.posts[i];
+				user.posts[i].facebookID = req.facebookID;
+				break;
 			}
+		}
 console.log('Post:', postID);
-			// Check to see if this post has already been saved
-			if(!postID) {
-				user.posts.push({originalID: req.body.postID});
-			}
-			user.save(function(err, user){
-				if (err) {
-					console.log('save error', err);
-				}
-				console.log('saved');
-			});
-			res.send(user);
-		});
-	}
+		// Check to see if this post has already been saved
+		if(!postID) {
+			user.posts.push({originalID: req.postID, facebookID: req.facebookID});
+		}
 
+		// Save the User in the database
+		user.markModified('posts');
+		user.save(function(err, user){
+			if (err) {
+				console.log('save error', err);
+			}
+			console.log('saved');
+		});
+	},
 };
 
 module.exports = apiController;

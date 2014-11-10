@@ -1,4 +1,6 @@
 var Facebook = require('facebook-node-sdk');
+var User = require('../models/schemas/user');
+
 var keys = require('../private/keys');
 var StatusPost = require('../models/status-posts.js');
 var _ = require('underscore');
@@ -57,12 +59,58 @@ var facebookController = {
 			'post',
 			{message: req.status}, function(response) {
 				if (!response || response.error) {
-					console.log("POST:", response);			
+					// console.log("POST:", response);			
 					console.log("There was a post error", response);
 				}
 				// console.log("POST:", response);
+				console.log("POST", response);
 				callback(response);
 			});
+	},
+	updateStatus: function(req, callback) {
+
+		// User.findOne({uniqueURL: req.userID}, function(err, user) {
+		// 	if (err) {
+		// 		console.log("There was a facebook error", err);
+		// 	}
+			FB.setAccessToken(req.user.media.facebook.facebookToken);
+			FB.api(
+				"/me/statuses",
+				function(err, response) {
+					if(err) {
+						console.log("Facebook Status Error:", err);
+					}
+
+					// Change Response to look like an array of information
+					 var recentPost = response.data[0];
+
+					 for (var i = 1; i < response.data.length; i++) {
+					 	if (response.data[i].id == recentPost.id) {
+					 		callback(err, null);
+					 		return;
+					 	}
+					 }
+
+	console.log('recent post', recentPost);
+					 var newStatusPost = new StatusPost(
+					 		recentPost.from.name,
+					 		req.user.uniqueURL,
+					 		'http://graph.facebook.com/' + recentPost.from.id + '/picture?type=large',
+					 		recentPost.id,
+					 		recentPost.updated_time,
+					 		recentPost.message,
+					 		recentPost.image,
+					 		findHashtags(recentPost.message),
+					 		recentPost.comments,
+					 		{facebook: true}
+					 	);
+	console.log('new status post', newStatusPost);
+
+
+
+					callback(err, newStatusPost);
+				});
+		// });
 	},
 
 

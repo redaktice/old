@@ -99,12 +99,13 @@ app.get('/auth/twittercallback',
 
 // Go to user home page
 app.get('/auth/sendToProfile/:uniqueUser', authenticationController.sendToProfile);
-app.get('/newstatus', statusController.createPost);
-app.get('/newtweet', statusController.createTweet);
+app.get('status/newstatus', statusController.createPost);
+app.get('status/newtweet', statusController.createTweet);
 
 
 // RE-VIBE ACTIONS
-app.post('/api/pushFacebook', apiController.pushFacebook);
+app.post('/status/pushFacebook', statusController.updateFacebook);
+app.post('/status/updateStatus', statusController.updateStatus);
 
 
 
