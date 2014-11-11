@@ -1,101 +1,99 @@
 script#status-post-template(type="text/x-handlebars-template").
-	{{#each statusPosts}}
-		<div class="status-post post template-post centering" user-id="{{this.userID}}" data-post-id="{{this.postID}}" id="">
-			<div class="col post-head">
-				<div class="col-sm-4 col-xs-12 inline-block post-icons">
-					{{#if this.mediaType.facebook}}
-						<i class="icon icon-btn facebook media-circle-md fa fa-facebook"></i>
-					{{/if}}
+	<div class="status-post post template-post centering" user-id="{{userID}}" data-post-id="{{postID}}" id="">
+		<div class="col post-head">
+			<div class="col-sm-4 col-xs-12 inline-block post-icons">
+				{{#if mediaType.facebook}}
+					<i class="icon icon-btn facebook media-circle-md fa fa-facebook"></i>
+				{{/if}}
 
-					{{#if this.mediaType.twitter}}
-						<i class="icon icon-btn twitter media-circle-md fa fa-twitter"></i>
-						<button class="push-facebook btn btn-default media-circle-md fa fa-facebook icon">Add facebook</button>
-					{{/if}}
+				{{#if mediaType.twitter}}
+					<i class="icon icon-btn twitter media-circle-md fa fa-twitter"></i>
+					<button class="push-facebook btn btn-default media-circle-md fa fa-facebook icon">Add facebook</button>
+				{{/if}}
 
-					<ul class="list-unstyled list-inline media-list">
-						<!-- Template -->
-						<li id="icon-template" class="template"><i class="icon media-circle-xs fa"></i></li>
-						<li class="btn-group dropup minus-media-xs" id="">
-							<h4 class="btn dropdown-toggle" data-toggle="dropdown"><span class="icon inline-block no-mgn"><i class="fa fa-minus-circle"></i></span></h4>
+				<ul class="list-unstyled list-inline media-list">
+					<!-- Template -->
+					<li id="icon-template" class="template"><i class="icon media-circle-xs fa"></i></li>
+					<li class="btn-group dropup minus-media-xs" id="">
+						<h4 class="btn dropdown-toggle" data-toggle="dropdown"><span class="icon inline-block no-mgn"><i class="fa fa-minus-circle"></i></span></h4>
 
-							<!-- REMOVE icons -->
-							<div id="" class="dropdown-menu relative" role="menu">
-								<div class="media inline-block">
-									<ul class="list-unstyled list-inline text-right alter-media-list">
-									
-									<!-- MEDIA ALREADY VIBED GOES HERE -->
+						<!-- REMOVE icons -->
+						<div id="" class="dropdown-menu relative" role="menu">
+							<div class="media inline-block">
+								<ul class="list-unstyled list-inline text-right alter-media-list">
+								
+								<!-- MEDIA ALREADY VIBED GOES HERE -->
 
-										{{#if this.mediaType.facebook}}
-											<li><i class="icon icon-btn facebook media-circle-md fa fa-facebook"></i></li>
-										{{/if}}
+									{{#if mediaType.facebook}}
+										<li><i class="icon icon-btn facebook media-circle-md fa fa-facebook"></i></li>
+									{{/if}}
 
-										{{#if this.mediaType.twitter}}
-											<li><i class="icon icon-btn twitter media-circle-md fa fa-twitter"></i></li>
-										{{/if}}
+									{{#if mediaType.twitter}}
+										<li><i class="icon icon-btn twitter media-circle-md fa fa-twitter"></i></li>
+									{{/if}}
 
-										<li><button type="button" class="re-vibe btn btn-success btn-circle-xs">V</button></li>
-									</ul>
-								</div>
+									<li><button type="button" class="re-vibe btn btn-success btn-circle-xs">V</button></li>
+								</ul>
 							</div>
-						</li>
+						</div>
+					</li>
 
-						<li class="btn-group dropup add-media-xs" id="">
-							<h4 class="btn dropdown-toggle" data-toggle="dropdown"><span class="icon inline-block no-mgn"><i class="fa fa-plus-circle"></i></span></h4>
+					<li class="btn-group dropup add-media-xs" id="">
+						<h4 class="btn dropdown-toggle" data-toggle="dropdown"><span class="icon inline-block no-mgn"><i class="fa fa-plus-circle"></i></span></h4>
 
-							<!-- ADD icons -->
-							<div id="" class="dropdown-menu relative" role="menu">
-								<div class="media inline-block">
-									<ul class="list-unstyled list-inline alter-media-list">
+						<!-- ADD icons -->
+						<div id="" class="dropdown-menu relative" role="menu">
+							<div class="media inline-block">
+								<ul class="list-unstyled list-inline alter-media-list">
 
-									<!-- MEDIA NOT VIBED GOES HERE -->
-										<li><button type="button" class="re-vibe btn btn-success btn-circle-xs">V</button></li>
-									</ul>
-								</div>
+								<!-- MEDIA NOT VIBED GOES HERE -->
+									<li><button type="button" class="re-vibe btn btn-success btn-circle-xs">V</button></li>
+								</ul>
 							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="col-sm-4 col-xs-12">
-					<span><img class="img-circle img-post-user" src="{{this.userImage}}" alt="">
-				
-						<span class="post-author">{{this.user}}</span>
-
-					</span>
-				</div>
-				<div class="col-sm-4 col-xs-12 date inline-block">
-					{{this.postTime}}
-				</div>
+						</div>
+					</li>
+				</ul>
 			</div>
+			<div class="col-sm-4 col-xs-12">
+				<span><img class="img-circle img-post-user" src="{{userImage}}" alt="">
 			
-			<!-- Main Post Content -->
-			<div class="post-content">
-				<p class="post-text">{{this.text}}</p>
+					<span class="post-author">{{user}}</span>
+
+				</span>
 			</div>
-			<div class="page-header"></div>
-			<h5 class="">Tags</h5>
-				{{#if this.mediaType.facebook}}
-					{{#each hashtag}}
-						<a href="#">{{this}}</a>
-					{{/each}}
-
-				{{/if}}
-
-				{{#if this.mediaType.twitter}}
-				{{#each hashtag}}
-					<a href="https://twitter.com/hashtag/{{this.text}}?src=hash&lang=en"><span>#</span>{{this.text}}</a>
-				{{/each}}
-				
-				{{/if}}
-
-			<div class="page-header"></div>
-			<h5 class="">Comments</h5>
-				{{#if this.mediaType.facebook}}
-				
-					{{#each comment.data}}
-						<span><img class="img-circle img-post-user" src="http://graph.facebook.com/{{this.from.id}}/picture?type=large", alt=""/>{{this.from.name}}</span>
-						<p>{{this.message}}</p>
-					{{/each}}
-				{{/if}}
-
+			<div class="col-sm-4 col-xs-12 date inline-block">
+				{{postTime}}
+			</div>
 		</div>
-	{{/each}}
+		
+		<!-- Main Post Content -->
+		<div class="post-content">
+			<p class="post-text">{{text}}</p>
+		</div>
+		<div class="page-header"></div>
+		<h5 class="">Tags</h5>
+			{{#if mediaType.facebook}}
+				{{#each hashtag}}
+					<a href="#">{{this}}</a>
+				{{/each}}
+
+			{{/if}}
+
+			{{#if mediaType.twitter}}
+			{{#each hashtag}}
+				<a href="https://twitter.com/hashtag/{{text}}?src=hash&lang=en"><span>#</span>{{text}}</a>
+			{{/each}}
+			
+			{{/if}}
+
+		<div class="page-header"></div>
+		<h5 class="">Comments</h5>
+			{{#if mediaType.facebook}}
+			
+				{{#each comment.data}}
+					<span><img class="img-circle img-post-user" src="http://graph.facebook.com/{{from.id}}/picture?type=large", alt=""/>{{from.name}}</span>
+					<p>{{message}}</p>
+				{{/each}}
+			{{/if}}
+
+	</div>

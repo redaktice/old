@@ -36,7 +36,12 @@ var userSchema = mongoose.Schema({
 	// 	unique: true
 	// },
 	media: Object,
-	posts: Array
+	posts: [
+		{
+			postID: String,
+			media: Object
+		}
+	]
 });
 
 // Model

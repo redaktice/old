@@ -42,13 +42,13 @@ var twitterController = {
 				 		'@' + post.user.screen_name,
 				 		user.uniqueURL,
 				 		post.user.profile_image_url,
-				 		post.id,
+				 		post.id.toString(),
 				 		post.created_at,
 				 		post.text,
 				 		post.image,
 				 		post.entities.hashtags,
 				 		'No twitter comments set up yet',
-				 		{twitter: true}
+				 		{twitter: post.id.toString()}
 				 	);
 				 	return statusPost;
 				 });
@@ -56,7 +56,7 @@ var twitterController = {
 				callback(err, primaryPosts);
 			});
 	},
-	newTweet: function(req, callback) {
+	writeStatus: function(req, callback) {
 		// var twitterAPIRest = new Twitter.RestClient(
 		// 	keys.twitter.consumerKey,
 		// 	keys.twitter.consumerSecret,

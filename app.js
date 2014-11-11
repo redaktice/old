@@ -14,6 +14,7 @@ var authenticationController = require('./controllers/authentication.js');
 var facebookController = require('./api-actions/facebook-actions.js');
 var statusController = require('./controllers/statusController.js');
 var apiController = require('./controllers/apiController.js');
+var allAPIController = require('./api-actions/all-actions.js');
 
 // Establish and connect to database
 mongoose.connect('mongodb://localhost/social-vibe');
@@ -99,16 +100,18 @@ app.get('/auth/twittercallback',
 
 // Go to user home page
 app.get('/auth/sendToProfile/:uniqueUser', authenticationController.sendToProfile);
-app.get('status/newstatus', statusController.createPost);
-app.get('status/newtweet', statusController.createTweet);
+app.get('/auth/showStatuses', authenticationController.showStatuses);
+app.get('/status/newstatus', statusController.createPost);
+app.get('/status/newtweet', statusController.createTweet);
 
 
 // RE-VIBE ACTIONS
 app.post('/status/pushFacebook', statusController.updateFacebook);
-app.post('/status/updateStatus', statusController.updateStatus);
+// app.post('/status/updateStatus', statusController.updateStatus);
 
 
-
+app.post('/status/revibe/:postID/:media', statusController.revibe);
+app.get('/status/updateStatus', allAPIController.updateStatus);
 
 // USED ONLY FOR TESTING
 app.get('/posts', statusController.displayStatus);

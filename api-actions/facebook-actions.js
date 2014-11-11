@@ -14,6 +14,8 @@ var findHashtags = function(post) {
 // console.log('Hashtag found', word[0] === '#');
 		return word[0] === '#';
 	});
+
+	hashtags = post.matchString(/#(\w)\W+/);
 	return hashtags;
 };
 
@@ -43,7 +45,7 @@ var facebookController = {
 				 		post.image,
 				 		findHashtags(post.message),
 				 		post.comments,
-				 		{facebook: true}
+				 		{facebook: post.id}
 				 		);
 				 // console.log('Facebook hashtags', statusPost.hashtag);
 				 	return statusPost;
@@ -53,18 +55,23 @@ var facebookController = {
 			});
 	},
 	writeStatus: function(req, callback) {
+
+		console.log("ARGUMENTS", arguments);
 		FB.setAccessToken(req.user.media.facebook.facebookToken);
 		FB.api(
 			"/me/feed",
 			'post',
-			{message: req.status}, function(response) {
+			{message: req.status}, function(error, response) {
 				if (!response || response.error) {
 					// console.log("POST:", response);			
 					console.log("There was a post error", response);
+					if (response) console.log("There was a response", response.error);
 				}
 				// console.log("POST:", response);
-				console.log("POST", response);
-				callback(response);
+				// console.log("POST", response);
+				// console.log(arguments);
+				var responseID = response.id.split('_')[1]; // regular expression --> /^([^_]*)_/
+				callback(error, responseID);
 			});
 	},
 	updateStatus: function(req, callback) {
