@@ -73,10 +73,10 @@ var statusController = {
 
 		var controller;
 		var originalPostID = req.params.postID;
-	// console.log('originalPostID', originalPostID);
-		var media = req.params.media;
+	console.log('originalPostID', originalPostID);
+		var toMedia = req.params.media;
 
-		switch (media) {
+		switch (toMedia) {
 			case 'facebook':
 				controller = facebookController;
 				break;
@@ -84,20 +84,28 @@ var statusController = {
 				controller = twitterController;
 		}
 
-		var originalPost = _.findWhere(req.user.posts, {postID: originalPostID}); // = req.user.posts.id(originalPostID);
+		var dbStatuses = req.user.posts;
+		var originalPost = _.find(dbStatuses, function(dbPost) {
+			return dbPost.postID === originalPostID;
+		}); // = req.user.posts.id(originalPostID);
 		// for (var i = 0; i < req.user.posts.length; i++) {
 			// return req.user.posts[i]
 		// };
 
-
 		// console.log("USER", req.user);
-		// console.log("originalPost", originalPost);
+		console.log("originalPost", originalPost);
 
 		controller.writeStatus({user: req.user, status: req.body.content}, function(err, mediaResponse) {
 
 			console.log("Post response ID:", mediaResponse);
 			// originalPost.id(originalPostID) = mediaResponse;
 			originalPost.media.facebook = mediaResponse;
+
+			for (var i = 0; i < req.user.posts.length; i++) {
+				if (req.user.posts[i].postID === originalPostID) {
+					req.user.posts[i].media.facebook = mediaResponse;
+				}
+			}
 			req.user.markModified('posts');
 			req.user.save(function(err, user){
 				if (err) {

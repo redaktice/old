@@ -15,7 +15,7 @@ var findHashtags = function(post) {
 		return word[0] === '#';
 	});
 
-	hashtags = post.matchString(/#(\w)\W+/);
+	// hashtags = post.matchString(/#(\w)\W+/);
 	return hashtags;
 };
 
