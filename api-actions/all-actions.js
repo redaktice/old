@@ -322,7 +322,8 @@ console.log("Both");
 							renderStatusInstance.source = 'socialvibe';
 							renderStatusInstance.mediaType.twitter = twInDB.postID;
 							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
-							renderStatusInstance.postTime = dbStatus.creationTime;
+							renderStatusInstance.postTime = Number(dbStatus.creationTime);
+
 							renderStatusInstance.revibed = ['facebook', 'twitter'];
 
 
@@ -342,7 +343,6 @@ console.log("Both");
 							renderStatusInstance.revibed = ['twitter'];
 
 						}
-
 						// Use TW status and update if source is TWITTER
 						else if (dbStatus.source === 'twitter') {
 							renderStatusInstance = twInDB;
@@ -357,11 +357,16 @@ console.log("Both");
 					else if (fbInDB && !twInDB) {
 						renderStatusInstance = onlyFBStatusInstance;
 						// Use FB status and UPDATE if source is SOCIALVIBE
+// console.log('Facebook POST TIME 0', renderStatusInstance.postTime, typeof renderStatusInstance.postTime);
+// console.log('DB POST TIME 0', dbStatus.creationTime, typeof renderStatusInstance.postTime);
 						if (dbStatus.source === 'socialvibe') {
 							renderStatusInstance.source = 'socialvibe';
 console.log("Facebook");
 							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
-							renderStatusInstance.postTime = dbStatus.creationTime;
+							renderStatusInstance.postTime = Number(dbStatus.creationTime);
+// console.log('CREATION TIME', dbStatus.creationTime, typeof dbStatus.creationTime);
+// console.log('DB POST TIME 0', dbStatus.creationTime, typeof renderStatusInstance.postTime);
+
 						}
 
 					}
@@ -372,9 +377,10 @@ console.log("Facebook");
 						// Use FB status and UPDATE if source is SOCIALVIBE
 						if (dbStatus.source === 'socialvibe') {
 							renderStatusInstance.source = 'socialvibe';
+					// console.log('POST TIME 1', renderStatusInstance.postTime);
 console.log("Twitter");
 							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
-							renderStatusInstance.postTime = dbStatus.creationTime;
+							renderStatusInstance.postTime = Number(dbStatus.creationTime);
 						}
 					}
 					
@@ -399,7 +405,6 @@ console.log("Twitter");
 				});
 
 
-
 				/*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
 							+++++++++++ SAVE THE DATABSE +++++++++++
 				=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/*/
@@ -414,7 +419,7 @@ console.log("Twitter");
 							mediaSources: status.mediaType
 						};
 				});
-			console.log('DATABASE LENGTH:', req.user.posts.length);
+			// console.log('DATABASE LENGTH:', req.user.posts.length);
 				// Save the Database
 				// console.log('DB update::', DB_update);
 				req.user.posts = DB_update;
@@ -423,7 +428,7 @@ console.log("Twitter");
 					if (err) {
 						console.log("Database Save Error:", err);
 					}
-console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
+// console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
 				// console.log('Database direct', req.user.posts);
 				});
 				/*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
@@ -436,9 +441,9 @@ console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
 			if (req.renderAll) {
 
 
-				var formattedOutput =  _.filter(outputStatuses, function(status) {
+				var formattedOutput =  _.map(outputStatuses, function(status) {
 					status.postTime = moment(status.postTime).calendar();	
-					status.updateTime = moment(status.updateTime).calendar();	
+					status.updateTime = moment(status.updateTime).calendar();
 					return status;
 				});
 
@@ -452,16 +457,20 @@ console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
 			if (!req.renderAll) {
 
 				// console.log('Update Render');
-				// console.log("REFERENCE TIME:", referenceTime);
 	// console.log("OUTPUT STATUSES:", outputStatuses);
 
 				var updatedStatuses =  _.filter(outputStatuses, function(status) {
 
 					if (status.postTime > referenceTime || status.updateTime > referenceTime) {
+						console.log("STATUS TIME:", status.postTime, typeof status.postTime);
+						console.log("UPDATE TIME:", status.updateTime, typeof status.updateTime);
 						status.postTime = moment(status.postTime).calendar();
 						status.updateTime = moment(status.updateTime).calendar();
-					return status;
+						console.log("STATUS TIME FORMAT:", status.postTime, typeof status.postTime);
+						console.log("UPDATE TIME FORMAT:", status.updateTime,  typeof status.updateTime);
+						return true;
 					}
+						return false;
 				});
 
 				// console.log("UPDATE STATUSES:", updatedStatuses);

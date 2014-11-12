@@ -16,8 +16,9 @@ var findHashtags = function(post) {
 // // console.log('Hashtag found', word[0] === '#');
 // 		return word[0] === '#';
 // 	});
-
-var hashtags = post.match(/\B#([^\#]\w+)/g); // --> http://www.regular-expressions.info/refadv.html
+var hashtags = (post.match(/\B#([^\#]\w+)/g) || []).map(function(hashtag){
+	return hashtag.slice(1);
+}); // --> http://www.regular-expressions.info/refadv.html
 
 console.log(hashtags);
 
@@ -35,29 +36,31 @@ var facebookController = {
 		FB.api(
 			"/me/statuses",
 			function(err, response) {
+				var allPosts;
 				if(err) {
 					console.log("Facebook Status Error:", err);
 				}
-
-				// Change Response to look like an array of information
-				 var allPosts = response.data.map(function(post) {
-				 	var statusPost = new StatusPost(
-				 		post.from.name,
-				 		user.uniqueURL,
-				 		'http://graph.facebook.com/' + post.from.id + '/picture?type=large',
-				 		post.id,
-				 		'facebook',
-				 		moment(post.updated_time).valueOf(),
-				 		moment(post.updated_time).valueOf(),
-				 		post.message,
-				 		post.image,
-				 		findHashtags(post.message),
-				 		post.comments,
-				 		{facebook: post.id}
-				 	);
-				 // console.log('Facebook hashtags', statusPost.hashtag);
-				 	return statusPost;
-				 });
+				else {
+					// Change Response to look like an array of information
+					 allPosts = response.data.map(function(post) {
+					 	var statusPost = new StatusPost(
+					 		post.from.name,
+					 		user.uniqueURL,
+					 		'http://graph.facebook.com/' + post.from.id + '/picture?type=large',
+					 		post.id,
+					 		'facebook',
+					 		moment(post.updated_time).valueOf(),
+					 		moment(post.updated_time).valueOf(),
+					 		post.message,
+					 		post.image,
+					 		findHashtags(post.message),
+					 		post.comments,
+					 		{facebook: post.id}
+					 	);
+					 // console.log('Facebook hashtags', statusPost.hashtag);
+					 	return statusPost;
+					 });
+				}
 				
 				callback(err, allPosts);
 			});

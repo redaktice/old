@@ -344,10 +344,14 @@ var statusController = {
 		// 		}
 		// };
 
-			async.auto({
-			facebook: (vibeFacebook === 'vibe') ? facebookController.writeStatus.bind(null, {user: user, status: content}) : function(callback) {callback(null, []);},
+		var useTwitter = ((vibeTwitter === 'vibe') && (user.media.twitter && user.media.twitter.isActive));
+		var useTFacebook = (vibeFacebook === 'vibe');
+		var arrayCallback = function(callback) {callback(null, []);};
 
-			twitter: ((vibeTwitter === 'vibe') && (user.media.twitter && user.media.twitter.isActive)) ? twitterController.writeStatus.bind(null, {user: user, status: content}) : function(callback) {callback(null, []);}
+			async.auto({
+				facebook: useTFacebook ? facebookController.writeStatus.bind(null, {user: user, status: content}) : arrayCallback,
+
+				twitter: useTwitter ? twitterController.writeStatus.bind(null, {user: user, status: content}) : arrayCallback
 
 			}, function(err, results){
 
@@ -373,19 +377,20 @@ var statusController = {
 
 				var DB_VibeStatus ={
 					source: 'socialvibe',
-					creationTime: referenceTime.toString(),
-					updateTime: referenceTime.toString(),
+					creationTime: referenceTime,
+					updateTime: referenceTime,
 					mediaSources: {
 						socialvibe: referenceTime.toString()
 					}
 				};
+
 
 				if (vibeFacebook === 'vibe') {
 					DB_VibeStatus.postID = FB_responseID;
 					DB_VibeStatus.mediaSources.facebook = FB_responseID;
 
 console.log('Twitter Pre Check?', vibeTwitter);
-					if (vibeTwitter) {
+					if (vibeTwitter === 'vibe') {
 console.log('Twitter?', vibeTwitter);
 						DB_VibeStatus.mediaSources.twitter = TW_responseID;
 					}
@@ -435,11 +440,15 @@ console.log('Twitter?', vibeTwitter);
 				req.user.save(function(err, user){
 					if (err) {
 						console.log('Database save error:', err);
+						return;
 					}
 					
 					allAPIController.updateStatus({user: req.user, referenceTime: referenceTime}, function(updatedStatuses) {
 						
+						// req.user.posts.map(function(post){
 
+						// console.log('DB ARRAY', post.creationTime, typeof post.creationTime);
+						// });
 						console.log('VIBE UPDATED ARRAY:', updatedStatuses);
 						res.send(updatedStatuses);
 				// console.log('DATABASE LENGTH SAVED:', req.user.posts.length);

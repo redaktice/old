@@ -32,17 +32,18 @@ var twitterController = {
 		// );
 		var twitterAPIRest = createTwitterAPIrest(user);
 		twitterAPIRest.statusesUserTimeline({}, function(err, result) {
+			var primaryPosts;
 			if (err) {
 				console.log("Twitter Timeline Error:", err);
 			}
-
+			else {
 				// Change Response to look like an array of information
-				 var allPosts = result.filter(function(post) {
+				var allPosts = result.filter(function(post) {
 					return post.in_reply_to_screen_name === null;
 				 });
 
 				 // Filter out comment posts
-				 var primaryPosts = allPosts.map(function(post) {
+				primaryPosts = allPosts.map(function(post) {
 
 				 	// Create an instance of a StatusPost for
 				 	// each incoming Twitter status
@@ -62,6 +63,7 @@ var twitterController = {
 				 	);
 				 	return statusPost;
 				 });
+				}
 				
 				callback(err, primaryPosts);
 			});
