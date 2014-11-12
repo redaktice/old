@@ -1,5 +1,5 @@
 script#status-post-template(type="text/x-handlebars-template").
-	<div class="status-post post template-post centering" user-id="{{userID}}" data-post-id="{{postID}}" id="">
+	<div class="status-post post template-post centering" user-id="" data-post-id="{{postID}}" id="">
 		<div class="col post-head">
 			<div class="col-sm-4 col-xs-12 inline-block post-icons">
 				{{#if mediaType.facebook}}
@@ -63,8 +63,16 @@ script#status-post-template(type="text/x-handlebars-template").
 				</span>
 			</div>
 			<div class="col-sm-4 col-xs-12 date inline-block">
-				{{postTime}}
+				Created {{postTime}}
 			</div>
+			{{#if revibed}}
+				<div class="col-sm-4 col-xs-12 date inline-block">
+					Revibed {{updateTime}} - 
+					{{#each revibed}}
+						<span class="icon inline-block no-mgn"><i class="fa fa-{{this}}"></i></span>
+					{{/each}}
+				</div>
+			{{/if}}
 		</div>
 		
 		<!-- Main Post Content -->
@@ -74,6 +82,7 @@ script#status-post-template(type="text/x-handlebars-template").
 		<div class="page-header"></div>
 		<h5 class="">Tags</h5>
 			{{#if mediaType.facebook}}
+					<span class="icon inline-block no-mgn"><i class="fa fa-facebook"></i></span>
 				{{#each hashtag}}
 					<a href="#">{{this}}</a>
 				{{/each}}
@@ -81,8 +90,9 @@ script#status-post-template(type="text/x-handlebars-template").
 			{{/if}}
 
 			{{#if mediaType.twitter}}
+				<span class="icon inline-block no-mgn"><i class="fa fa-twitter"></i></span>
 			{{#each hashtag}}
-				<a href="https://twitter.com/hashtag/{{text}}?src=hash&lang=en"><span>#</span>{{text}}</a>
+				<a href="https://twitter.com/hashtag/{{this}}?src=hash&lang=en">{{this}}</a>
 			{{/each}}
 			
 			{{/if}}

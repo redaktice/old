@@ -137,14 +137,14 @@ $('#generate-post .vibe').on('click', function(e) {
 	var vibeTwitter = false;
 
 	if ($('#vibe-facebook').hasClass('selected')) {
-		vibeFacebook = true;
+		vibeFacebook = 'vibe';
 	}
 	if ($('#vibe-twitter').hasClass('selected')) {
-		vibeTwitter = true;
+		vibeTwitter = 'vibe';
 	}
 	if ($('#vibe-all').hasClass('selected')) {
-		vibeTwitter = true;
-		vibeFacebook = true;
+		vibeTwitter = 'vibe';
+		vibeFacebook = 'vibe';
 	}
 
 	if (vibeTwitter && postContent.length > 140  /* && TWITTER IS SELECTED */) {
@@ -153,7 +153,7 @@ $('#generate-post .vibe').on('click', function(e) {
 	else {
 		// VIBE TO THE SELECTED MEDIA
 		$.post('/status/vibe', {content: postContent, hashtags: hashtags, vibeFacebook: vibeFacebook, vibeTwitter: vibeTwitter}, function(response, status, jXHR){
-		
+		console.debug('Twitter?', vibeTwitter);
 			response.map(function(newPost) {
 				var newStatusHTML = statusPostTemplateFunc(newPost);
 				$('#feed').prepend(newStatusHTML);

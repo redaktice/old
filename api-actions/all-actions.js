@@ -323,6 +323,7 @@ console.log("Both");
 							renderStatusInstance.mediaType.twitter = twInDB.postID;
 							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
 							renderStatusInstance.postTime = dbStatus.creationTime;
+							renderStatusInstance.revibed = ['facebook', 'twitter'];
 
 
 							if (twInDB.postTime > fbInDB.postTime) {
@@ -338,6 +339,8 @@ console.log("Both");
 							renderStatusInstance = fbInDB;
 							renderStatusInstance.mediaType.twitter = twInDB.postID;
 							renderStatusInstance.updateTime = twInDB.postTime;
+							renderStatusInstance.revibed = ['twitter'];
+
 						}
 
 						// Use TW status and update if source is TWITTER
@@ -345,6 +348,8 @@ console.log("Both");
 							renderStatusInstance = twInDB;
 							renderStatusInstance.mediaType.facebook = fbInDB.postID;
 							renderStatusInstance.updateTime = fbInDB.postTime;
+							renderStatusInstance.revibed = ['facebook'];
+
 						}
 						
 					}/*--------------------- END DUPLICATE FILTER ---------------------*/
@@ -430,9 +435,17 @@ console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
 /*--------------------RE-RENDER THE ENTIRE PAGE ------------*/
 			if (req.renderAll) {
 
+
+				var formattedOutput =  _.filter(outputStatuses, function(status) {
+					status.postTime = moment(status.postTime).calendar();	
+					status.updateTime = moment(status.updateTime).calendar();	
+					return status;
+				});
+
 				console.log('Entire Page Render');
 				// Send the organized array of statuses
-				callback(outputStatuses);
+				callback(formattedOutput);
+				// console.log("POST", formattedOutput);
 			}
 
 /*--------------------RENDER CHANGED STATUSES  ------------*/
@@ -444,13 +457,11 @@ console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
 
 				var updatedStatuses =  _.filter(outputStatuses, function(status) {
 
-				if (status.postTime > referenceTime || status.updateTime > referenceTime) {
-					// console.log("OUTPUT POSTTIME:", status.postTime);
-					// console.log("OUTPUT:", status);
-					// console.log("OUTPUT UPDATETIME:", status.updateTime);
-				}
-
-						return (status.postTime > referenceTime || status.updateTime > referenceTime);
+					if (status.postTime > referenceTime || status.updateTime > referenceTime) {
+						status.postTime = moment(status.postTime).calendar();
+						status.updateTime = moment(status.updateTime).calendar();
+					return status;
+					}
 				});
 
 				// console.log("UPDATE STATUSES:", updatedStatuses);

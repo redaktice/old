@@ -17,6 +17,13 @@ var createTwitterAPIrest = function(user) {
 
 var twitterController = {
 	getTwitterStatus: function(user, callback) {
+
+		var findHashtags = function(tags) {
+			var hashtags = tags.map(function(tag) {
+				return (tag.text);
+			});
+			return hashtags;
+		};
 		// var twitterAPIRest = new Twitter.RestClient(
 		// 	keys.twitter.consumerKey,
 		// 	keys.twitter.consumerSecret,
@@ -49,7 +56,7 @@ var twitterController = {
 				 		moment(post.created_at).valueOf(),
 				 		post.text,
 				 		post.image,
-				 		post.entities.hashtags,
+				 		findHashtags(post.entities.hashtags),
 				 		'No twitter comments set up yet',
 				 		{twitter: post.id.toString()}
 				 	);

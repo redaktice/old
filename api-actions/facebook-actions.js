@@ -10,12 +10,16 @@ var moment = require('moment');
 
 var FB = new Facebook({appId: keys.facebook.appID, secret: keys.facebook.appSecret});
 var findHashtags = function(post) {
-	var postWords = post.split(' ');
-// console.log('Post Words', postWords);
-	var hashtags = postWords.filter(function(word) {
-// console.log('Hashtag found', word[0] === '#');
-		return word[0] === '#';
-	});
+// 	var postWords = post.split(' ');
+// // console.log('Post Words', postWords);
+// 	var hashtags = postWords.filter(function(word) {
+// // console.log('Hashtag found', word[0] === '#');
+// 		return word[0] === '#';
+// 	});
+
+var hashtags = post.match(/\B#([^\#]\w+)/g); // --> http://www.regular-expressions.info/refadv.html
+
+console.log(hashtags);
 
 	// hashtags = post.matchString(/#(\w)\W+/);
 	return hashtags;

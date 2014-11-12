@@ -148,7 +148,7 @@ var statusController = {
 		controller.writeStatus({user: req.user, status: req.body.content}, function(err, mediaResponse) {
 
 			// if (mediaResponse) {
-			console.log("Post response ID:", mediaResponse.id);
+			// console.log("Post response ID:", mediaResponse.id);
 			// originalPost.id(originalPostID) = mediaResponse;
 			originalPost.mediaSources.twitter = mediaResponse.id;
 
@@ -328,19 +328,39 @@ var statusController = {
 		var user = req.user;
 		var content = req.body.content;
 		var referenceTime = moment().valueOf() - 1000;
-
-
+		var vibeTwitter = req.body.vibeTwitter;
+		var vibeFacebook = req.body.vibeFacebook;
 		var newContent = req.body.cotent;
 
-			async.auto({
-			facebook: (req.body.vibeFacebook) ? facebookController.writeStatus.bind(null, {user: user, status: content}) : function(callback) {callback(null, []);},
 
-			twitter: (user.media.twitter && user.media.twitter.isActive && req.body.vibeTwitter) ? twitterController.writeStatus.bind(null, {user: user, status: content}) : function(callback) {callback(null, []);}
+		// var checkVibeTwitter = function(callback) {
+		// 	if (vibeTwitter === true) {
+		// 		if (user.media.twitter && user.media.twitter.isActive) {
+		// 			twitterController.writeStatus.bind(null, {user: user, status: content});
+		// 		} 
+		// 		else {
+		// 			 callback(null, []);
+		// 			}
+		// 		}
+		// };
+
+			async.auto({
+			facebook: (vibeFacebook === 'vibe') ? facebookController.writeStatus.bind(null, {user: user, status: content}) : function(callback) {callback(null, []);},
+
+			twitter: ((vibeTwitter === 'vibe') && (user.media.twitter && user.media.twitter.isActive)) ? twitterController.writeStatus.bind(null, {user: user, status: content}) : function(callback) {callback(null, []);}
+
 			}, function(err, results){
 
 
-				var FB_responseID = results.facebook;
-				var TW_responseID = results.twitter.id.toString();
+				var FB_responseID;
+				if (vibeFacebook === 'vibe' && results.facebook) {
+					FB_responseID = results.facebook;
+				}
+
+				var TW_responseID;
+				if (vibeTwitter === 'vibe' && results.twitter) {
+					TW_responseID = results.twitter.id.toString();
+				}
 
 // console.log('VIBE FACEBOOK RESPONSE:', FB_responseID);
 // console.log('VIBE TWITTER RESPONSE:', TW_responseID);
@@ -360,15 +380,17 @@ var statusController = {
 					}
 				};
 
-				if (req.body.vibeFacebook) {
+				if (vibeFacebook === 'vibe') {
 					DB_VibeStatus.postID = FB_responseID;
 					DB_VibeStatus.mediaSources.facebook = FB_responseID;
 
-					if (req.body.vibeTwitter) {
+console.log('Twitter Pre Check?', vibeTwitter);
+					if (vibeTwitter) {
+console.log('Twitter?', vibeTwitter);
 						DB_VibeStatus.mediaSources.twitter = TW_responseID;
 					}
 				}
-				else if (req.body.vibeTwitter) {
+				else if (vibeTwitter === 'vibe') {
 					DB_VibeStatus.postID = TW_responseID;
 					DB_VibeStatus.mediaSources.twitter = TW_responseID;
 				}
