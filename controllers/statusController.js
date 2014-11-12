@@ -71,7 +71,7 @@ var statusController = {
 	},
 	revibe: function(req, res) {
 
-		var referenceTime = moment().valueOf();
+		var referenceTime = moment().valueOf() - 1000;
 
 
 		var controller;
@@ -79,26 +79,24 @@ var statusController = {
 	// console.log('originalPostID', originalPostID);
 		var toMedia = req.params.media;
 
-		switch (toMedia) {
-			case 'facebook':
-				controller = facebookController;
-				break;
-			case 'twitter':
-				controller = twitterController;
-		}
 
-		var dbStatuses = req.user.posts;
-		var originalPost = _.find(dbStatuses, function(dbPost) {
-			return dbPost.postID === originalPostID;
-		}); // = req.user.posts.id(originalPostID);
-		// for (var i = 0; i < req.user.posts.length; i++) {
-			// return req.user.posts[i]
-		// };
 
-		// console.log("USER", req.user);
-		// console.log("originalPost", originalPost);
+/*+++++++++++++++++++++++++++++ RE-VIBE TO FACEBOOK +++++++++++++++++++++++++++++*/
 
-		controller.writeStatus({user: req.user, status: req.body.content}, function(err, mediaResponse) {
+		var pushToFacebook = function () {
+
+			var dbStatuses = req.user.posts;
+			var originalPost = _.find(dbStatuses, function(dbPost) {
+				return dbPost.postID === originalPostID;
+			}); // = req.user.posts.id(originalPostID);
+			// for (var i = 0; i < req.user.posts.length; i++) {
+				// return req.user.posts[i]
+			// };
+
+			// console.log("USER", req.user);
+			// console.log("originalPost", originalPost);
+
+			controller.writeStatus({user: req.user, status: req.body.content}, function(err, mediaResponse) {
 
 			// console.log("Post response ID:", mediaResponse);
 			// originalPost.id(originalPostID) = mediaResponse;
@@ -121,6 +119,89 @@ var statusController = {
 				});
 			});
 		});
+
+
+		}; /*-------------------------- END RE-VIBE TO FACEBOOK --------------------------*/
+
+
+
+/*+++++++++++++++++++++++++++++ RE-VIBE TO TWITTER +++++++++++++++++++++++++++++*/
+
+		var pushToTwitter = function () {
+
+		var dbStatuses = req.user.posts;
+		var originalPost = _.find(dbStatuses, function(dbPost) {
+			return dbPost.postID === originalPostID;
+		}); // = req.user.posts.id(originalPostID);
+		// for (var i = 0; i < req.user.posts.length; i++) {
+			// return req.user.posts[i]
+		// };
+
+		// console.log("USER", req.user);
+		console.log("originalPost", originalPost);
+
+		controller.writeStatus({user: req.user, status: req.body.content}, function(err, mediaResponse) {
+
+			// if (mediaResponse) {
+			console.log("Post response ID:", mediaResponse.id);
+			// originalPost.id(originalPostID) = mediaResponse;
+			originalPost.mediaSources.twitter = mediaResponse.id;
+
+			// }
+			// for (var i = 0; i < req.user.posts.length; i++) {
+			// 	if (req.user.posts[i].postID === originalPostID) {
+			// 		req.user.posts[i].media.facebook = mediaResponse;
+			// 	}
+			// }
+			
+			// console.log("Database Direct", _.find(req.user.posts, function(DB) {
+			// 	return DB.postID === originalPostID;
+			// }));
+
+			req.user.posts = req.user.posts.map(function(dbStatus) {
+				if (dbStatus.postID === originalPostID) {
+					dbStatus.mediaSources.twitter = mediaResponse.id.toString();
+				}
+				return dbStatus;
+			});
+
+			req.user.markModified('posts');
+			req.user.save(function(err, user){
+				if (err) {
+					console.log('Database save error:', err);
+				}
+				
+// console.log('DATABASE', req.user.posts);
+				allAPIController.updateStatus({user: req.user, referenceTime: referenceTime}, function(updatedStatuses) {
+					
+					res.send(updatedStatuses);
+		// console.log("originalPost UPDATED", originalPost);
+		// console.log("Database Direct UPDATED", _.find(req.user.posts, function(DB) {
+		// 		return DB.postID === originalPostID;
+		// 	}));
+				});
+			});
+		});
+
+
+		}; /*-------------------------- END RE-VIBE TO TWITTER --------------------------*/
+
+
+
+
+
+		switch (toMedia) {
+			case 'facebook':
+				controller = facebookController;
+				pushToFacebook();
+				break;
+			case 'twitter':
+				controller = twitterController;
+				pushToTwitter();
+				break;
+		}
+
+		
 
 
 	//*/	

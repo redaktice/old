@@ -67,7 +67,7 @@ var twitterController = {
 		// 	req.user.media.twitter.twitterSecret	
 		// );
 		var twitterAPIRest = createTwitterAPIrest(req.user);
-		twitterAPIRest.statusesUpdate({status: req.tweet}, function(err, returnData) {
+		twitterAPIRest.statusesUpdate({status: req.status}, function(err, returnData) {
 			if (err) {
 				console.log("Twitter Tweet Error:", err);
 			}

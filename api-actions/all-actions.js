@@ -188,8 +188,7 @@ var referenceTime = req.referenceTime;
 						// Assign reference to FB status instance to be rendered
 						onlyFBStatusInstance = fbInDB;
 
-
-						console.log('fbInDB', fbInDB);
+						// console.log('fbInDB', fbInDB);
 
 						onlyFBStatusInstance.mediaType.facebook = fbInDB.postID;
 
@@ -213,7 +212,7 @@ var referenceTime = req.referenceTime;
 					// If status exists in TW, remove status from TW array
 					if (twInDB) {
 
-						console.log('twInDB', twInDB);
+						// console.log('twInDB', twInDB);
 						// Assign reference to TW status instance to be rendered
 						onlyTWStatusInstance = twInDB;
 						onlyTWStatusInstance.mediaType.twitter = twInDB.postID;
@@ -242,7 +241,6 @@ var referenceTime = req.referenceTime;
 						// Use TW status and update if source is TWITTER
 						else if (dbStatus.source === 'twitter') {
 							renderStatusInstance = twInDB;
-							renderStatusInstance.mediaType.facebook = fbInDB.postID;
 							renderStatusInstance.mediaType.facebook = fbInDB.postID;
 							renderStatusInstance.updateTime = fbInDB.postTime;
 						}
@@ -283,7 +281,7 @@ var referenceTime = req.referenceTime;
 				=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/*/
 				// Update the database with the information from the renderable statuses
 				var DB_update = outputStatuses.map(function(status){
-					console.log('DB save: Post:', status);
+					// console.log('DB save: Post:', status);
 						return {
 							postID: status.postID,
 							source: status.source,
@@ -321,19 +319,22 @@ var referenceTime = req.referenceTime;
 /*--------------------RENDER CHANGED STATUSES  ------------*/
 			if (!req.renderAll) {
 
-				console.log('Update Render');
-				console.log("REFERENCE TIME:", referenceTime);
+				// console.log('Update Render');
+				// console.log("REFERENCE TIME:", referenceTime);
+	// console.log("OUTPUT STATUSES:", outputStatuses);
 
 				var updatedStatuses =  _.filter(outputStatuses, function(status) {
 
-				console.log("OUTPUT POSTTIME:", status.postTime);
-				console.log("OUTPUT:", status);
-				console.log("OUTPUT UPDATETIME:", status.updateTime);
+				if (status.postTime > referenceTime || status.updateTime > referenceTime) {
+					console.log("OUTPUT POSTTIME:", status.postTime);
+					console.log("OUTPUT:", status);
+					console.log("OUTPUT UPDATETIME:", status.updateTime);
+				}
 
 						return (status.postTime > referenceTime || status.updateTime > referenceTime);
 				});
 
-				console.log("UPDATE STATUSES:", updatedStatuses);
+				// console.log("UPDATE STATUSES:", updatedStatuses);
 				callback(updatedStatuses);
 			}
 
