@@ -3,6 +3,7 @@ var keys = require('../private/keys');
 var _ = require('underscore');
 var Twitter = require ('node-twitter');
 var StatusPost = require('../models/status-posts.js');
+var moment = require('moment');
 
 var createTwitterAPIrest = function(user) {
 	var twitterAPIRest = new Twitter.RestClient(
@@ -43,7 +44,9 @@ var twitterController = {
 				 		user.uniqueURL,
 				 		post.user.profile_image_url,
 				 		post.id.toString(),
-				 		post.created_at,
+				 		'twitter',
+				 		moment(post.created_at).valueOf(),
+				 		moment(post.created_at).valueOf(),
 				 		post.text,
 				 		post.image,
 				 		post.entities.hashtags,

@@ -4,6 +4,8 @@ var User = require('../models/schemas/user');
 var keys = require('../private/keys');
 var StatusPost = require('../models/status-posts.js');
 var _ = require('underscore');
+var moment = require('moment');
+
 
 
 var FB = new Facebook({appId: keys.facebook.appID, secret: keys.facebook.appSecret});
@@ -40,7 +42,9 @@ var facebookController = {
 				 		user.uniqueURL,
 				 		'http://graph.facebook.com/' + post.from.id + '/picture?type=large',
 				 		post.id,
-				 		post.updated_time,
+				 		'facebook',
+				 		moment(post.updated_time).valueOf(),
+				 		moment(post.updated_time).valueOf(),
 				 		post.message,
 				 		post.image,
 				 		findHashtags(post.message),
@@ -98,7 +102,7 @@ var facebookController = {
 					 	}
 					 }
 
-	console.log('recent post', recentPost);
+	// console.log('recent post', recentPost);
 					 var newStatusPost = new StatusPost(
 					 		recentPost.from.name,
 					 		req.user.uniqueURL,
@@ -111,7 +115,7 @@ var facebookController = {
 					 		recentPost.comments,
 					 		{facebook: true}
 					 	);
-	console.log('new status post', newStatusPost);
+	// console.log('new status post', newStatusPost);
 
 
 

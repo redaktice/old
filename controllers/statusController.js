@@ -24,9 +24,9 @@ var noAccount = function(callback) {
 
 var statusController = {
 	createPost: function(req, res) {
-	console.log("REQUEST");
+	// console.log("REQUEST");
 		facebookControl.writeStatus({user: req.user, status: "New #socialvibe #test"}, function(err, response) {
-			console.log('New post response', response);
+			// console.log('New post response', response);
 			res.send(response);
 			// res.redirect('auth/sendToProfile/' + req.user.uniqueURL);
 		});
@@ -37,7 +37,7 @@ var statusController = {
 		});
 	},
 	updateFacebook: function(req, res) {
-		console.log('Request', req.body);
+		// console.log('Request', req.body);
 
 		User.findOne({uniqueURL: req.body.userID}, function(err, user) {
 			if (err) {
@@ -71,9 +71,12 @@ var statusController = {
 	},
 	revibe: function(req, res) {
 
+		var referenceTime = moment().valueOf();
+
+
 		var controller;
 		var originalPostID = req.params.postID;
-	console.log('originalPostID', originalPostID);
+	// console.log('originalPostID', originalPostID);
 		var toMedia = req.params.media;
 
 		switch (toMedia) {
@@ -93,25 +96,27 @@ var statusController = {
 		// };
 
 		// console.log("USER", req.user);
-		console.log("originalPost", originalPost);
+		// console.log("originalPost", originalPost);
 
 		controller.writeStatus({user: req.user, status: req.body.content}, function(err, mediaResponse) {
 
-			console.log("Post response ID:", mediaResponse);
+			// console.log("Post response ID:", mediaResponse);
 			// originalPost.id(originalPostID) = mediaResponse;
-			originalPost.media.facebook = mediaResponse;
+			originalPost.mediaSources.facebook = mediaResponse;
 
-			for (var i = 0; i < req.user.posts.length; i++) {
-				if (req.user.posts[i].postID === originalPostID) {
-					req.user.posts[i].media.facebook = mediaResponse;
-				}
-			}
+			// for (var i = 0; i < req.user.posts.length; i++) {
+			// 	if (req.user.posts[i].postID === originalPostID) {
+			// 		req.user.posts[i].media.facebook = mediaResponse;
+			// 	}
+			// }
 			req.user.markModified('posts');
 			req.user.save(function(err, user){
 				if (err) {
 					console.log('Database save error:', err);
 				}
-				allAPIController.updateStatus(req, function(updatedStatuses) {
+				
+				allAPIController.updateStatus({user: req.user, referenceTime: referenceTime}, function(updatedStatuses) {
+					
 					res.send(updatedStatuses);
 				});
 			});

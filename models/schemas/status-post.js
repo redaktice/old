@@ -17,10 +17,15 @@
 			required: true,
 			uniqu: false
 		},
-		postID: {
+		statusID: {
 			type: String,
 			required: true,
 			unique: true
+		},
+		source: {
+			type: String,
+			required: true,
+			unique: false
 		},
 		postTime: {
 			type: String,

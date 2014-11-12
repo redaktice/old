@@ -10,7 +10,7 @@ $(document).on('ready', function() {
 		return statusPostTemplateFunc(statusPost);
 	});
 	// var statusPostHTML = statusPostTemplateFunc({statusPosts: renderedPosts});
-console.log(renderedPosts);
+// console.log(renderedPosts);
 	$('#feed').append(statusPostsHTML);
 
 // console.log(statusPostsHTML);
@@ -43,7 +43,8 @@ $('.push-facebook').on('click', function(e) {
 	var postContent = nthis.closest('.status-post').find('.post-text').text();
 	
 	$.post('/status/revibe/' + postID + '/facebook', {content: postContent}, function(response) {
-		
+	
+// debugger;	
 // var updatedStatusPostsHTML = 
 		response.map(function(newPost) {
 		var updateable = $('[data-post-id=' + response.postID + ']');

@@ -39,7 +39,10 @@ var userSchema = mongoose.Schema({
 	posts: [
 		{
 			postID: String,
-			media: Object
+			mediaSources: Object,
+			source: String,
+			creationTime: String,
+			updateTime: String,
 		}
 	]
 });

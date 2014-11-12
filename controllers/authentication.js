@@ -34,6 +34,12 @@ var authenticationController = {
 	// Grab all of the Facebook status information and render the user's profile
 	sendToProfile: function(req, res) {
 
+		var referenceTime = moment().valueOf();
+
+		allAPIController.updateStatus({user: req.user, referenceTime: referenceTime, renderAll: true}, function(statusArray){
+			res.render('profile', {user: req.user, renderedPosts: statusArray});
+		});
+
 // 		console.log('Update User', req.user);
 // 		async.auto({
 // 			facebook: facebookControl.getFacebookStatus.bind(null, req.user),
@@ -173,78 +179,78 @@ var authenticationController = {
 
 // 		});
 
-		async.auto({
-			facebook: facebookControl.getFacebookStatus.bind(null, req.user),
-			twitter: (req.user.media.twitter && req.user.media.twitter.isActive) ? twitterControl.getTwitterStatus.bind(null, req.user) : function(callback) {callback(null, []);}
-		}, function(err, results){
+		// async.auto({
+		// 	facebook: facebookControl.getFacebookStatus.bind(null, req.user),
+		// 	twitter: (req.user.media.twitter && req.user.media.twitter.isActive) ? twitterControl.getTwitterStatus.bind(null, req.user) : function(callback) {callback(null, []);}
+		// }, function(err, results){
 
-				var fbStatuses = results.facebook;
-				var twStatuses = results.twitter;
-				var allDBposts = req.user.posts;
+		// 		var fbStatuses = results.facebook;
+		// 		var twStatuses = results.twitter;
+		// 		var allDBposts = req.user.posts;
 
-				var sharedStatuses = [];
-				for (var i = 0; i < req.user.posts.length; i++) {
-					if (req.user.posts[i].media.facebook && req.user.posts[i].media.facebook) {
-						sharedStatuses.push(req.user.posts[i]);
-					}
-				}
-				// var sharedStatuses = _.filter(req.user.posts, function(dbStatus){
-				// 	return (dbStatus.media.facebook && dbStatus.media.twitter);
-				// });
+		// 		var sharedStatuses = [];
+		// 		for (var i = 0; i < req.user.posts.length; i++) {
+		// 			if (req.user.posts[i].media.facebook && req.user.posts[i].media.facebook) {
+		// 				sharedStatuses.push(req.user.posts[i]);
+		// 			}
+		// 		}
+		// 		// var sharedStatuses = _.filter(req.user.posts, function(dbStatus){
+		// 		// 	return (dbStatus.media.facebook && dbStatus.media.twitter);
+		// 		// });
 
-				sharedStatuses.map(function(dbSharedStatus){
-				/*----------------Look for Statuses that originally came from Facebook------------------*/
-					for (var j = 0; j < dbSharedStatus.length; j++) {
+		// 		sharedStatuses.map(function(dbSharedStatus){
+		// 		/*----------------Look for Statuses that originally came from Facebook------------------*/
+		// 			for (var j = 0; j < dbSharedStatus.length; j++) {
 
-						// If the sharedStatus postID matches a postID from Facebook
-						if (dbSharedStatus.postID === fbStatuses[j].postID) {
+		// 				// If the sharedStatus postID matches a postID from Facebook
+		// 				if (dbSharedStatus.postID === fbStatuses[j].postID) {
 
-							// Remove the corresponding Twitter post from
-							// the Twitter array of posts to be rendered (avoid duplicates)
-							_.reject(twStatuses, function(status) {
-								return (status.postID === dbSharedStatus.media.twitter);
-							});
+		// 					// Remove the corresponding Twitter post from
+		// 					// the Twitter array of posts to be rendered (avoid duplicates)
+		// 					_.reject(twStatuses, function(status) {
+		// 						return (status.postID === dbSharedStatus.media.twitter);
+		// 					});
 
-							// Assign a Twitter property to the Facebook status to be rendered
-							fbStatuses[j].mediaType.twitter = dbSharedStatus.media.twitter;
-						}
-					}
+		// 					// Assign a Twitter property to the Facebook status to be rendered
+		// 					fbStatuses[j].mediaType.twitter = dbSharedStatus.media.twitter;
+		// 				}
+		// 			}
 
-				/*----------------Look for Statuses that originally came from Twitter------------------*/
-					for (var k = 0; k < dbSharedStatus.length; k++) {
-						// If the sharedStatus postID matches a postID from Twitter
-						if (dbSharedStatus.postID === twStatuses[k].postID) {
+		// 		/*----------------Look for Statuses that originally came from Twitter------------------*/
+		// 			for (var k = 0; k < dbSharedStatus.length; k++) {
+		// 				// If the sharedStatus postID matches a postID from Twitter
+		// 				if (dbSharedStatus.postID === twStatuses[k].postID) {
 
-							// Remove the corresponding Facebook post from
-							// the Facebook array of posts to be rendered (avoid duplicates)
-							_.reject(fbStatuses, function(status) {
-								return (status.postID === dbSharedStatus.media.facebook);
-							});
+		// 					// Remove the corresponding Facebook post from
+		// 					// the Facebook array of posts to be rendered (avoid duplicates)
+		// 					_.reject(fbStatuses, function(status) {
+		// 						return (status.postID === dbSharedStatus.media.facebook);
+		// 					});
 
-							// Assign a Facebook property to the Twitter status to be rendered
-							twStatuses[k].mediaType.facebook = dbSharedStatus.media.facebook;
-						}
-					}
-				});
-				var allStatuses = fbStatuses.concat(twStatuses);
-				var organizedPosts = _.sortBy(allStatuses, function(post) {
-					return -1 * moment(post.postTime).valueOf();
-				});
+		// 					// Assign a Facebook property to the Twitter status to be rendered
+		// 					twStatuses[k].mediaType.facebook = dbSharedStatus.media.facebook;
+		// 				}
+		// 			}
+		// 		});
+		// 		var allStatuses = fbStatuses.concat(twStatuses);
+		// 		var organizedPosts = _.sortBy(allStatuses, function(post) {
+		// 			return -1 * moment(post.postTime).valueOf();
+		// 		});
 
-				console.log('Organized Posts', organizedPosts);
+		// 		console.log('Organized Posts', organizedPosts);
 
-				var postIDArray = organizedPosts.map(function(post){
-					return {postID: post.postID, media: post.mediaType};
-				});
-				req.user.posts = postIDArray;
-				req.user.markModified('posts');
-				req.user.save(function(err, user) {
-					if (err) {
-						console.log('Database save error:', err);
-					}
-				});
-			res.render('profile', {user: req.user, renderedPosts: organizedPosts});
-		});
+		// 		var postIDArray = organizedPosts.map(function(post){
+		// 			return {postID: post.postID, source: post.source, media: post.mediaType};
+		// 		});
+		// 		req.user.posts = postIDArray;
+		// 		req.user.markModified('posts');
+		// 		req.user.save(function(err, user) {
+		// 			if (err) {
+		// 				console.log('Database save error:', err);
+		// 			}
+		// 		});
+		// 	res.render('profile', {user: req.user, renderedPosts: organizedPosts});
+		// });
 	},
 		// Grab all of the Facebook status information and render the user's profile
 	showStatuses: function(req, res) {
