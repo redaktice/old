@@ -50,7 +50,7 @@ var facebookController = {
 				 		findHashtags(post.message),
 				 		post.comments,
 				 		{facebook: post.id}
-				 		);
+				 	);
 				 // console.log('Facebook hashtags', statusPost.hashtag);
 				 	return statusPost;
 				 });
@@ -60,7 +60,7 @@ var facebookController = {
 	},
 	writeStatus: function(req, callback) {
 
-		console.log("ARGUMENTS", arguments);
+		// console.log("ARGUMENTS", arguments);
 		FB.setAccessToken(req.user.media.facebook.facebookToken);
 		FB.api(
 			"/me/feed",

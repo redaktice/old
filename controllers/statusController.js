@@ -5,6 +5,10 @@ var async = require('async');
 var _ = require('underscore');
 var moment = require('moment');
 
+var StatusPost = require('../models/status-posts.js');
+
+
+// CONTROLLERS
 var facebookController = require('../api-actions/facebook-actions.js');
 var twitterController = require('../api-actions/twitter-actions.js');
 var authenticationController = require('./authentication.js');
@@ -14,6 +18,7 @@ var apiController = require('./apiController.js');
 // 	facebook: false,
 // 	twitter: true,
 // };
+
 
 
 // Function called when the user does not have a media
@@ -158,6 +163,10 @@ var statusController = {
 			// 	return DB.postID === originalPostID;
 			// }));
 
+
+			/*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
+							+++++++++++ SAVE THE DATABSE +++++++++++
+			=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/*/
 			req.user.posts = req.user.posts.map(function(dbStatus) {
 				if (dbStatus.postID === originalPostID) {
 					dbStatus.mediaSources.twitter = mediaResponse.id.toString();
@@ -181,6 +190,9 @@ var statusController = {
 		// 	}));
 				});
 			});
+			/*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
+						----------- END SAVE THE DATABSE -----------
+			=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/*/
 		});
 
 
@@ -308,7 +320,116 @@ var statusController = {
 		// 		console.log('Database save error:', err);
 		// 	}
 		// });
-},
+	},
+	vibe: function(req, res) {
+
+		var controller;
+		var vibeStatusScaffold;
+		var user = req.user;
+		var content = req.body.content;
+		var referenceTime = moment().valueOf() - 1000;
+
+
+		var newContent = req.body.cotent;
+
+			async.auto({
+			facebook: (req.body.vibeFacebook) ? facebookController.writeStatus.bind(null, {user: user, status: content}) : function(callback) {callback(null, []);},
+
+			twitter: (user.media.twitter && user.media.twitter.isActive && req.body.vibeTwitter) ? twitterController.writeStatus.bind(null, {user: user, status: content}) : function(callback) {callback(null, []);}
+			}, function(err, results){
+
+
+				var FB_responseID = results.facebook;
+				var TW_responseID = results.twitter.id.toString();
+
+// console.log('VIBE FACEBOOK RESPONSE:', FB_responseID);
+// console.log('VIBE TWITTER RESPONSE:', TW_responseID);
+				// if (req.vibeFacebook) {
+
+				// }
+				// else if (req.vibeTwitter) {
+
+				// }
+
+				var DB_VibeStatus ={
+					source: 'socialvibe',
+					creationTime: referenceTime.toString(),
+					updateTime: referenceTime.toString(),
+					mediaSources: {
+						socialvibe: referenceTime.toString()
+					}
+				};
+
+				if (req.body.vibeFacebook) {
+					DB_VibeStatus.postID = FB_responseID;
+					DB_VibeStatus.mediaSources.facebook = FB_responseID;
+
+					if (req.body.vibeTwitter) {
+						DB_VibeStatus.mediaSources.twitter = TW_responseID;
+					}
+				}
+				else if (req.body.vibeTwitter) {
+					DB_VibeStatus.postID = TW_responseID;
+					DB_VibeStatus.mediaSources.twitter = TW_responseID;
+				}
+
+// 				var newStatus = new StatusPost(
+// 			 		(user.profile.firstName + ' ' + user.profile.lastName),
+// 			 		user.uniqueURL,
+// 			 		user.profile.image,
+// 			 		referenceTime,
+// 			 		'socialvibe',
+// 			 		moment().valueOf(),
+// 			 		moment().valueOf(),
+// 			 		'content',
+// 			 		req.body.image,
+// 			 		req.body.hashtags,
+// 			 		'This is a vibe!',
+// 			 		{
+// 			 			socialvibe: moment().valueOf(),
+// 			 			facebook: FB_responseID,
+// 			 			twitter: TW_responseID
+// 			 		}
+// 				 );
+
+// console.log('NEW VIBE STATUS:', newStatus);
+// 					var DB_newStatus =  {
+// 							postID: newStatus.postID,
+// 							source: newStatus.source,
+// 							creationTime: newStatus.postTime,
+// 							updateTime: newStatus.updateTime,
+// 							mediaSources: newStatus.mediaType
+// 						};
+
+
+				console.log('NEW DB ITEM:', DB_VibeStatus);
+				/*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
+							+++++++++++ SAVE THE DATABSE +++++++++++
+				=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/*/
+				
+				// console.log('DATABASE LENGTH:', req.user.posts.length);
+				req.user.posts.unshift(DB_VibeStatus);
+				req.user.markModified('posts');
+				req.user.save(function(err, user){
+					if (err) {
+						console.log('Database save error:', err);
+					}
+					
+					allAPIController.updateStatus({user: req.user, referenceTime: referenceTime}, function(updatedStatuses) {
+						
+
+						console.log('VIBE UPDATED ARRAY:', updatedStatuses);
+						res.send(updatedStatuses);
+				// console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
+			
+					});
+				});
+				/*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
+						----------- END SAVE THE DATABSE -----------
+				=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/*/
+			});
+	},
+
 
 	// FOR TESTING ONLY
 			displayStatus: function(req, res) {

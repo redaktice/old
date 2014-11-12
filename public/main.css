@@ -374,3 +374,7 @@
 .absent, .template, #template, #icon-template {
 	display: none;
 }
+
+.selected {
+	background-color: #0E0;
+}

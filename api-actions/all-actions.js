@@ -2,6 +2,8 @@ var _ = require('underscore');
 var moment = require('moment');
 var async = require('async');
 
+var StatusPost = require('../models/status-posts.js');
+
 
 var facebookControl = require('../api-actions/facebook-actions.js');
 var twitterControl = require('../api-actions/twitter-actions.js');
@@ -224,15 +226,115 @@ var referenceTime = req.referenceTime;
 					}/*--------------------- END TWITTER SEARCH ---------------------*/
 
 
+
+
+
+
 			/*================== GENERATE INSTANCE OF DB-MATCHED STATUSES ==================*/
 
 					/*++++++++++++++++++++++ FILTER DUPLICATES ++++++++++++++++++++++*/
 					
+
+
+
+/*~~~~~~~~~~~~~~~~~~~~ VIBE WAS THE SOURCE ~~~~~~~~~~~~~~~~~~~~*/
+					// if (dbStatus.source === 'socialvibe') {
+
+					// 	// renderStatusInstance = new StatusPost(
+			 	// 	// 		(req.user.profile.firstName + ' ' + req.user.profile.lastName),
+			 	// 	// 		req.user.uniqueURL,
+			 	// 	// 		req.user.profile.image,
+			 	// 	// 		dbStatus.postTime,
+			 	// 	// 		'socialvibe',
+			 	// 	// 		dbStatus.postTime,
+			 	// 	// 		dbStatus.updateTime,
+			 	// 	// 		'text: placeholder',
+			 	// 	// 		'image: placeholder',
+			 	// 	// 		'hashtags: placeholder',
+			 	// 	// 		'comment: placeholder',
+			 	// 	// 		{socialvibe: dbStatus.postID}
+					// 	// );
+
+					// 	if (fbInDB) {
+
+					// 		// renderStatusInstance = new StatusPost(
+				 // 		// 		(req.user.profile.firstName + ' ' + req.user.profile.lastName),
+				 // 		// 		req.user.uniqueURL,
+				 // 		// 		req.user.profile.image,
+				 // 		// 		dbStatus.postTime,
+				 // 		// 		'socialvibe',
+				 // 		// 		dbStatus.postTime,
+				 // 		// 		dbStatus.updateTime,
+				 // 		// 		'text: placeholder',
+				 // 		// 		'image: placeholder',
+				 // 		// 		'hashtags: placeholder',
+				 // 		// 		'comment: placeholder',
+				 // 		// 		{socialvibe: dbStatus.postID}
+					// 		// );
+					// 		// renderStatusInstance.mediaType.facebook = fbInDB.postID;
+					// 		// renderStatusInstance.text = fbInDB.text;
+					// 		// renderStatusInstance.hashtag = fbInDB.hashtag;
+					// 		// renderStatusInstance.comment = fbInDB.comment;
+
+					// 		renderStatusInstance = onlyFBStatusInstance;
+							
+					// 		if (twInDB) {
+					// 			renderStatusInstance.mediaType.twitter = twInDB.postID;
+					// 			if (twInDB.postTime > fbInDB.postTime) {
+					// 				renderStatusInstance.updateTime = twInDB.postTime;
+					// 			}
+					// 			else {
+					// 				renderStatusInstance.updateTime = fbInDB.postTime;
+					// 				// renderStatusInstance.mediaType.facebook = fbInDB.postID;
+					// 			}
+					// 		}
+					// 	}
+
+					// 	else if (twInDB) {
+					// 		renderStatusInstance = onlyTWStatusInstance;
+
+					// 		// renderStatusInstance.mediaType.twitter = twInDB.postID;
+					// 		// renderStatusInstance.text = twInDB.text;
+					// 		// renderStatusInstance.hashtag = twInDB.hashtag;
+					// 		// renderStatusInstance.comment = twInDB.comment;
+					// 		// renderStatusInstance.mediaType.facebook = twInDB.postID;
+					// 	}
+
+					// 	else {
+					// 		return false;
+					// 	}
+					// 	renderStatusInstance.mediaType.socialvibe = dbStatus.postID;						
+					// }
+/*~~~~~~~~~~~~~~~~~~~~ END VIBE WAS THE SOURCE ~~~~~~~~~~~~~~~~~~~~*/
+
+
+
+
+
+
 					// Check for DB statuses in FB && TW
 					if (fbInDB && twInDB) {
+console.log("Double match");
+						// Use FB status and update if source is SOCIALVIBE
+						if (dbStatus.source === 'socialvibe') {
+console.log("Both");
+							renderStatusInstance = fbInDB;
+							renderStatusInstance.source = 'socialvibe';
+							renderStatusInstance.mediaType.twitter = twInDB.postID;
+							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
+							renderStatusInstance.postTime = dbStatus.creationTime;
+
+
+							if (twInDB.postTime > fbInDB.postTime) {
+								renderStatusInstance.updateTime = twInDB.postTime;
+							}
+							else {
+								renderStatusInstance.updateTime = fbInDB.postTime;
+							}
+						}
 
 						// Use FB status and update if source is FACEBOOK
-						if (dbStatus.source === 'facebook') {
+						else if (dbStatus.source === 'facebook') {
 							renderStatusInstance = fbInDB;
 							renderStatusInstance.mediaType.twitter = twInDB.postID;
 							renderStatusInstance.updateTime = twInDB.postTime;
@@ -244,14 +346,31 @@ var referenceTime = req.referenceTime;
 							renderStatusInstance.mediaType.facebook = fbInDB.postID;
 							renderStatusInstance.updateTime = fbInDB.postTime;
 						}
+						
 					}/*--------------------- END DUPLICATE FILTER ---------------------*/
 
 					else if (fbInDB && !twInDB) {
 						renderStatusInstance = onlyFBStatusInstance;
+						// Use FB status and UPDATE if source is SOCIALVIBE
+						if (dbStatus.source === 'socialvibe') {
+							renderStatusInstance.source = 'socialvibe';
+console.log("Facebook");
+							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
+							renderStatusInstance.postTime = dbStatus.creationTime;
+						}
+
 					}
 
-					else if (!fbInDB && twInDB) {
+					else if (twInDB && !fbInDB) {
 						renderStatusInstance = onlyTWStatusInstance;
+
+						// Use FB status and UPDATE if source is SOCIALVIBE
+						if (dbStatus.source === 'socialvibe') {
+							renderStatusInstance.source = 'socialvibe';
+console.log("Twitter");
+							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
+							renderStatusInstance.postTime = dbStatus.creationTime;
+						}
 					}
 					
 
@@ -290,16 +409,16 @@ var referenceTime = req.referenceTime;
 							mediaSources: status.mediaType
 						};
 				});
-			
+			console.log('DATABASE LENGTH:', req.user.posts.length);
 				// Save the Database
 				// console.log('DB update::', DB_update);
 				req.user.posts = DB_update;
-
 				req.user.markModified('posts');
 				req.user.save(function(err, user) {
 					if (err) {
 						console.log("Database Save Error:", err);
 					}
+console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
 				// console.log('Database direct', req.user.posts);
 				});
 				/*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
@@ -326,9 +445,9 @@ var referenceTime = req.referenceTime;
 				var updatedStatuses =  _.filter(outputStatuses, function(status) {
 
 				if (status.postTime > referenceTime || status.updateTime > referenceTime) {
-					console.log("OUTPUT POSTTIME:", status.postTime);
-					console.log("OUTPUT:", status);
-					console.log("OUTPUT UPDATETIME:", status.updateTime);
+					// console.log("OUTPUT POSTTIME:", status.postTime);
+					// console.log("OUTPUT:", status);
+					// console.log("OUTPUT UPDATETIME:", status.updateTime);
 				}
 
 						return (status.postTime > referenceTime || status.updateTime > referenceTime);

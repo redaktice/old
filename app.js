@@ -111,6 +111,8 @@ app.post('/status/pushFacebook', statusController.updateFacebook);
 
 
 app.post('/status/revibe/:postID/:media', statusController.revibe);
+app.post('/status/vibe', statusController.vibe);
+
 app.get('/status/updateStatus', allAPIController.updateStatus);
 
 // USED ONLY FOR TESTING

@@ -76,37 +76,44 @@ console.log('Push Twitter');
 	var postID = nthis.closest('.status-post').attr('data-post-id');
 	var postContent = nthis.closest('.status-post').find('.post-text').text();
 
-	$.post('/status/revibe/' + postID + '/twitter', {postID: postID, content: postContent}, function(response, status, jXHR) {
-	console.debug(response);
-	
-// debugger;	
-// var updatedStatusPostsHTML = 
-		response.map(function(newPost) {
-			var postID = newPost.postID;
+	if (postContent.length > 140  /* && TWITTER IS SELECTED */) {
+		alert('MESSAGE OVER 140 CHARACTERS. TOO MUCH FOR TWITTER :(');
+	}
+	else {
+		$.post('/status/revibe/' + postID + '/twitter', {postID: postID, content: postContent}, function(response, status, jXHR) {
+		console.debug(response);
+		
+	// debugger;	
+	// var updatedStatusPostsHTML = 
+			response.map(function(newPost) {
+				var postID = newPost.postID;
 
-		console.debug("Post ID", postID);
-			var updateable = $('[data-post-id=' + postID + ']');
+			console.debug("Post ID", postID);
+				var updateable = $('[data-post-id=' + postID + ']');
 
-		console.debug('Updateable', updateable);
-			var newStatusHTML = statusPostTemplateFunc(newPost);
-			if (updateable.length === 0) {
-				$('#feed').prepend(newStatusHTML);
+			console.debug('Updateable', updateable);
+				var newStatusHTML = statusPostTemplateFunc(newPost);
+				if (updateable.length === 0) {
+					$('#feed').prepend(newStatusHTML);
 
-		console.debug('PREPEND');
-			}
+			console.debug('PREPEND');
+				}
 
-			else {
-				updateable.replaceWith(newStatusHTML);
-			}
-			
-		});
+				else {
+					updateable.replaceWith(newStatusHTML);
+				}
+				
+			});
 
-	}, "json");
+		}, "json");
+	}
 });
 
 
 
-
+$('.vibe-to').on('click', function(){
+	$(this).toggleClass('selected');
+});
 
 
 // Creating a new Vibe post
@@ -121,13 +128,40 @@ $('#new-post').on('keyup', function() {
 });
 
 $('#generate-post .vibe').on('click', function(e) {
-	var newMessage = $('#new-post').val();
 	e.preventDefault();
-	if (newMessage.length > 140  /* && TWITTER IS SELECTED */) {
+
+	var postContent = $('#new-post').val();
+	var hashtags = $('#tag-post').val();
+
+	var vibeFacebook = false;
+	var vibeTwitter = false;
+
+	if ($('#vibe-facebook').hasClass('selected')) {
+		vibeFacebook = true;
+	}
+	if ($('#vibe-twitter').hasClass('selected')) {
+		vibeTwitter = true;
+	}
+	if ($('#vibe-all').hasClass('selected')) {
+		vibeTwitter = true;
+		vibeFacebook = true;
+	}
+
+	if (vibeTwitter && postContent.length > 140  /* && TWITTER IS SELECTED */) {
 		alert('MESSAGE OVER 140 CHARACTERS. TOO MUCH FOR TWITTER :(');
-	} else {
+	}
+	else {
 		// VIBE TO THE SELECTED MEDIA
-		$.post();
+		$.post('/status/vibe', {content: postContent, hashtags: hashtags, vibeFacebook: vibeFacebook, vibeTwitter: vibeTwitter}, function(response, status, jXHR){
+		
+			response.map(function(newPost) {
+				var newStatusHTML = statusPostTemplateFunc(newPost);
+				$('#feed').prepend(newStatusHTML);
+			});
+
+			$('vibe-to').removeClass('selected');
+
+		}, "json");
 	}
 });
 
