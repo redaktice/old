@@ -1,69 +1,52 @@
 extends layout
 
 block content
-	//- script
-	//- 	| window.fbAsyncInit = function() {
-	//- 	| FB.init({
-	//- 	| appID: ,
-	//- 	| xfbml: true,
-	//- 	| version: 'v2.1'
-	//- 	| });
-	//- 	| };
-	//- 	| (function(d, s, id){
-	//- 	| var js, fjs = d.getElementsByTagName(s)[0];
-	//- 	| if (d.getElementById(id)) {
-	//- 	| return;
-	//- 	| }
-	//- 	| js = d.createElement(s);
-	//- 	| js.id = id;
-	//- 	| js.src="//connect.facebook.net/en_US/sdk.js";
-	//- 	| fjs.parentNode.insertBefore(js, fjs);
-	//- 	| }(document, 'script', 'facebook-jssdk'));
 	div.main-page
 		div.container
 			//- Navigation
-			nav.navbar.navbar-default
-				div.container.container-fluid
-					div.navbar-header
-						button.navbar-toggle.collapsed(data-toggle="collapse", data-target="#collapse-section")
-							span.icon-bar
-							span.icon-bar
-							span.icon-bar
-						//- a.navbar-brand(href="#") Media
-					div#collapse-section.collapse.navbar-collapse
-						div.centering
-							ul.nav.navbar-nav.inline-block.centered
-								li.pad-md-right: i.facebook.media-circle-md.fa.fa-facebook
-								li.pad-md-right: i.twitter.media-circle-md.fa.fa-twitter
-								//- li.pad-md-right: i.instagram.media-circle-md.fa.fa-instagram
-								//- li.pad-md-right: i.linkedin.media-circle-md.fa.fa-linkedin
 			//- End Navigation
 
 			//- Main Content
 			div.relative.centering
+				div.absolute.page-front
+					nav.navbar.navbar-default
+						div.container.container-fluid
+							div.navbar-header
+								button.navbar-toggle.collapsed(data-toggle="collapse", data-target="#collapse-section")
+									span.icon-bar
+									span.icon-bar
+									span.icon-bar
+								//- a.navbar-brand(href="#") Media
+							div#collapse-section.collapse.navbar-collapse
+								div.centering
+									ul.nav.navbar-nav.inline-block.centered
+										li.pad-md-right: i.facebook.media-circle-md.fa.fa-facebook
+										li.pad-md-right: i.twitter.media-circle-md.fa.fa-twitter
+										//- li.pad-md-right: i.instagram.media-circle-md.fa.fa-instagram
+										//- li.pad-md-right: i.linkedin.media-circle-md.fa.fa-linkedin
 
-				//- Login
-				div.absolute.form-container.form-container-avg
-					div.inline-block.centering
-						a(href='/auth/facebook'): button.btn.btn-primary.btn-lg Login with Facebook
-						form#sign-in.center-form.form(action="/login", method="post")
-							div.absent.failed-login
-								p.bg-danger No matching username/password found
-								p.bg-danger Try again or create an account
-							div.form-group
-								//- input.input-username(required, name="username", type="username", placeholder="Username")
-							div.form-group
-								//- input.input-password(required, name="password", type="password", placeholder="Password")
-							div.form-group.container-fluid
-								//- button#login.btn.btn-primary.btn-lg Login with Face
-								//div.fb-login-button(data-size="xlarge", data-show-faces="false", data-auto-logout-link="false")
-								//- 
-							//- if error
-							//- 	p.bg-danger No matching username/password found
-							div.page-header
-							//- button#sign-up.btn.btn-success.btn-sm Sign Up
-							div.form-group.container-fluid
-								button.terms-of-use.btn.btn-info.btn-xs Terms of Use
+					//- Login
+					div.form-container.form-container-avg
+						div.inline-block.centering
+							a(href='/auth/facebook'): button.btn.btn-primary.btn-lg Login with Facebook
+							form#sign-in.center-form.form(action="/login", method="post")
+								div.absent.failed-login
+									p.bg-danger No matching username/password found
+									p.bg-danger Try again or create an account
+								div.form-group
+									//- input.input-username(required, name="username", type="username", placeholder="Username")
+								div.form-group
+									//- input.input-password(required, name="password", type="password", placeholder="Password")
+								div.form-group.container-fluid
+									//- button#login.btn.btn-primary.btn-lg Login with Face
+									//div.fb-login-button(data-size="xlarge", data-show-faces="false", data-auto-logout-link="false")
+									//- 
+								//- if error
+								//- 	p.bg-danger No matching username/password found
+								div.page-header
+								//- button#sign-up.btn.btn-success.btn-sm Sign Up
+								div.form-group.container-fluid
+									button.terms-of-use.btn.btn-info.btn-xs Terms of Use
 				//- Create Account
 				//- div.absolute.form-container.form-container-tall
 				//- 	div.inline-block.centering.form-container-wide
@@ -119,7 +102,7 @@ block content
 			a.left.carousel-control(href="#login-page", role="button", data-slide="prev")
 			a.right.carousel-control(href="#login-page", role="button", data-slide="next")
 			//- Footer
-			div.absolute
+			div.absolute.page-foot.page-front
 				footer.text-center
 					div.page-header
 					ul.list-inline

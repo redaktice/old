@@ -40,6 +40,20 @@ html, body {
 	/*border-bottom: 2px solid #777;*/
 }
 
+
+.page-front {
+	z-index: 10;
+}
+
+.page-foot {
+	bottom: 10px;
+	width: 100%;
+	color: #FFF;
+}
+
+.page-foot a {
+	color: #FFF;
+}
 /*---------- New Post ---------*/
 
 #generate-post {
