@@ -14,5 +14,8 @@
     "passport-twitter": "~1.0.2",
     "underscore": "~1.7.0",
     "moment": "~2.8.3"
-  }
+  },
+     "scripts": {
+        "start": "node app.js"
+    }
 }
