@@ -9,7 +9,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var facebookStrategy = new FacebookStrategy({
 	clientID: keys.facebook.appID,
 	clientSecret: keys.facebook.appSecret,
-	callbackURL: 'http://localhost:9609/auth/facebookcallback',
+	callbackURL: 'http://socialvibe.herokuapp.com/auth/facebookcallback',
 	}, function(accessToken, refreshToken, profile, done){
 	
 

@@ -7,7 +7,7 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 var twitterStrategy = new TwitterStrategy({
 	consumerKey: keys.twitter.consumerKey,
 	consumerSecret: keys.twitter.consumerSecret,
-	callbackURL: 'http://localhost:9609/auth/twittercallback',
+	callbackURL: 'http://socialvibe.herokuapp.com/auth/twittercallback',
 	passReqToCallback: true
 	}, function(req, accessToken, secretToken, profile, done){
 		if (!req.user) {
