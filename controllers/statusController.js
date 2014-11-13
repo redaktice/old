@@ -76,14 +76,13 @@ var statusController = {
 	},
 	revibe: function(req, res) {
 
-		var referenceTime = moment().valueOf() - 1000;
 
+		var referenceTime = moment().toDate().valueOf() - 5000;
 
 		var controller;
 		var originalPostID = req.params.postID;
 	// console.log('originalPostID', originalPostID);
 		var toMedia = req.params.media;
-
 
 
 /*+++++++++++++++++++++++++++++ RE-VIBE TO FACEBOOK +++++++++++++++++++++++++++++*/
@@ -143,14 +142,14 @@ var statusController = {
 		// };
 
 		// console.log("USER", req.user);
-		console.log("originalPost", originalPost);
+		// console.log("originalPost", originalPost);
 
 		controller.writeStatus({user: req.user, status: req.body.content}, function(err, mediaResponse) {
 
 			// if (mediaResponse) {
 			// console.log("Post response ID:", mediaResponse.id);
 			// originalPost.id(originalPostID) = mediaResponse;
-			originalPost.mediaSources.twitter = mediaResponse.id;
+			originalPost.mediaSources.twitter = mediaResponse.id.toString();
 
 			// }
 			// for (var i = 0; i < req.user.posts.length; i++) {
@@ -389,9 +388,9 @@ var statusController = {
 					DB_VibeStatus.postID = FB_responseID;
 					DB_VibeStatus.mediaSources.facebook = FB_responseID;
 
-console.log('Twitter Pre Check?', vibeTwitter);
+// console.log('Twitter Pre Check?', vibeTwitter);
 					if (vibeTwitter === 'vibe') {
-console.log('Twitter?', vibeTwitter);
+// console.log('Twitter?', vibeTwitter);
 						DB_VibeStatus.mediaSources.twitter = TW_responseID;
 					}
 				}

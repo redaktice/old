@@ -188,11 +188,12 @@ var referenceTime = req.referenceTime;
 					if (fbInDB) {
 
 						// Assign reference to FB status instance to be rendered
-						onlyFBStatusInstance = fbInDB;
-
+						renderStatusInstance = fbInDB;
+// console.log('Facebook matched');
 						// console.log('fbInDB', fbInDB);
 
-						onlyFBStatusInstance.mediaType.facebook = fbInDB.postID;
+						renderStatusInstance.mediaType.facebook = fbInDB.postID;
+						renderStatusInstance.facebook = fbInDB.postID;
 
 						// Remove the fbInDB status from FB array
 						FB_statusArray = _.reject(FB_statusArray, function(foundStatus){
@@ -213,11 +214,13 @@ var referenceTime = req.referenceTime;
 
 					// If status exists in TW, remove status from TW array
 					if (twInDB) {
+// console.log('Twitter matched');
 
 						// console.log('twInDB', twInDB);
 						// Assign reference to TW status instance to be rendered
-						onlyTWStatusInstance = twInDB;
-						onlyTWStatusInstance.mediaType.twitter = twInDB.postID;
+						renderStatusInstance = twInDB;
+						renderStatusInstance.mediaType.twitter = twInDB.postID;
+						renderStatusInstance.twitter = twInDB.postID;
 
 						// Remove the twInDB satus from the TW array
 						TW_statusArray = _.reject(TW_statusArray, function(foundStatus){
@@ -321,17 +324,22 @@ console.log("Both");
 							renderStatusInstance = fbInDB;
 							renderStatusInstance.source = 'socialvibe';
 							renderStatusInstance.mediaType.twitter = twInDB.postID;
-							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
+							renderStatusInstance.mediaType.socialvibe = dbStatus.creationTime;
+							renderStatusInstance.postID = dbStatus.postID;
 							renderStatusInstance.postTime = Number(dbStatus.creationTime);
 
+							renderStatusInstance.socialvibe = Number(dbStatus.creationTime);
 							renderStatusInstance.revibed = ['facebook', 'twitter'];
 
 
+console.log(renderStatusInstance);
 							if (twInDB.postTime > fbInDB.postTime) {
 								renderStatusInstance.updateTime = twInDB.postTime;
+								renderStatusInstance.postTime = fbInDB.postTime;
 							}
 							else {
 								renderStatusInstance.updateTime = fbInDB.postTime;
+								renderStatusInstance.postTime = twInDB.postTime;
 							}
 						}
 
@@ -340,6 +348,8 @@ console.log("Both");
 							renderStatusInstance = fbInDB;
 							renderStatusInstance.mediaType.twitter = twInDB.postID;
 							renderStatusInstance.updateTime = twInDB.postTime;
+
+							renderStatusInstance.facebook = fbInDB.postID;
 							renderStatusInstance.revibed = ['twitter'];
 
 						}
@@ -348,6 +358,8 @@ console.log("Both");
 							renderStatusInstance = twInDB;
 							renderStatusInstance.mediaType.facebook = fbInDB.postID;
 							renderStatusInstance.updateTime = fbInDB.postTime;
+
+							renderStatusInstance.twitter = twInDB.postTime;
 							renderStatusInstance.revibed = ['facebook'];
 
 						}
@@ -355,15 +367,20 @@ console.log("Both");
 					}/*--------------------- END DUPLICATE FILTER ---------------------*/
 
 					else if (fbInDB && !twInDB) {
-						renderStatusInstance = onlyFBStatusInstance;
+						renderStatusInstance = fbInDB;
 						// Use FB status and UPDATE if source is SOCIALVIBE
 // console.log('Facebook POST TIME 0', renderStatusInstance.postTime, typeof renderStatusInstance.postTime);
 // console.log('DB POST TIME 0', dbStatus.creationTime, typeof renderStatusInstance.postTime);
 						if (dbStatus.source === 'socialvibe') {
 							renderStatusInstance.source = 'socialvibe';
-console.log("Facebook");
-							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
+							renderStatusInstance.mediaType.socialvibe = Number(dbStatus.creationTime);
 							renderStatusInstance.postTime = Number(dbStatus.creationTime);
+							renderStatusInstance.postID = dbStatus.postID;
+
+
+							renderStatusInstance.socialvibe = Number(dbStatus.creationTime);
+console.log("SoialVibe Facebook Only");
+console.log(renderStatusInstance);
 // console.log('CREATION TIME', dbStatus.creationTime, typeof dbStatus.creationTime);
 // console.log('DB POST TIME 0', dbStatus.creationTime, typeof renderStatusInstance.postTime);
 
@@ -372,15 +389,21 @@ console.log("Facebook");
 					}
 
 					else if (twInDB && !fbInDB) {
-						renderStatusInstance = onlyTWStatusInstance;
+						renderStatusInstance = twInDB;
 
 						// Use FB status and UPDATE if source is SOCIALVIBE
 						if (dbStatus.source === 'socialvibe') {
 							renderStatusInstance.source = 'socialvibe';
+
+							renderStatusInstance.socialvibe = Number(dbStatus.creationTime);
+							renderStatusInstance.postID = dbStatus.postID;
+
 					// console.log('POST TIME 1', renderStatusInstance.postTime);
-console.log("Twitter");
-							renderStatusInstance.mediaType.socialvibe = dbStatus.socialvibe;
+
+							renderStatusInstance.mediaType.socialvibe = dbStatus.creationTime;
 							renderStatusInstance.postTime = Number(dbStatus.creationTime);
+console.log("SoialVibe Twitter Only");
+console.log(renderStatusInstance);
 						}
 					}
 					
@@ -456,9 +479,9 @@ console.log("Twitter");
 /*--------------------RENDER CHANGED STATUSES  ------------*/
 			if (!req.renderAll) {
 
-				// console.log('Update Render');
+				console.log('Update Render');
 	// console.log("OUTPUT STATUSES:", outputStatuses);
-
+console.log('REFERENCE TIME', referenceTime);
 				var updatedStatuses =  _.filter(outputStatuses, function(status) {
 
 					if (status.postTime > referenceTime || status.updateTime > referenceTime) {

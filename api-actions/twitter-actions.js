@@ -58,7 +58,7 @@ var twitterController = {
 				 		post.text,
 				 		post.image,
 				 		findHashtags(post.entities.hashtags),
-				 		'No twitter comments set up yet',
+				 		null,
 				 		{twitter: post.id.toString()}
 				 	);
 				 	return statusPost;

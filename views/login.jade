@@ -35,8 +35,8 @@ block content
 							ul.nav.navbar-nav.inline-block.centered
 								li.pad-md-right: i.facebook.media-circle-md.fa.fa-facebook
 								li.pad-md-right: i.twitter.media-circle-md.fa.fa-twitter
-								li.pad-md-right: i.instagram.media-circle-md.fa.fa-instagram
-								li.pad-md-right: i.linkedin.media-circle-md.fa.fa-linkedin
+								//- li.pad-md-right: i.instagram.media-circle-md.fa.fa-instagram
+								//- li.pad-md-right: i.linkedin.media-circle-md.fa.fa-linkedin
 			//- End Navigation
 
 			//- Main Content
@@ -90,43 +90,44 @@ block content
 				//- 			div.form-group.container-fluid
 				//- 				a.terms-of-use.btn.btn-info.btn-xs(href="#") Terms of use
 				//- Carousel
-				div#login-page.carousel.slide(data-ride="carousel")
-					div.carousel-inner
+		div#login-page.carousel.slide(data-ride="carousel")
+			div.carousel-inner
 
-						//- Carousel Item
-						div.item.active.carousel-item-1
-							div.carousel-caption
-								h2 Organize Your Life!
-							div.color
+				//- Carousel Item
+				div.item.active.carousel-item-1
+					div.carousel-caption
+						h2 Organize Your Life!
+					div.color
 
-						//- Carousel Item
-						div.item.carousel-item-2
-							div.carousel-caption
-								h2 Connect With The World!
-							div.color
+				//- Carousel Item
+				div.item.carousel-item-2
+					div.carousel-caption
+						h2 Connect With The World!
+					div.color
 
-						//- Carousel Item
-						div.item.carousel-item-3
-							div.carousel-caption
-								h2 Manage Digital Life!
-							div.color
+				//- Carousel Item
+				div.item.carousel-item-3
+					div.carousel-caption
+						h2 Manage Digital Life!
+					div.color
 
-						//- Carousel Item
-						div.item.carousel-item-4
-							div.carousel-caption
-								h2 Increase Your Presence!
-							div.color
-					a.left.carousel-control(href="#login-page", role="button", data-slide="prev")
-					a.right.carousel-control(href="#login-page", role="button", data-slide="next")
-		//- Footer
-		footer.text-center
-			div.page-header
-			ul.list-inline
-				li: a(href="#") About Us
-				li: a(href="#") Contact Us
-				li: a(href="#") FAQ
-				li: a(href="#") Terms of use
-			p © Company
+				//- Carousel Item
+				div.item.carousel-item-4
+					div.carousel-caption
+						h2 Increase Your Presence!
+					div.color
+			a.left.carousel-control(href="#login-page", role="button", data-slide="prev")
+			a.right.carousel-control(href="#login-page", role="button", data-slide="next")
+			//- Footer
+			div.absolute
+				footer.text-center
+					div.page-header
+					ul.list-inline
+						li: a(href="#") About Us
+						li: a(href="#") Contact Us
+						li: a(href="#") FAQ
+						li: a(href="#") Terms of use
+					p © Company
 
 	script.
 		//- var key = #{key}

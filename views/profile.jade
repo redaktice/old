@@ -9,129 +9,172 @@ block content
 	div.main-body
 		div.container
 
-			//- Navigation
-			nav.navbar.navbar-default
-				div.navbar-header
-					button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-target="#collapse-section")
-						span.icon-bar
-						span.icon-bar
-						span.icon-bar
-				a.navbar-brand(href="#")
-					h3 My Media
-				div#collapse-section.collapse.navbar-collapse
-					div.centering
-						ul.nav.navbar-nav.inline-block.centered
-							li: i.icon.facebook.media-circle-md.fa.fa-facebook
-							li#user-twitter
-								a(href="/auth/twitter")
-									button: i.icon.twitter.media-circle-md.fa.fa-twitter
-							//- li: i.icon.instagram.media-circle-md.fa.fa-instagram
-							li
-								button#incorporate-media.icon.icon-btn.btn-default.btn-circle
-									h1: i.fa.fa-plus-circle
-						ul.nav.navbar-nav.navbar-right
-							li.dropdown
-								a.dropdown-toggle(href="#", data-toggle="dropdown")
-									h3.inline-block
-										i.fa.fa-cog.fa-spin
-										span.caret
-								ul.dropdown-menu(role="menu")
-									li: a(href="#") Settings
-									li: a(href="#") Privacy
-									li.divider Privacy
-									li
+			header.container.text-center
+				h1 SocialVibe
+
+			//- //- Navigation
+			//- nav.navbar.navbar-default
+			//- 	div.navbar-header
+			//- 		button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-target="#collapse-section")
+			//- 			span.icon-bar
+			//- 			span.icon-bar
+			//- 			span.icon-bar
+			//- 	a.navbar-brand(href="#")
+			//- 		h3 My Media
+			//- 	div#collapse-section.collapse.navbar-collapse
+			//- 		div.centering
+			//- 			ul.nav.navbar-nav.inline-block.centered
+			//- 				li: i.icon.facebook.media-circle-md.fa.fa-facebook
+			//- 				li#user-twitter
+			//- 					a(href="/auth/twitter")
+			//- 						button: i.icon.twitter.media-circle-md.fa.fa-twitter
+			//- 				//- li: i.icon.instagram.media-circle-md.fa.fa-instagram
+			//- 				li
+			//- 					button#incorporate-media.icon.icon-btn.btn-default.btn-circle
+			//- 						h1: i.fa.fa-plus-circle
+			//- 			ul.nav.navbar-nav.navbar-right
+			//- 				li.dropdown
+			//- 					a.dropdown-toggle(href="#", data-toggle="dropdown")
+			//- 						h3.inline-block
+			//- 							i.fa.fa-cog.fa-spin
+			//- 							span.caret
+			//- 					ul.dropdown-menu(role="menu")
+			//- 						li: a(href="#") Settings
+			//- 						li: a(href="#") Privacy
+			//- 						li.divider Privacy
+			//- 						li
 										a(href='/auth/logout'): button.btn.btn-primary.btn-lg Log Out
 
+							
 
 			//- Profile
-			div.container.profile
-				div.user
-					img.user-img.img-circle(src='#{user.profile.image}')
-					div.user-info
+			div#profile-container.container
+				div.row
+					div.col-sm-2.text-center.btm-bord
 						h2
 							span.user-firstName #{user.profile.firstName} 
 							small.user-lastName #{user.profile.lastName}
-						h3.user-age age
-						div.progress
+					div.col-sm-4.text-center
+						//- div.row
+							div.col-sm-4
+							div.col-sm-4
+						div#profile-image.user
+							img.img-circle.text-center(src='#{user.profile.image}')
+					div.col-sm-6.text-center.btm-bord
+						ul.list-unstyled.list-inline
+							li: i.icon-btn.user-media.facebook.media-circle-md.fa.fa-facebook
+							li#use-twitter: i.icon-btn.user-media.twitter.media-circle-md.fa.fa-twitter.unused
+							li: i.icon-btn.user-media-filter.all.media-circle-md.inline-block.fa.fa-tachometer
+						h2.dropdown
+							button.dropdown-toggle(href="#", data-toggle="dropdown"): i.fa.fa-cog.fa-spin
+							ul.dropdown-menu(role="menu")
+								li#login-twitter
+									a(href="/auth/twitter")
+										i.icon.twitter.media-circle-md.fa.fa-twitter
+								li
+									a(href='/auth/logout'): button.btn.btn-primary.btn-lg Log Out
+						//- h3.user-age age
+						//- div.progress
 							div.progress-bar(role="progressbar", aria-valuenow-"2", aria-valuemin="0", aria-valuemax="30%", style="width: 20%") Facebook
 							div.progress-bar(role="progressbar", aria-valuenow-"2", aria-valuemin="0", aria-valuemax="30%", style="width: 20%") Twitter
 							div.progress-bar(role="progressbar", aria-valuenow-"2", aria-valuemin="0", aria-valuemax="30%", style="width: 20%") Instagram
 							p.text-center Media Presence
+					//div.col-sm-4
+						div.page-header
+				div.user-info.text-center
+				//- Feed
+			div.row
 
-			//- Feed
-			div.container.text-center
-				h2
-					strong The Vibe
-						i.icon.icon-btn.fa.fa-compass.fa-spin
-				div#feed-head.media.inline-block
-					ul.list-unstyled.list-inline
-						li
-							button#btn-all.icon.icon-btn.btn-circle.highlight
-								h2.inline-block.no-mgn
-									i.fa.fa-tachometer
-						li: i.icon-btn.media-filter.facebook.media-circle-md.fa.fa-facebook
-						li: i.icon-btn.media-filter.twitter.media-circle-md.fa.fa-twitter
-						li: i.icon-btn.media-filter.instagram.media-circle-md.fa.fa-instagram
-			div#feed.box-center
-				//- span: img.img-circle.img-post-user(src="http://graph.facebook.com/#{status.data[0].from.id}/picture?type=large")
-				//- h2=status.data[0].from.name
-				//- h4=status.data[0].updated_time
-				//- h2=status.data[0].message
-					//- p=status.data[0].update_time
-					//- for var i= 0; i<data.length; i++
-					//- Posts Go Here
-				//- div(class="fb-activity", data-site="http://www.facebook.com", data-action="likes, recommends," data-colorscheme="light", data-header="true") Hello
-	
+				//- Popup
+					//- div.btn-group.dropup
+					//- 	button#btn-post.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown")
+					//- 		h4.inline-block.no-mgn Post
+					//- 			span.caret
+				div.container.col-sm-9.text-center
+					h2
+						strong The Vibe
+							//- i.icon.icon-btn.fa.fa-compass.fa-spin
+					div#feed-head.media.inline-block
+						ul.list-unstyled.list-inline
+							li: i#filter-all.icon-btn.media-filter.all.media-circle-md.inline-block.fa.fa-tachometer
+							li: i#filter-facebook.icon-btn.media-filter.facebook.media-circle-md.fa.fa-facebook
+							li: i#filter-twitter.icon-btn.media-filter.twitter.media-circle-md.fa.fa-twitter
+							//- li: i.icon-btn.media-filter.instagram.media-circle-md.fa.fa-instagram
+					div#feed.box-center
+				div.col-sm-3
+					div#generate-post.btn-group.dropup
+						button.btn.btn-default.btn-success(type="button", data-toggle="modal", data-target="#vibe-modal")
+							h4.inline-block.no-mgn Post
+								span.caret
+						//- span: img.img-circle.img-post-user(src="http://graph.facebook.com/#{status.data[0].from.id}/picture?type=large")
+						//- h2=status.data[0].from.name
+						//- h4=status.data[0].updated_time
+						//- h2=status.data[0].message
+							//- p=status.data[0].update_time
+							//- for var i= 0; i<data.length; i++
+							//- Posts Go Here
+						//- div(class="fb-activity", data-site="http://www.facebook.com", data-action="likes, recommends," data-colorscheme="light", data-header="true") Hello
+		
 			//- Template?
 			li#add-media-template.template: i.to-media.media-circle-xs.fa
 			
 			//- Friends
-			aside
-				div.box-side-right.inline-block
-					div.btn-group.dropup
-						button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown")
-							h3.inline-block.no-mgn
-								h2.no-mgn.inline-block
-									i.fa.fa-group
-								span.caret
-						ul.friends.dropdown-menu(role="menu")
-							li
-								img.img-circle(src="http://placehold.it/40x40")
-								p Darth Vader
-							li
-								img.img-circle(src="http://placehold.it/40x40")
-								p Friend 2
-							li
-								img.img-circle(src="http://placehold.it/40x40")
-								p Friend 3
+			//- aside
+			//- 	div.box-side-right.inline-block
+			//- 		div.btn-group.dropup
+			//- 			button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown")
+			//- 				h3.inline-block.no-mgn
+			//- 					h2.no-mgn.inline-block
+			//- 						i.fa.fa-group
+			//- 					span.caret
+			//- 			ul.friends.dropdown-menu(role="menu")
+			//- 				li
+			//- 					img.img-circle(src="http://placehold.it/40x40")
+			//- 					p Darth Vader
+			//- 				li
+			//- 					img.img-circle(src="http://placehold.it/40x40")
+			//- 					p Friend 2
+			//- 				li
+			//- 					img.img-circle(src="http://placehold.it/40x40")
+			//- 					p Friend 3
 
 			//- Create New Post
-			aside#generate-post
-				div.box-side-left.inline-block
+			div
+				div
 
-					//- Popup
-					//- div.btn-group.dropup
-						button#btn-post.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown")
-							h4.inline-block.no-mgn Post
-								span.caret
-					div#post-menu
-						form.post-form(action="form")
-							div.form-group
-								textarea#new-post(name="post", cols="30", rows="5", placeholder="Share your thoughts")
-								p: span#character-count
-								textarea#tag-post(name="", cols="30", rows="2", placeholder="#It")
-							h2.no-mgn: i.btn.fa.fa-camera
-							div.page-header.no-mgn
-							//- Share icons
-							div.media.inline-block
-								ul.list-unstyled.list-inline
-									li: p#vibe-all.vibe-to ALL
-									li: i#vibe-facebook.vibe-to.media-circle-md.fa.fa-facebook.facebook
-									li: i#vibe-twitter.vibe-to.media-circle-md.fa.fa-twitter.twitter
-									li: i#vibe-instagram.vibe-to.media-circle-md.fa.fa-instagram.instagram
-							//- Submit
-							div.form-group
-								button.btn.btn-success.vibe(type="button") Vibe
+					
+			div#vibe-modal.modal.fade.text-center
+				div.modal-dialog
+					div.modal-content
+						div.modal-header
+							button.btn.btn-default(type="button", class="close", data-dismiss="modal"): span.glyphicon.glyphicon-minus
+							h3 Time to Vibe
+						div.modal-body
+							div.text-center
+								form.post-form(action="form", roll="form")
+									div.form-group
+										div: label Status
+										textarea#new-post.form-control(type="text", name="post", rows="5", placeholder="Share your thoughts")
+										p: span#character-count
+										div: label Your Tags
+										textarea#tag-post.form-control(name="", cols="30", rows="2", placeholder="#It")
+									//- h2.no-mgn: i.btn.fa.fa-camera
+									div.page-header.no-mgn
+									//- Share icons
+									div.form-group
+										h4: label Vibe To
+										div.media.inline-block
+											ul.list-unstyled.list-inline
+												li: i#vibe-all.icon-btn.media-filter.all.media-circle-md.inline-block.fa.fa-tachometer
+												li: i#vibe-facebook.vibe-to.media-circle-md.fa.fa-facebook.facebook
+												li: i#vibe-twitter.vibe-to.media-circle-md.fa.fa-twitter.twitter
+												//- li: i#vibe-instagram.vibe-to.media-circle-md.fa.fa-instagram.instagram
+								
+						div.modal-footer
+							//- span: button.btn.btn-default(type="button", class="close", data-dismiss="modal") Dismiss
+							span: button.btn.btn-success.vibe.close(type="button", data-dismiss="modal") Vibe
+
+					
 
 			//- Footer
 			footer.text-center
@@ -150,7 +193,7 @@ block content
 			//- var key = #{key}
 			//- var facebookStatus = !{JSON.stringify(facebookStatus)}
 			//- var twitterTimeline = !{JSON.stringify(twitterTimeline)}
-			//- var user = !{JSON.stringify(user)}
+			var userMedia = !{JSON.stringify(user.media)}
 			var renderedPosts = !{JSON.stringify(renderedPosts)}
 
 
