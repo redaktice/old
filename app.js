@@ -17,7 +17,7 @@ var apiController = require('./controllers/apiController.js');
 var allAPIController = require('./api-actions/all-actions.js');
 
 // Establish and connect to database
-mongoose.connect('mongodb://localhost/social-vibe');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/social-vibe');
 
 var app = express();
 app.set('view engine', 'jade');
@@ -123,7 +123,7 @@ app.get('/twittertime', statusController.displayTwitterTime);
 app.get('/auth/logout', authenticationController.logout);
 
 
-var server = app.listen(9609, function() {
+var server = app.listen(process.env.PORT || 9609, function() {
 	console.log('Express server listening on port ' + server.address().port);
 });
 
