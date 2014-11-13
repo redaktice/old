@@ -1,7 +1,7 @@
 var Facebook = require('facebook-node-sdk');
 var User = require('../models/schemas/user');
 
-var keys = require('../private/keys');
+var keys = require('../getKeys');
 var StatusPost = require('../models/status-posts.js');
 var _ = require('underscore');
 var moment = require('moment');

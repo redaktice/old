@@ -1,4 +1,4 @@
-var keys = require('../private/keys');
+var keys = require('../getKeys');
 var User = require('../models/schemas/user');
 var async = require('async');
 var _ = require('underscore');

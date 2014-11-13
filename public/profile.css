@@ -3,6 +3,9 @@
 					ALIGNMENT
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+html, body {
+	font-family: Lato;
+}
 .main-body {
 	background-color: #EBFCE4;
 	border-left: 1em solid #D4E6E8;
@@ -252,7 +255,9 @@
 	line-height: .65em;
 }
 
-
+/*.media-sm {
+	
+}*/
 /*_____________MEDIA ICONS______________*/
 
 .facebook {
@@ -403,6 +408,9 @@
 
 /*----------------------CAROUSEL ITEMS----------------------*/
 
+.carousel-caption {
+	padding-bottom: 3em;
+}
 .carousel-item-1 .color {
 	height: 100%;
 	width: 100%;

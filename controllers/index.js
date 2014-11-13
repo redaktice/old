@@ -1,4 +1,4 @@
-var keys = require('../private/keys');
+var keys = require('../getKeys');
 
 var indexController = {
 	index: function(req, res) {

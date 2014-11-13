@@ -1,4 +1,4 @@
-var keys = require('../private/keys');
+var keys = require('../getKeys');
 var passport = require('passport');
 var User = require('../models/schemas/user');
 var TwitterStrategy = require('passport-twitter').Strategy;

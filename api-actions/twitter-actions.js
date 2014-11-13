@@ -1,5 +1,5 @@
 // var Twitter = require('twitter');
-var keys = require('../private/keys');
+var keys = require('../getKeys');
 var _ = require('underscore');
 var Twitter = require ('node-twitter');
 var StatusPost = require('../models/status-posts.js');
