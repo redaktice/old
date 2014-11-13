@@ -227,7 +227,10 @@ html, body {
 }
 
 .app-name {
-	color: green;
+	color: rgb(67, 255, 156);
+	font-size: 80px;
+	font-family: initial;
+	text-decoration: underline;
 }
 .highlight {
 	border: .15em solid #AEA;
@@ -463,7 +466,7 @@ html, body {
 .carousel-item-3 .color {
 	height: 100%;
 	width: 100%;
-	background-color: rgba(50, 150, 50, .5);
+	background-color: rgba(89, 116, 103, 0.5);
 } 
 
 .carousel-item-3 {
@@ -483,6 +486,13 @@ html, body {
 	background-size: 100%;
 }
 
+.push-twitter, .push-facebook {
+	color: #FFF;
+	border-radius: 50%;
+	text-align: center;
+	/*margin: 0;*/
+	padding: .5em 0 0 0;
+}
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 						/////////////////
 -----------------------------GENERAL---------------------------------------------
