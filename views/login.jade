@@ -2,15 +2,15 @@ extends layout
 
 block content
 	div.main-page
-		div.container
+		div.container-fluid
 			//- Navigation
 			//- End Navigation
 
 			//- Main Content
 			div.relative.centering
-				div.absolute.page-front
-					nav.navbar.navbar-default
-						div.container.container-fluid
+				div.absolute.page-front.login-front
+					//- div.title.tile-bar.clearfix
+						//- div.container.container-fluid
 							div.navbar-header
 								button.navbar-toggle.collapsed(data-toggle="collapse", data-target="#collapse-section")
 									span.icon-bar
@@ -19,17 +19,20 @@ block content
 								//- a.navbar-brand(href="#") Media
 							div#collapse-section.collapse.navbar-collapse
 								div.centering
-									ul.nav.navbar-nav.inline-block.centered
-										li.pad-md-right: i.facebook.media-circle-md.fa.fa-facebook
-										li.pad-md-right: i.twitter.media-circle-md.fa.fa-twitter
+					div.centering.title
+						h1.app-name SocialVibe
 										//- li.pad-md-right: i.instagram.media-circle-md.fa.fa-instagram
 										//- li.pad-md-right: i.linkedin.media-circle-md.fa.fa-linkedin
 
 					//- Login
-					div.form-container.form-container-avg
+					div.login-container.login-container-avg
+						div.centering.media-inc
+							ul.nav.navbar-nav.inline-block.centered
+								li.pad-md-right: i.facebook.media-circle-md.fa.fa-facebook
+								li.pad-md-right: i.twitter.media-circle-md.fa.fa-twitter
 						div.inline-block.centering
 							a(href='/auth/facebook'): button.btn.btn-primary.btn-lg Login with Facebook
-							form#sign-in.center-form.form(action="/login", method="post")
+							//- form#sign-in.center-form.form(action="/login", method="post")
 								div.absent.failed-login
 									p.bg-danger No matching username/password found
 									p.bg-danger Try again or create an account
@@ -79,25 +82,25 @@ block content
 				//- Carousel Item
 				div.item.active.carousel-item-1
 					div.carousel-caption
-						h2 Organize Your Life!
+						h2 Organize Your Life
 					div.color
 
 				//- Carousel Item
 				div.item.carousel-item-2
 					div.carousel-caption
-						h2 Connect With The World!
+						h2 Connect With The World
 					div.color
 
 				//- Carousel Item
 				div.item.carousel-item-3
 					div.carousel-caption
-						h2 Manage Digital Life!
+						h2 Manage Digital Life
 					div.color
 
 				//- Carousel Item
 				div.item.carousel-item-4
 					div.carousel-caption
-						h2 Increase Your Presence!
+						h2 Increase Your Presence
 					div.color
 			a.left.carousel-control(href="#login-page", role="button", data-slide="prev")
 			a.right.carousel-control(href="#login-page", role="button", data-slide="next")

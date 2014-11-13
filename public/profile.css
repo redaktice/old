@@ -139,7 +139,7 @@ html, body {
 .comment {
 	/*background-color: */
 	width: 75%;
-	/*margin: auto;*/
+	margin: auto;
 }
 #post-menu {
 	display: none;
@@ -216,14 +216,19 @@ html, body {
 	/*height: 1000px;*/
 	/*#CDE;*/
 }
-
-.navbar {
-	background-color: #E2E0DF;
+.login-front {
+	width: 100%;
+}
+.title {
+	/*background-color: #E2E0DF;*/
 	padding-top: 1em;
-	border-radius: 1em;
-	border: .5em solid #DCA;
+	/*border-radius: 1em;*/
+	/*border: .5em solid #DCA;*/
 }
 
+.app-name {
+	color: green;
+}
 .highlight {
 	border: .15em solid #AEA;
 }
@@ -381,15 +386,18 @@ html, body {
 
 }
 
-.form-container {
+.login-container {
 	z-index: 10;
 	width: 100%;
 }
 
-.form-container-avg {
-	top: 25%;
+.login-container-avg {
+	margin-top: 16%;
 }
 
+.media-inc {
+	margin-bottom: 2.5em;
+}
 
 
 /*_________________NEW USER_______________*/
@@ -435,7 +443,7 @@ html, body {
 }
 
 .carousel-item-1 { 
-	background-image: url("images/IMG_1900.JPG");
+	background-image: url("images/IMG_2180.JPG");
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
@@ -447,7 +455,7 @@ html, body {
 }
 
 .carousel-item-2 {
-	background-image: url("images/IMG_2438.JPG");
+	background-image: url("images/6637020477_7ce856e47c_b.jpg");
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
@@ -459,7 +467,7 @@ html, body {
 } 
 
 .carousel-item-3 {
-	background-image: url("images/IMG_2023.JPG");
+	background-image: url("images/IMAG2227-1.jpg");
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
@@ -470,7 +478,7 @@ html, body {
 	background-color: rgba(150, 50, 50, .5);
 }
 .carousel-item-4 {
-	background-image: url("images/IMG_2439.JPG");
+	background-image: url("images/images.jpeg");
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
