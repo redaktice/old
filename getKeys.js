@@ -1,4 +1,5 @@
 if (process.env.NODE_ENV === "production") {
+	console.log('Production');
 	var keys = {
 		facebook: {
 			appID: process.env.FACEBOOK_ID,
@@ -12,6 +13,7 @@ if (process.env.NODE_ENV === "production") {
 }
 else {
 	var keys = require('./private/keys.js');
-}
 console.log('getKeys Test', keys);
+}
+console.log('Process Env', process.env);
 module.exports = keys;
