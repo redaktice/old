@@ -17,4 +17,5 @@ else {
 console.log('getKeys Test', keys);
 }
 console.log('Process Env', process.env);
+console.log('NODE Env', process.env.NODE_ENV);
 module.exports = keys;
