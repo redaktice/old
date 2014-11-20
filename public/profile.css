@@ -228,7 +228,8 @@ html, body {
 }
 
 .name-color {
-	color: rgb(67, 255, 156);
+	/*color: rgb(67, 255, 156);*/
+	color: #000;
 }
 .app-name {
 	font-size: 80px;
