@@ -11,6 +11,7 @@ if (process.env.NODE_ENV === "production") {
 		}
 	};
 }
+
 else {
 	var keys = require('./private/keys.js');
 console.log('getKeys Test', keys);
