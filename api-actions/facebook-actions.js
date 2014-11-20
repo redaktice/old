@@ -36,7 +36,7 @@ var facebookController = {
 				callback(err, allPosts);
 				// }
 			});
-	}
+	},
 	writeStatus: function(user, callback) {
 		FB.setAccessToken(user.media.facebook.facebookToken)
 	}

@@ -22,7 +22,7 @@ var facebookStrategy = new FacebookStrategy({
 			if(!user) {
 				delete profile._raw;
 				delete profile._json;
-				var randomNumber = (10* Math.random()).toFixed(2);
+				var randomNumber = (10 * Math.random()).toFixed(2);
 				// profile.facebookToken = accessToken;
 				var newUser = new User({
 					profile: {
