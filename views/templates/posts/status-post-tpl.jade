@@ -1,5 +1,5 @@
 script#status-post-template(type="text/x-handlebars-template").
-	<div class="status-post post template-post centering source-{{source}}" user-id="" data-post-id="{{postID}}" id="">
+	<div class="status-post post template-post centering source-{{source}}" user-id="" data-post-id="{{statusID}}" id="">
 		<div class="col post-head">
 			<div class="col-sm-4 col-xs-12 inline-block post-icons">
 
@@ -55,7 +55,7 @@ script#status-post-template(type="text/x-handlebars-template").
 				</a>
 			</div>
 			<div class="col-sm-4 col-xs-12 date inline-block text-center">
-				Created {{postTime}}
+				Created {{creationTime}}
 			</div>
 
 			{{#if revibed}}

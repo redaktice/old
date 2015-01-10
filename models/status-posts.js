@@ -1,10 +1,10 @@
-	var StatusPost = function(user, userID, userImage, id, source, postTime, updateTime, text, image, hashtag, comment, mediaType) {
+	var StatusPost = function(user, userID, userImage, id, source, creationTime, updateTime, text, image, hashtag, comment, mediaType) {
 		this.user = user;
 		this.userID = userID;
 		this.userImage = userImage;
-		this.postID = id;
+		this.statusID = id;
 		this.source = source;
-		this.postTime = postTime;
+		this.creationTime = creationTime;
 		this.updateTime = updateTime;
 		this.text = text || null;
 		this.image = image || null;

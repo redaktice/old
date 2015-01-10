@@ -36,11 +36,13 @@ var userSchema = mongoose.Schema({
 	// 	unique: true
 	// },
 	media: Object,
-	posts: [
+	statuses: [
 		{
-			postID: String,
+			statusID: String,
 			mediaSources: Object,
 			source: String,
+			FB_time: String,
+			TW_time: String,
 			creationTime: String,
 			updateTime: String,
 		}

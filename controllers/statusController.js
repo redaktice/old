@@ -13,10 +13,7 @@ var twitterController = require('../api-actions/twitter-actions.js');
 var authenticationController = require('./authentication.js');
 var allAPIController = require('../api-actions/all-actions.js');
 var apiController = require('./apiController.js');
-// var signedIn = {
-// 	facebook: false,
-// 	twitter: true,
-// };
+
 
 
 
@@ -63,7 +60,7 @@ var statusController = {
 						console.log(err);
 					}
 		console.log('New post:', newStatusPost);
-					apiController.pushFacebook({user: user, postID: req.body.postID, facebookID: newStatusPost.postID}, function(err, confirmation){
+					apiController.pushFacebook({user: user, statusID: req.body.statusID, facebookID: newStatusPost.statusID}, function(err, confirmation){
 					});
 						res.send(newStatusPost);
 					// return (newStatusPost);
@@ -79,8 +76,8 @@ var statusController = {
 		var referenceTime = moment().toDate().valueOf() - 5000;
 
 		var controller;
-		var originalPostID = req.params.postID;
-	// console.log('originalPostID', originalPostID);
+		var originalstatusID = req.params.statusID;
+	// console.log('originalstatusID', originalstatusID);
 		var toMedia = req.params.media;
 
 
@@ -88,12 +85,12 @@ var statusController = {
 
 		var pushToFacebook = function () {
 
-			var dbStatuses = req.user.posts;
+			var dbStatuses = req.user.statuses;
 			var originalPost = _.find(dbStatuses, function(dbPost) {
-				return dbPost.postID === originalPostID;
-			}); // = req.user.posts.id(originalPostID);
-			// for (var i = 0; i < req.user.posts.length; i++) {
-				// return req.user.posts[i]
+				return dbPost.statusID === originalstatusID;
+			}); // = req.user.statuses.id(originalstatusID);
+			// for (var i = 0; i < req.user.statuses.length; i++) {
+				// return req.user.statuses[i]
 			// };
 
 			// console.log("USER", req.user);
@@ -102,12 +99,12 @@ var statusController = {
 			controller.writeStatus({user: req.user, status: req.body.content}, function(err, mediaResponse) {
 
 			// console.log("Post response ID:", mediaResponse);
-			// originalPost.id(originalPostID) = mediaResponse;
+			// originalPost.id(originalstatusID) = mediaResponse;
 			originalPost.mediaSources.facebook = mediaResponse;
 
-			// for (var i = 0; i < req.user.posts.length; i++) {
-			// 	if (req.user.posts[i].postID === originalPostID) {
-			// 		req.user.posts[i].media.facebook = mediaResponse;
+			// for (var i = 0; i < req.user.statuses.length; i++) {
+			// 	if (req.user.statuses[i].statusID === originalstatusID) {
+			// 		req.user.statuses[i].media.facebook = mediaResponse;
 			// 	}
 			// }
 			req.user.markModified('posts');
@@ -132,12 +129,12 @@ var statusController = {
 
 		var pushToTwitter = function () {
 
-		var dbStatuses = req.user.posts;
+		var dbStatuses = req.user.statuses;
 		var originalPost = _.find(dbStatuses, function(dbPost) {
-			return dbPost.postID === originalPostID;
-		}); // = req.user.posts.id(originalPostID);
-		// for (var i = 0; i < req.user.posts.length; i++) {
-			// return req.user.posts[i]
+			return dbPost.statusID === originalstatusID;
+		}); // = req.user.statuses.id(originalstatusID);
+		// for (var i = 0; i < req.user.statuses.length; i++) {
+			// return req.user.statuses[i]
 		// };
 
 		// console.log("USER", req.user);
@@ -147,26 +144,26 @@ var statusController = {
 
 			// if (mediaResponse) {
 			// console.log("Post response ID:", mediaResponse.id);
-			// originalPost.id(originalPostID) = mediaResponse;
+			// originalPost.id(originalstatusID) = mediaResponse;
 			originalPost.mediaSources.twitter = mediaResponse.id.toString();
 
 			// }
-			// for (var i = 0; i < req.user.posts.length; i++) {
-			// 	if (req.user.posts[i].postID === originalPostID) {
-			// 		req.user.posts[i].media.facebook = mediaResponse;
+			// for (var i = 0; i < req.user.statuses.length; i++) {
+			// 	if (req.user.statuses[i].statusID === originalstatusID) {
+			// 		req.user.statuses[i].media.facebook = mediaResponse;
 			// 	}
 			// }
 			
-			// console.log("Database Direct", _.find(req.user.posts, function(DB) {
-			// 	return DB.postID === originalPostID;
+			// console.log("Database Direct", _.find(req.user.statuses, function(DB) {
+			// 	return DB.statusID === originalstatusID;
 			// }));
 
 
 			/*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
 							+++++++++++ SAVE THE DATABSE +++++++++++
 			=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/*/
-			req.user.posts = req.user.posts.map(function(dbStatus) {
-				if (dbStatus.postID === originalPostID) {
+			req.user.statuses = req.user.statuses.map(function(dbStatus) {
+				if (dbStatus.statusID === originalstatusID) {
 					dbStatus.mediaSources.twitter = mediaResponse.id.toString();
 				}
 				return dbStatus;
@@ -178,13 +175,13 @@ var statusController = {
 					console.log('Database save error:', err);
 				}
 				
-// console.log('DATABASE', req.user.posts);
+// console.log('DATABASE', req.user.statuses);
 				allAPIController.updateStatus({user: req.user, referenceTime: referenceTime}, function(updatedStatuses) {
 					
 					res.send(updatedStatuses);
 		// console.log("originalPost UPDATED", originalPost);
-		// console.log("Database Direct UPDATED", _.find(req.user.posts, function(DB) {
-		// 		return DB.postID === originalPostID;
+		// console.log("Database Direct UPDATED", _.find(req.user.statuses, function(DB) {
+		// 		return DB.statusID === originalstatusID;
 		// 	}));
 				});
 			});
@@ -226,12 +223,12 @@ var statusController = {
 // /*/			
 // 			var allPosts = results.facebook.concat(results.twitter);
 // 			var organizedPosts = _.sortBy(allPosts, function(post) {
-// 				return -1 * moment(post.postTime).valueOf();
+// 				return -1 * moment(post.creationTime).valueOf();
 // 			});
-// 			var postIDArray = organizedPosts.map(function(post){
-// 					return {postID: post.postID, media: post.mediaType};
+// 			var statusIDArray = organizedPosts.map(function(post){
+// 					return {statusID: post.statusID, media: post.mediaType};
 // 			});
-// 			req.user.posts = postIDArray;
+// 			req.user.statuses = statusIDArray;
 
 // 			req.user.markModified('posts');
 // 			req.user.save(function(err, user) {
@@ -240,7 +237,7 @@ var statusController = {
 // 				}
 // 			});
 
-// 		var existingStatusQuery = req.user.posts;
+// 		var existingStatusQuery = req.user.statuses;
 // 		var unrenStatuses = [];
 // 		for (var i = 0; i < recentStatusQuery.length; i++) {
 // 			var statusMatch = _.find(existingStatusQuery, function(statusPost) {
@@ -284,7 +281,7 @@ var statusController = {
 
 // 	/*/			var allPosts = results.facebook.concat(results.twitter);
 // 				var organizedPosts = _.sortBy(allPosts, function(post) {
-// 					return -1 * moment(post.postTime).valueOf();
+// 					return -1 * moment(post.creationTime).valueOf();
 // 				});
 // 				// Concatenate the facebook and twitter data
 // 				res.send(organizedPosts);
@@ -298,7 +295,7 @@ var statusController = {
 	},
 	updateStatus: function(req, res) {
 
-		// var existingStatusQuery = req.user.posts;
+		// var existingStatusQuery = req.user.statuses;
 		// var unrenStatuses = [];
 		// for (var i = 0; i < recentStatusQuery.length; i++) {
 		// 	var statusMatch = _.find(existingStatusQuery, function(statusPost) {
@@ -384,7 +381,7 @@ var statusController = {
 
 
 				if (vibeFacebook === 'vibe') {
-					DB_VibeStatus.postID = FB_responseID;
+					DB_VibeStatus.statusID = FB_responseID;
 					DB_VibeStatus.mediaSources.facebook = FB_responseID;
 
 // console.log('Twitter Pre Check?', vibeTwitter);
@@ -394,7 +391,7 @@ var statusController = {
 					}
 				}
 				else if (vibeTwitter === 'vibe') {
-					DB_VibeStatus.postID = TW_responseID;
+					DB_VibeStatus.statusID = TW_responseID;
 					DB_VibeStatus.mediaSources.twitter = TW_responseID;
 				}
 
@@ -419,9 +416,9 @@ var statusController = {
 
 // console.log('NEW VIBE STATUS:', newStatus);
 // 					var DB_newStatus =  {
-// 							postID: newStatus.postID,
+// 							statusID: newStatus.statusID,
 // 							source: newStatus.source,
-// 							creationTime: newStatus.postTime,
+// 							creationTime: newStatus.creationTime,
 // 							updateTime: newStatus.updateTime,
 // 							mediaSources: newStatus.mediaType
 // 						};
@@ -432,8 +429,8 @@ var statusController = {
 							+++++++++++ SAVE THE DATABSE +++++++++++
 				=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/*/
 				
-				// console.log('DATABASE LENGTH:', req.user.posts.length);
-				req.user.posts.unshift(DB_VibeStatus);
+				// console.log('DATABASE LENGTH:', req.user.statuses.length);
+				req.user.statuses.unshift(DB_VibeStatus);
 				req.user.markModified('posts');
 				req.user.save(function(err, user){
 					if (err) {
@@ -443,13 +440,13 @@ var statusController = {
 					
 					allAPIController.updateStatus({user: req.user, referenceTime: referenceTime}, function(updatedStatuses) {
 						
-						// req.user.posts.map(function(post){
+						// req.user.statuses.map(function(post){
 
 						// console.log('DB ARRAY', post.creationTime, typeof post.creationTime);
 						// });
 						console.log('VIBE UPDATED ARRAY:', updatedStatuses);
 						res.send(updatedStatuses);
-				// console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
+				// console.log('DATABASE LENGTH SAVED:', req.user.statuses.length);
 			
 					});
 				});

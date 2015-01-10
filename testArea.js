@@ -6,7 +6,7 @@ var	updateStatus = function (req, callback) {
 
 var referenceTime = new Date().getTime();
 
-		var DB_statuses = req.user.posts;
+		var DB_statuses = req.user.statuses;
 
 		async.auto({
 			facebook: facebookControl.getFacebookStatus.bind(null, req.user),
@@ -26,18 +26,18 @@ var referenceTime = new Date().getTime();
 					// Look for the DB status in FACEBOOK
 					// Return the FB status object
 					var fbInDB = _.find(FB_statusArray, function(fbStatus) {
-						return (fbStatus.postID === dbStatus.media.facebook);
+						return (fbStatus.statusID === dbStatus.media.facebook);
 					});
 					// If status exists in FB, remove the status from FB array
 					if (fbInDB) {
 
 						// Assign reference to FB status instance to be rendered
 						onlyFBStatusInstance = fbInDB;
-						onlyFBStatusInstance.mediaType.facebook = fbInDB.postID;
+						onlyFBStatusInstance.mediaType.facebook = fbInDB.statusID;
 
 						// Remove the fbInDB status from FB array
 						FB_statusArray = _.reject(FB_statusArray, function(foundStatus){
-							return (foundStatus.postID === fbInDB.postID);
+							return (foundStatus.statusID === fbInDB.statusID);
 						});
 					}/*--------------------- END FACEBOOK SEARCH ---------------------*/
 
@@ -49,7 +49,7 @@ var referenceTime = new Date().getTime();
 					// Look for the DB status in TWITTER
 					// Return the TW status object
 					var twInDB = _.find(TW_statusArray, function(twStatus) {
-						return (twStatus.postID === dbStatus.media.twitter);
+						return (twStatus.statusID === dbStatus.media.twitter);
 					});
 
 					// If status exists in TW, remove status from TW array
@@ -57,11 +57,11 @@ var referenceTime = new Date().getTime();
 
 						// Assign reference to TW status instance to be rendered
 						onlyTWStatusInstance = twInDB;
-						onlyTWStatusInstance.mediaType.twitter = twInDB.postID;
+						onlyTWStatusInstance.mediaType.twitter = twInDB.statusID;
 
 						// Remove the twInDB satus from the TW array
 						TW_statusArray = _.reject(TW_statusArray, function(foundStatus){
-							return (foundStatus.postID === twInDB.postID);
+							return (foundStatus.statusID === twInDB.statusID);
 						});
 					}/*--------------------- END TWITTER SEARCH ---------------------*/
 
@@ -76,15 +76,15 @@ var referenceTime = new Date().getTime();
 						// Use FB status and update if source is FACEBOOK
 						if (dbStatus.source === 'facebook') {
 							renderStatusInstance = fbInDB;
-							renderStatusInstance.mediaType.twitter = twInDB.postID;
-							renderStatusInstance.updateTime = twInDB.postTime;
+							renderStatusInstance.mediaType.twitter = twInDB.statusID;
+							renderStatusInstance.updateTime = twInDB.creationTime;
 						}
 
 						// Use TW status and update if source is TWITTER
 						else if (dbStatus.source === 'twitter') {
 							renderStatusInstance = twInDB;
-							renderStatusInstance.mediaType.facebook = fbInDB.postID;
-							renderStatusInstance.updateTime = fbInDB.postTime;
+							renderStatusInstance.mediaType.facebook = fbInDB.statusID;
+							renderStatusInstance.updateTime = fbInDB.creationTime;
 						}
 					}/*--------------------- END DUPLICATE FILTER ---------------------*/
 
@@ -113,7 +113,7 @@ var referenceTime = new Date().getTime();
 				// Sort the output status array by date
 				var rawOutputStatuses = _.compact(allRenderableStatus);
 				var outputStatuses =  _.sortBy(rawOutputStatuses, function(status) {
-						return -1 * moment(status.postTime).valueOf();
+						return -1 * moment(status.creationTime).valueOf();
 				});
 
 
@@ -125,9 +125,9 @@ var referenceTime = new Date().getTime();
 				var DB_update = outputStatuses.map(function(status){
 					console.log('DB save: Post Source:', status.source);
 						return {
-							postID: status.postID,
+							statusID: status.statusID,
 							source: status.source,
-							creationTime: status.postTime,
+							creationTime: status.creationTime,
 							updateTime: status.updatTime,
 							media: status.mediaType
 						};
@@ -135,14 +135,14 @@ var referenceTime = new Date().getTime();
 			
 				// Save the Database
 				// console.log('DB update::', DB_update);
-				req.user.posts = DB_update;
+				req.user.statuses = DB_update;
 
 				req.user.markModified('posts');
 				req.user.save(function(err, user) {
 					if (err) {
 						console.log("Database Save Error:", err);
 					}
-				// console.log('Database direct', req.user.posts);
+				// console.log('Database direct', req.user.statuses);
 				});
 /*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
 		----------- END SAVE THE DATABSE -----------
@@ -159,7 +159,7 @@ var referenceTime = new Date().getTime();
 /*--------------------RE-RENDER THE ENTIRE PAGE ------------*/
 			if (!req.renderAll) {
 				var updatedStatuses =  _.filter(outputStatuses, function(status) {
-						return status.postTime > referenceTime;
+						return status.creationTime > referenceTime;
 				});
 				callback(updatedStatuses);
 			}
@@ -169,7 +169,7 @@ var referenceTime = new Date().getTime();
 	};
 
 
-// var DB_statuses = req.user.posts;
+// var DB_statuses = req.user.statuses;
 
 // 		async.auto({
 // 			facebook: facebookControl.getFacebookStatus.bind(null, req.user),
@@ -189,18 +189,18 @@ var referenceTime = new Date().getTime();
 // 					// Look for the DB status in FACEBOOK
 // 					// Return the FB status object
 // 					var fbInDB = _.find(FB_statusArray, function(fbStatus) {
-// 						return (fbStatus.postID === dbStatus.media.facebook);
+// 						return (fbStatus.statusID === dbStatus.media.facebook);
 // 					});
 // 					// If status exists in FB, remove the status from FB array
 // 					if (fbInDB) {
 
 // 						// Assign reference to FB status instance to be rendered
 // 						onlyFBStatusInstance = fbInDB;
-// 						onlyFBStatusInstance.mediaType.facebook = fbInDB.postID;
+// 						onlyFBStatusInstance.mediaType.facebook = fbInDB.statusID;
 
 // 						// Remove the fbInDB status from FB array
 // 						FB_statusArray = _.reject(FB_statusArray, function(foundStatus){
-// 							return (foundStatus.postID === fbInDB.postID);
+// 							return (foundStatus.statusID === fbInDB.statusID);
 // 						});
 // 					}/*--------------------- END FACEBOOK SEARCH ---------------------*/
 
@@ -212,7 +212,7 @@ var referenceTime = new Date().getTime();
 // 					// Look for the DB status in TWITTER
 // 					// Return the TW status object
 // 					var twInDB = _.find(TW_statusArray, function(twStatus) {
-// 						return (twStatus.postID === dbStatus.media.twitter);
+// 						return (twStatus.statusID === dbStatus.media.twitter);
 // 					});
 
 // 					// If status exists in TW, remove status from TW array
@@ -220,11 +220,11 @@ var referenceTime = new Date().getTime();
 
 // 						// Assign reference to TW status instance to be rendered
 // 						onlyTWStatusInstance = twInDB;
-// 						onlyTWStatusInstance.mediaType.twitter = twInDB.postID;
+// 						onlyTWStatusInstance.mediaType.twitter = twInDB.statusID;
 
 // 						// Remove the twInDB satus from the TW array
 // 						TW_statusArray = _.reject(TW_statusArray, function(foundStatus){
-// 							return (foundStatus.postID === twInDB.postID);
+// 							return (foundStatus.statusID === twInDB.statusID);
 // 						});
 // 					}/*--------------------- END TWITTER SEARCH ---------------------*/
 
@@ -239,13 +239,13 @@ var referenceTime = new Date().getTime();
 // 						// Use FB status and update if source is FACEBOOK
 // 						if (dbStatus.source === 'facebook') {
 // 							renderStatusInstance = fbInDB;
-// 							renderStatusInstance.mediaType.twitter = twInDB.postID;
+// 							renderStatusInstance.mediaType.twitter = twInDB.statusID;
 // 						}
 
 // 						// Use TW status and update if source is TWITTER
 // 						else if (dbStatus.source === 'twitter') {
 // 							renderStatusInstance = twInDB;
-// 							renderStatusInstance.mediaType.facebook = fbInDB.postID;
+// 							renderStatusInstance.mediaType.facebook = fbInDB.statusID;
 // 						}
 // 					}/*--------------------- END DUPLICATE FILTER ---------------------*/
 
@@ -274,7 +274,7 @@ var referenceTime = new Date().getTime();
 // 				// Sort the output status array by date
 // 				var rawOutputStatuses = _.compact(allRenderableStatus);
 // 				var outputStatuses =  _.sortBy(rawOutputStatuses, function(status) {
-// 						return -1 * moment(status.postTime).valueOf();
+// 						return -1 * moment(status.creationTime).valueOf();
 // 				});
 
 
@@ -285,19 +285,19 @@ var referenceTime = new Date().getTime();
 // 				// Update the database with the information from the renderable statuses
 // 				var DB_update = outputStatuses.map(function(status){
 // 					console.log('DB save: Post Source:', status.source);
-// 						return {postID: status.postID, source: status.source, media: status.mediaType};
+// 						return {statusID: status.statusID, source: status.source, media: status.mediaType};
 // 				});
 			
 // 				// Save the Database
 // 				// console.log('DB update::', DB_update);
-// 				req.user.posts = DB_update;
+// 				req.user.statuses = DB_update;
 
 // 				req.user.markModified('posts');
 // 				req.user.save(function(err, user) {
 // 					if (err) {
 // 						console.log("Database Save Error:", err);
 // 					}
-// 				// console.log('Database direct', req.user.posts);
+// 				// console.log('Database direct', req.user.statuses);
 // 				});
 // /*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
 // 		----------- END SAVE THE DATABSE -----------
@@ -305,7 +305,7 @@ var referenceTime = new Date().getTime();
 
 
 // 	var resorted =  _.sortBy(outputStatuses, function(status) {
-// 						return -1 * moment(status.postTime).valueOf();
+// 						return -1 * moment(status.creationTime).valueOf();
 // 				});
 // 				// Send the organized array of statuses
 // 				callback(resorted);

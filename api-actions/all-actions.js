@@ -28,23 +28,23 @@ var allAPIController = {
 		// 		// Combine all the posts from media and organize by date
 		// 		// var allPosts = results.facebook.concat(results.twitter);
 		// 		// var organizedPosts = _.sortBy(allPosts, function(post) {
-		// 		// 	return -1 * moment(post.postTime).valueOf();
+		// 		// 	return -1 * moment(post.creationTime).valueOf();
 		// 		// });
 		// 	var allStatuses = results.facebook.concat(results.facebook);
 		// 		var organizedPosts = _.sortBy(allStatuses, function(post) {
-		// 			return -1 * moment(post.postTime).valueOf();
+		// 			return -1 * moment(post.creationTime).valueOf();
 		// 		});
 
 		// 		console.log('Organized Posts', organizedPosts);
 
-		// 		var postIDArray = organizedPosts.map(function(post){
-		// 			return {postID: post.postID, media: post.mediaType};
+		// 		var statusIDArray = organizedPosts.map(function(post){
+		// 			return {statusID: post.statusID, media: post.mediaType};
 		// 		});
 
 
 
 
-		// 		var dbStatuses = req.user.posts;
+		// 		var dbStatuses = req.user.statuses;
 
 
 		// 		var updatedStatuses = dbStatuses.map(function(dbPost) {
@@ -52,26 +52,26 @@ var allAPIController = {
 		// 			console.log('Map arguments', arguments);
 		// 			var resultingPost;
 
-		// 			// Look for THIS postID from the databse
+		// 			// Look for THIS statusID from the databse
 		// 			// ALSO in the Facebook response
 		// 			var fbMatch = _.find(results.facebook, function(fbPost) {
-		// 				return fbPost.postID === dbPost.media.facebook;
+		// 				return fbPost.statusID === dbPost.media.facebook;
 		// 			});
 		// 			if (fbMatch) {
 		// 				resultingPost = fbMatch;
-		// 				resultingPost.mediaType.facebook = fbMatch.postID;
+		// 				resultingPost.mediaType.facebook = fbMatch.statusID;
 		// 			}
 
-		// 			// Look for THIS postID from the databse
+		// 			// Look for THIS statusID from the databse
 		// 			// ALSO in the Twitter response
 		// 			var twMatch = _.find(results.twitter, function(twPost) {
-		// 				return twPost.postID === dbPost.media.twitter;
+		// 				return twPost.statusID === dbPost.media.twitter;
 		// 			});
 
-		// 			// If THIS database postID exists in the Twitter response:
+		// 			// If THIS database statusID exists in the Twitter response:
 		// 			if (twMatch) {
 
-		// 				// If THIS database postID is ALSO
+		// 				// If THIS database statusID is ALSO
 		// 				//  in the Facebook response:
 		// 				if (!resultingPost) {
 
@@ -81,9 +81,9 @@ var allAPIController = {
 		// 				}
 		// 				// Update the media property in the Facebook response
 		// 				// and use the Facebook response
-		// 				resultingPost.mediaType.twitter = twMatch.postID;
+		// 				resultingPost.mediaType.twitter = twMatch.statusID;
 
-		// 				// postIDArray[dbStatuses.indexOf(dbPost)].media.twitter = twMatch.postID;
+		// 				// statusIDArray[dbStatuses.indexOf(dbPost)].media.twitter = twMatch.statusID;
 
 		// 			}
 
@@ -95,18 +95,18 @@ var allAPIController = {
 		// 	// Remove null entries in the array from the map
 		// 	var allUpdatedStatuses = _.compact(updatedStatuses);
 		// 	var organizedNewPosts = _.sortBy(allUpdatedStatuses, function(post) {
-		// 		return 1 * moment(post.postTime).valueOf();
+		// 		return 1 * moment(post.creationTime).valueOf();
 		// 	});
 
 			// Create a simplified of array of IDs and media sources
-	// 		var postIDArray = organizedPosts.map(function(post){
-	// 				return {postID: post.postID, media: post.mediaType};
+	// 		var statusIDArray = organizedPosts.map(function(post){
+	// 				return {statusID: post.statusID, media: post.mediaType};
 	// 		});
 
 	// 		var recentStatusQuery = organizedPosts;
 	// 		// Compare the list of post IDs in the database
 	// 		//  to the most recent query
-	// 		var dbStatuses = req.user.posts;
+	// 		var dbStatuses = req.user.statuses;
 	// 		var updatedStatuses = [];
 
 	// 		for (var i = 0; i < recentStatusQuery.length; i++) {
@@ -118,7 +118,7 @@ var allAPIController = {
 	// 			var statusMatch = _.find(dbStatuses, function(statusPost) {
 	// 		console.log("statusPost - id check", statusPost);
 	// 		console.log("recent post - id check", recentStatusQuery[i]);
-	// 				return statusPost.postID === recentStatusQuery[i].postID;
+	// 				return statusPost.statusID === recentStatusQuery[i].statusID;
 	// 			});
 
 	// // console.log("Status Match", statusMatch);
@@ -133,7 +133,7 @@ var allAPIController = {
 	// 			} 
 	// 			else {
 	// 				updatedStatuses.unshift(recentStatusQuery[i]);
-	// 				req.user.posts.unshift(recentStatusQuery[i]);
+	// 				req.user.statuses.unshift(recentStatusQuery[i]);
 	// 			}
 	// 		}
 	// 		// Save any changes made to the list of
@@ -147,7 +147,7 @@ var allAPIController = {
 	// 		
 			
 
-		// 		req.user.posts = postIDArray;
+		// 		req.user.statuses = statusIDArray;
 		// 		req.user.markModified('posts');
 		// 		req.user.save(function(err, user) {
 		// 			if (err) {
@@ -160,9 +160,9 @@ var allAPIController = {
 	updateStatus: function (req, callback) {
 
 		
-var referenceTime = req.referenceTime;
+		var referenceTime = req.referenceTime;
 
-		var DB_statuses = req.user.posts;
+		var DB_statuses = req.user.statuses;
 
 		async.auto({
 			facebook: facebookControl.getFacebookStatus.bind(null, req.user),
@@ -182,7 +182,7 @@ var referenceTime = req.referenceTime;
 					// Look for the DB status in FACEBOOK
 					// Return the FB status object
 					var fbInDB = _.find(FB_statusArray, function(fbStatus) {
-						return (fbStatus.postID === dbStatus.mediaSources.facebook);
+						return (fbStatus.statusID === dbStatus.mediaSources.facebook);
 					});
 					// If status exists in FB, remove the status from FB array
 					if (fbInDB) {
@@ -192,12 +192,12 @@ var referenceTime = req.referenceTime;
 // console.log('Facebook matched');
 						// console.log('fbInDB', fbInDB);
 
-						renderStatusInstance.mediaType.facebook = fbInDB.postID;
-						renderStatusInstance.facebook = fbInDB.postID;
+						renderStatusInstance.mediaType.facebook = fbInDB.statusID;
+						renderStatusInstance.facebook = fbInDB.statusID;
 
 						// Remove the fbInDB status from FB array
 						FB_statusArray = _.reject(FB_statusArray, function(foundStatus){
-							return (foundStatus.postID === fbInDB.postID);
+							return (foundStatus.statusID === fbInDB.statusID);
 						});
 					}/*--------------------- END FACEBOOK SEARCH ---------------------*/
 
@@ -209,7 +209,7 @@ var referenceTime = req.referenceTime;
 					// Look for the DB status in TWITTER
 					// Return the TW status object
 					var twInDB = _.find(TW_statusArray, function(twStatus) {
-						return (twStatus.postID === dbStatus.mediaSources.twitter);
+						return (twStatus.statusID === dbStatus.mediaSources.twitter);
 					});
 
 					// If status exists in TW, remove status from TW array
@@ -219,12 +219,12 @@ var referenceTime = req.referenceTime;
 						// console.log('twInDB', twInDB);
 						// Assign reference to TW status instance to be rendered
 						renderStatusInstance = twInDB;
-						renderStatusInstance.mediaType.twitter = twInDB.postID;
-						renderStatusInstance.twitter = twInDB.postID;
+						renderStatusInstance.mediaType.twitter = twInDB.statusID;
+						renderStatusInstance.twitter = twInDB.statusID;
 
 						// Remove the twInDB satus from the TW array
 						TW_statusArray = _.reject(TW_statusArray, function(foundStatus){
-							return (foundStatus.postID === twInDB.postID);
+							return (foundStatus.statusID === twInDB.statusID);
 						});
 					}/*--------------------- END TWITTER SEARCH ---------------------*/
 
@@ -247,15 +247,15 @@ var referenceTime = req.referenceTime;
 			 	// 	// 		(req.user.profile.firstName + ' ' + req.user.profile.lastName),
 			 	// 	// 		req.user.uniqueURL,
 			 	// 	// 		req.user.profile.image,
-			 	// 	// 		dbStatus.postTime,
+			 	// 	// 		dbStatus.creationTime,
 			 	// 	// 		'socialvibe',
-			 	// 	// 		dbStatus.postTime,
+			 	// 	// 		dbStatus.creationTime,
 			 	// 	// 		dbStatus.updateTime,
 			 	// 	// 		'text: placeholder',
 			 	// 	// 		'image: placeholder',
 			 	// 	// 		'hashtags: placeholder',
 			 	// 	// 		'comment: placeholder',
-			 	// 	// 		{socialvibe: dbStatus.postID}
+			 	// 	// 		{socialvibe: dbStatus.statusID}
 					// 	// );
 
 					// 	if (fbInDB) {
@@ -264,17 +264,17 @@ var referenceTime = req.referenceTime;
 				 // 		// 		(req.user.profile.firstName + ' ' + req.user.profile.lastName),
 				 // 		// 		req.user.uniqueURL,
 				 // 		// 		req.user.profile.image,
-				 // 		// 		dbStatus.postTime,
+				 // 		// 		dbStatus.creationTime,
 				 // 		// 		'socialvibe',
-				 // 		// 		dbStatus.postTime,
+				 // 		// 		dbStatus.creationTime,
 				 // 		// 		dbStatus.updateTime,
 				 // 		// 		'text: placeholder',
 				 // 		// 		'image: placeholder',
 				 // 		// 		'hashtags: placeholder',
 				 // 		// 		'comment: placeholder',
-				 // 		// 		{socialvibe: dbStatus.postID}
+				 // 		// 		{socialvibe: dbStatus.statusID}
 					// 		// );
-					// 		// renderStatusInstance.mediaType.facebook = fbInDB.postID;
+					// 		// renderStatusInstance.mediaType.facebook = fbInDB.statusID;
 					// 		// renderStatusInstance.text = fbInDB.text;
 					// 		// renderStatusInstance.hashtag = fbInDB.hashtag;
 					// 		// renderStatusInstance.comment = fbInDB.comment;
@@ -282,13 +282,13 @@ var referenceTime = req.referenceTime;
 					// 		renderStatusInstance = onlyFBStatusInstance;
 							
 					// 		if (twInDB) {
-					// 			renderStatusInstance.mediaType.twitter = twInDB.postID;
-					// 			if (twInDB.postTime > fbInDB.postTime) {
-					// 				renderStatusInstance.updateTime = twInDB.postTime;
+					// 			renderStatusInstance.mediaType.twitter = twInDB.statusID;
+					// 			if (twInDB.creationTime > fbInDB.creationTime) {
+					// 				renderStatusInstance.updateTime = twInDB.creationTime;
 					// 			}
 					// 			else {
-					// 				renderStatusInstance.updateTime = fbInDB.postTime;
-					// 				// renderStatusInstance.mediaType.facebook = fbInDB.postID;
+					// 				renderStatusInstance.updateTime = fbInDB.creationTime;
+					// 				// renderStatusInstance.mediaType.facebook = fbInDB.statusID;
 					// 			}
 					// 		}
 					// 	}
@@ -296,17 +296,17 @@ var referenceTime = req.referenceTime;
 					// 	else if (twInDB) {
 					// 		renderStatusInstance = onlyTWStatusInstance;
 
-					// 		// renderStatusInstance.mediaType.twitter = twInDB.postID;
+					// 		// renderStatusInstance.mediaType.twitter = twInDB.statusID;
 					// 		// renderStatusInstance.text = twInDB.text;
 					// 		// renderStatusInstance.hashtag = twInDB.hashtag;
 					// 		// renderStatusInstance.comment = twInDB.comment;
-					// 		// renderStatusInstance.mediaType.facebook = twInDB.postID;
+					// 		// renderStatusInstance.mediaType.facebook = twInDB.statusID;
 					// 	}
 
 					// 	else {
 					// 		return false;
 					// 	}
-					// 	renderStatusInstance.mediaType.socialvibe = dbStatus.postID;						
+					// 	renderStatusInstance.mediaType.socialvibe = dbStatus.statusID;						
 					// }
 /*~~~~~~~~~~~~~~~~~~~~ END VIBE WAS THE SOURCE ~~~~~~~~~~~~~~~~~~~~*/
 
@@ -323,43 +323,43 @@ console.log("Double match");
 console.log("Both");
 							renderStatusInstance = fbInDB;
 							renderStatusInstance.source = 'socialvibe';
-							renderStatusInstance.mediaType.twitter = twInDB.postID;
+							renderStatusInstance.mediaType.twitter = twInDB.statusID;
 							renderStatusInstance.mediaType.socialvibe = dbStatus.creationTime;
-							renderStatusInstance.postID = dbStatus.postID;
-							renderStatusInstance.postTime = Number(dbStatus.creationTime);
+							renderStatusInstance.statusID = dbStatus.statusID;
+							renderStatusInstance.creationTime = Number(dbStatus.creationTime);
 
 							renderStatusInstance.socialvibe = Number(dbStatus.creationTime);
 							renderStatusInstance.revibed = ['facebook', 'twitter'];
 
 
 console.log(renderStatusInstance);
-							if (twInDB.postTime > fbInDB.postTime) {
-								renderStatusInstance.updateTime = twInDB.postTime;
-								renderStatusInstance.postTime = fbInDB.postTime;
+							if (twInDB.creationTime > fbInDB.creationTime) {
+								renderStatusInstance.updateTime = twInDB.creationTime;
+								renderStatusInstance.creationTime = fbInDB.creationTime;
 							}
 							else {
-								renderStatusInstance.updateTime = fbInDB.postTime;
-								renderStatusInstance.postTime = twInDB.postTime;
+								renderStatusInstance.updateTime = fbInDB.creationTime;
+								renderStatusInstance.creationTime = twInDB.creationTime;
 							}
 						}
 
 						// Use FB status and update if source is FACEBOOK
 						else if (dbStatus.source === 'facebook') {
 							renderStatusInstance = fbInDB;
-							renderStatusInstance.mediaType.twitter = twInDB.postID;
-							renderStatusInstance.updateTime = twInDB.postTime;
+							renderStatusInstance.mediaType.twitter = twInDB.statusID;
+							renderStatusInstance.updateTime = twInDB.creationTime;
 
-							renderStatusInstance.facebook = fbInDB.postID;
+							renderStatusInstance.facebook = fbInDB.statusID;
 							renderStatusInstance.revibed = ['twitter'];
 
 						}
 						// Use TW status and update if source is TWITTER
 						else if (dbStatus.source === 'twitter') {
 							renderStatusInstance = twInDB;
-							renderStatusInstance.mediaType.facebook = fbInDB.postID;
-							renderStatusInstance.updateTime = fbInDB.postTime;
+							renderStatusInstance.mediaType.facebook = fbInDB.statusID;
+							renderStatusInstance.updateTime = fbInDB.creationTime;
 
-							renderStatusInstance.twitter = twInDB.postTime;
+							renderStatusInstance.twitter = twInDB.creationTime;
 							renderStatusInstance.revibed = ['facebook'];
 
 						}
@@ -369,20 +369,20 @@ console.log(renderStatusInstance);
 					else if (fbInDB && !twInDB) {
 						renderStatusInstance = fbInDB;
 						// Use FB status and UPDATE if source is SOCIALVIBE
-// console.log('Facebook POST TIME 0', renderStatusInstance.postTime, typeof renderStatusInstance.postTime);
-// console.log('DB POST TIME 0', dbStatus.creationTime, typeof renderStatusInstance.postTime);
+// console.log('Facebook POST TIME 0', renderStatusInstance.creationTime, typeof renderStatusInstance.creationTime);
+// console.log('DB POST TIME 0', dbStatus.creationTime, typeof renderStatusInstance.creationTime);
 						if (dbStatus.source === 'socialvibe') {
 							renderStatusInstance.source = 'socialvibe';
 							renderStatusInstance.mediaType.socialvibe = Number(dbStatus.creationTime);
-							renderStatusInstance.postTime = Number(dbStatus.creationTime);
-							renderStatusInstance.postID = dbStatus.postID;
+							renderStatusInstance.creationTime = Number(dbStatus.creationTime);
+							renderStatusInstance.statusID = dbStatus.statusID;
 
 
 							renderStatusInstance.socialvibe = Number(dbStatus.creationTime);
 console.log("SoialVibe Facebook Only");
 console.log(renderStatusInstance);
 // console.log('CREATION TIME', dbStatus.creationTime, typeof dbStatus.creationTime);
-// console.log('DB POST TIME 0', dbStatus.creationTime, typeof renderStatusInstance.postTime);
+// console.log('DB POST TIME 0', dbStatus.creationTime, typeof renderStatusInstance.creationTime);
 
 						}
 
@@ -396,12 +396,12 @@ console.log(renderStatusInstance);
 							renderStatusInstance.source = 'socialvibe';
 
 							renderStatusInstance.socialvibe = Number(dbStatus.creationTime);
-							renderStatusInstance.postID = dbStatus.postID;
+							renderStatusInstance.statusID = dbStatus.statusID;
 
-					// console.log('POST TIME 1', renderStatusInstance.postTime);
+					// console.log('POST TIME 1', renderStatusInstance.creationTime);
 
 							renderStatusInstance.mediaType.socialvibe = dbStatus.creationTime;
-							renderStatusInstance.postTime = Number(dbStatus.creationTime);
+							renderStatusInstance.creationTime = Number(dbStatus.creationTime);
 console.log("SoialVibe Twitter Only");
 console.log(renderStatusInstance);
 						}
@@ -424,7 +424,7 @@ console.log(renderStatusInstance);
 				// Sort the output status array by date
 				var rawOutputStatuses = _.compact(allRenderableStatus);
 				var outputStatuses =  _.sortBy(rawOutputStatuses, function(status) {
-						return -1 * moment(status.postTime).valueOf();
+						return -1 * moment(status.creationTime).valueOf();
 				});
 
 
@@ -435,24 +435,24 @@ console.log(renderStatusInstance);
 				var DB_update = outputStatuses.map(function(status){
 					// console.log('DB save: Post:', status);
 						return {
-							postID: status.postID,
+							statusID: status.statusID,
 							source: status.source,
-							creationTime: status.postTime,
+							creationTime: status.creationTime,
 							updateTime: status.updateTime,
 							mediaSources: status.mediaType
 						};
 				});
-			// console.log('DATABASE LENGTH:', req.user.posts.length);
+			// console.log('DATABASE LENGTH:', req.user.statuses.length);
 				// Save the Database
 				// console.log('DB update::', DB_update);
-				req.user.posts = DB_update;
+				req.user.statuses = DB_update;
 				req.user.markModified('posts');
 				req.user.save(function(err, user) {
 					if (err) {
 						console.log("Database Save Error:", err);
 					}
-// console.log('DATABASE LENGTH SAVED:', req.user.posts.length);
-				// console.log('Database direct', req.user.posts);
+// console.log('DATABASE LENGTH SAVED:', req.user.statuses.length);
+				// console.log('Database direct', req.user.statuses);
 				});
 				/*=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/ 
 						----------- END SAVE THE DATABSE -----------
@@ -465,7 +465,7 @@ console.log(renderStatusInstance);
 
 
 				var formattedOutput =  _.map(outputStatuses, function(status) {
-					status.postTime = moment(status.postTime).calendar();	
+					status.creationTime = moment(status.creationTime).calendar();	
 					status.updateTime = moment(status.updateTime).calendar();
 					return status;
 				});
@@ -484,12 +484,12 @@ console.log(renderStatusInstance);
 console.log('REFERENCE TIME', referenceTime);
 				var updatedStatuses =  _.filter(outputStatuses, function(status) {
 
-					if (status.postTime > referenceTime || status.updateTime > referenceTime) {
-						console.log("STATUS TIME:", status.postTime, typeof status.postTime);
+					if (status.creationTime > referenceTime || status.updateTime > referenceTime) {
+						console.log("STATUS TIME:", status.creationTime, typeof status.creationTime);
 						console.log("UPDATE TIME:", status.updateTime, typeof status.updateTime);
-						status.postTime = moment(status.postTime).calendar();
+						status.creationTime = moment(status.creationTime).calendar();
 						status.updateTime = moment(status.updateTime).calendar();
-						console.log("STATUS TIME FORMAT:", status.postTime, typeof status.postTime);
+						console.log("STATUS TIME FORMAT:", status.creationTime, typeof status.creationTime);
 						console.log("UPDATE TIME FORMAT:", status.updateTime,  typeof status.updateTime);
 						return true;
 					}

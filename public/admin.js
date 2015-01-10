@@ -183,7 +183,7 @@ var allUsers = usersArrayString.map(function(objectLiteral) {
 
 /**
  * Creates base class for each kind of social media
- * @param {String}  postTime     The time this post was created
+ * @param {String}  creationTime     The time this post was created
  * @param {Object}  author    The user object that created this post
  * @param {Object}  content    The user actual content of the page
  * @param {Boolean}  facebook    Is this being sent to Facebook?
@@ -192,10 +192,10 @@ var allUsers = usersArrayString.map(function(objectLiteral) {
  * * @param {Array}  tags    Array of random tags that can be used to identify the post and its contents
  * @param {Boolean} isPublic Determine if the user wants THIS MEDIA INSTANCE to be public (default private)
  */
-var Post = function (postTime, id, author, content, facebook, twitter, instagram, tags, img, isPublic) {
+var Post = function (creationTime, id, author, content, facebook, twitter, instagram, tags, img, isPublic) {
 
-	if (typeof(postTime) === 'string') {
-		this.postTime = postTime;
+	if (typeof(creationTime) === 'string') {
+		this.creationTime = creationTime;
 		this.id = id;
 		this.author = author;
 		this.postAuthor = author.firstName + ' ' + author.lastName;
@@ -211,8 +211,8 @@ var Post = function (postTime, id, author, content, facebook, twitter, instagram
 	}
 
 	else {
-		for (var key in postTime) {
-			this[key] = postTime[key];
+		for (var key in creationTime) {
+			this[key] = creationTime[key];
 		}
 	}
 };

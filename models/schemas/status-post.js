@@ -1,7 +1,7 @@
 	var mongoose = require ('mongoose');
 
 	var StatusPostSchema = mongoose.Schema({
-					//function(user, userID, userImage, id, postTime, text, image, hashtag, comment, mediaType) {
+					//function(user, userID, userImage, id, creationTime, text, image, hashtag, comment, mediaType) {
 		user: {
 			type: String,
 			required: true,
@@ -27,7 +27,7 @@
 			required: true,
 			unique: false
 		},
-		postTime: {
+		creationTime: {
 			type: String,
 			required: true,
 			unique: false

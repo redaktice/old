@@ -48,18 +48,18 @@ var twitterController = {
 				 	// Create an instance of a StatusPost for
 				 	// each incoming Twitter status
 				 	var statusPost = new StatusPost(
-				 		'@' + post.user.screen_name,
-				 		user.uniqueURL,
-				 		post.user.profile_image_url,
-				 		post.id.toString(),
-				 		'twitter',
-				 		moment(post.created_at).valueOf(),
-				 		moment(post.created_at).valueOf(),
-				 		post.text,
-				 		post.image,
-				 		findHashtags(post.entities.hashtags),
-				 		null,
-				 		{twitter: post.id.toString()}
+				 		'@' + post.user.screen_name, //User
+				 		user.uniqueURL, //UserID
+				 		post.user.profile_image_url, //UserImage
+				 		post.id.toString(), //statusID
+				 		'twitter', //Source
+				 		moment(post.created_at).valueOf(), //creationTime
+				 		null, //PostUpdate
+				 		post.text, //Post Text
+				 		post.image, //Post Image
+				 		findHashtags(post.entities.hashtags), //Post Hashtag
+				 		null, //Post Comment
+				 		{twitter: post.id.toString()} //MediaType
 				 	);
 				 	return statusPost;
 				 });

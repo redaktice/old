@@ -25,7 +25,7 @@ console.log(renderedPosts);
 	// 	for (var key in post.mediaType) {
 	// 		console.log('KEY', key);
 
-	// 		feed.children('[data-post-id="' + post.postID + '"]').addClass('vibe-' + key);
+	// 		feed.children('[data-post-id="' + post.statusID + '"]').addClass('vibe-' + key);
 	// 	}
 	// console.debug(statusPostsHTML);
 	// });
@@ -59,22 +59,22 @@ else {
 
 		var nthis = $(this);
 		console.log('nthis', nthis);
-		var postID = nthis.closest('.status-post').attr('data-post-id');
+		var statusID = nthis.closest('.status-post').attr('data-post-id');
 		var postContent = nthis.closest('.status-post').find('.post-text').text();
 		
-		$.post('/status/revibe/' + postID + '/facebook', {postID: postID, content: postContent}, function(response, status, jXHR) {
+		$.post('/status/revibe/' + statusID + '/facebook', {statusID: statusID, content: postContent}, function(response, status, jXHR) {
 
 			console.log('FB push response', response);
 	// debugger;	
 	// var updatedStatusPostsHTML = 
 			response.map(function(newPost) {
-				var postID = newPost.postID;
-				var updateable = $('[data-post-id=' + postID + ']');
+				var statusID = newPost.statusID;
+				var updateable = $('[data-post-id=' + statusID + ']');
 				var newStatusHTML = statusPostTemplateFunc(newPost);
 				var clickedStatus =  nthis.closest('.status-post');
 
 				console.log(clickedStatus.attr('data-post-id'));
-				// if (clickedStatus.attr('data-post-id') === postID) {
+				// if (clickedStatus.attr('data-post-id') === statusID) {
 				// 	console.log('found');
 				// 	clickedStatus.replaceWith(newStatusHTML);
 				// }
@@ -103,23 +103,23 @@ else {
 		e.preventDefault();
 
 		var nthis = $(this);
-		var postID = nthis.closest('.status-post').attr('data-post-id');
+		var statusID = nthis.closest('.status-post').attr('data-post-id');
 		var postContent = nthis.closest('.status-post').find('.post-text').text();
 
 		if (postContent.length > 140  /* && TWITTER IS SELECTED */) {
 			alert('MESSAGE OVER 140 CHARACTERS. TOO MUCH FOR TWITTER :(');
 		}
 		else {
-			$.post('/status/revibe/' + postID + '/twitter', {postID: postID, content: postContent}, function(response, status, jXHR) {
+			$.post('/status/revibe/' + statusID + '/twitter', {statusID: statusID, content: postContent}, function(response, status, jXHR) {
 			// console.debug(response);
 			
 		// debugger;	
 		// var updatedStatusPostsHTML = 
 				response.map(function(newPost) {
-					var postID = newPost.postID;
+					var statusID = newPost.statusID;
 
-				// console.debug("Post ID", postID);
-					var updateable = $('[data-post-id=' + postID + ']');
+				// console.debug("Post ID", statusID);
+					var updateable = $('[data-post-id=' + statusID + ']');
 
 				// console.debug('Updateable', updateable);
 					var newStatusHTML = statusPostTemplateFunc(newPost);

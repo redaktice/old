@@ -1,5 +1,5 @@
 var Facebook = require('facebook-node-sdk');
-var keys = require('../private/keys');
+var keys = require('../getKeys');
 var StatusPost = require('../models/status-posts.js');
 
 var FB = new Facebook({appId: keys.facebook.appID, secret: keys.facebook.appSecret});
@@ -20,15 +20,18 @@ var facebookController = {
 				// Change Response to look like an array of information
 				 var allPosts = response.data.map(function(post) {
 				 	var statusPost = new StatusPost(
-				 		post.from.name,
-				 		'http://graph.facebook.com/' + post.from.id + '/picture?type=large',
-				 		post.id,
-				 		post.updated_time,
-				 		post.message,
-				 		post.image,
-				 		'hashtags go here',
-				 		post.comments,
-				 		{facebook: true}
+				 		post.from.name, //User
+				 		user.uniqueURL, //UserID
+				 		'http://graph.facebook.com/' + post.from.id + '/picture?type=large', //UserImage 
+				 		post.id, //Post ID
+				 		'facebook', //Post Source
+				 		post.updated_time, //Post Time
+				 		null, //Post Update
+				 		post.message, //Post Text
+				 		post.image, //Post Image
+				 		null, //Post Hashtag
+				 		post.comments, //Post Comment
+				 		{facebook: true} //Post MediaType
 				 		);
 				 	return statusPost;
 				 });
@@ -38,7 +41,7 @@ var facebookController = {
 			});
 	},
 	writeStatus: function(user, callback) {
-		FB.setAccessToken(user.media.facebook.facebookToken)
+		FB.setAccessToken(user.media.facebook.facebookToken);
 	}
 	// https://developers.facebook.com/docs/graph-api/reference/v2.2/user/feed#publish
 

@@ -110,7 +110,7 @@ app.post('/status/pushFacebook', statusController.updateFacebook);
 // app.post('/status/updateStatus', statusController.updateStatus);
 
 
-app.post('/status/revibe/:postID/:media', statusController.revibe);
+app.post('/status/revibe/:statusID/:media', statusController.revibe);
 app.post('/status/vibe', statusController.vibe);
 
 app.get('/status/updateStatus', allAPIController.updateStatus);
@@ -125,6 +125,8 @@ app.get('/auth/logout', authenticationController.logout);
 
 var server = app.listen(process.env.PORT || 9609, function() {
 	console.log('Express server listening on port ' + server.address().port);
+
+	console.log("Process Port env", process.env.PORT);
 });
 
 // function appGet(path, handler) {
