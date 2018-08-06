@@ -1,0 +1,86 @@
+// Part 1: Add Numbers
+
+/**
+ * Adds numbers in word strings
+ * @param {String} str words with numbers in them
+ */
+var addNumbers = function (str) {
+	
+	var splitString = str.split('');
+
+// console.log('splitString', splitString);
+
+	var numberArray = [];
+	var total = 0;
+
+	for (var i = 0; i < splitString.length; i++) {
+
+		if (!isNaN(parseInt(splitString[i]))) {
+
+			for (var j = i; j < splitString.length+1; j++) {
+
+				if (isNaN(parseInt(splitString[j]))) {
+					var onlyNumbers = splitString.slice(i, j).join('');
+					i=j;
+					j=splitString.length+1;
+
+// console.log("I: ", i);
+// console.log("J: ", j);
+// console.log("I: ", i);
+// console.log('onlyNumbers', onlyNumbers);
+
+					numberArray.push(onlyNumbers);
+				}
+			}
+
+// console.log('numberArray', numberArray);
+
+		}
+	}
+
+	for (var k = 0; k < numberArray.length; k++) {
+		total += parseInt(numberArray[k]);
+	}
+	return total;
+};
+
+console.log('The total value of numbers in the string is: ', addNumbers('55H5el21lo'));
+
+
+// Part 2: Longest Word
+
+/**
+ * Finds the longest word in a string
+ * @param {String} a string of words to check
+ */
+var longestWord = function (str) {
+
+
+	var punctuation = ",./<>?;':[]{}-=_+";
+
+	var noPuncString = "";
+
+	// Create a string without punctuation
+	for (var i = 0; i < str.length; i++) {
+	
+		if (punctuation.indexOf(str[i]) === -1) {
+				noPuncString += str[i];
+		}
+	}
+
+
+// console.log("noPuncString", noPuncString);
+
+	var wordArray = noPuncString.split(' ');
+
+// console.log("wordArray", wordArray);
+
+	wordArray.sort(function(a, b) {return b.length-a.length;});
+
+// console.log("wordArray", wordArray);
+
+	return wordArray[0];
+};
+
+
+console.log('The longeset word in the phrase is: ', longestWord('What is the longest word!!??'));

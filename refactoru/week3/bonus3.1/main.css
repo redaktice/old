@@ -1,0 +1,163 @@
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++
+CALENDAR TITLE
++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*Title Container*/
+.title-container {
+	background-color: #DDD;
+	font-size: 2em;
+	border: .5em solid #000;
+}
+
+
+/*Title Text*/
+.title-text {
+	background-color: #FED;
+	color: #88C;
+	padding: 10px;
+	display: inline-block;
+	margin: .25em;
+	border: .5em solid #AAA;
+	border-radius: .25em;
+}
+
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++
+CONTAINERS
++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.container {
+	text-align: center;
+}
+
+.main-calendar {
+	background-color: #FCE9D3;
+}
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++
+YEAR
++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++
+MONTHS
++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*----------------General--------------------------*/
+.month {
+}
+
+
+/*----------------Each Month--------------------------*/
+.jan {
+	border: .5em solid #AAA;
+}
+
+.feb {
+	border: .5em solid #BBB;
+}
+
+
+.mar {
+	border: .5em solid #CCC;
+
+}
+
+
+.apr {
+	border: .5em solid #DDD;
+
+}
+
+
+.may {
+	border: .5em solid #EEE;
+
+}
+
+
+.jun {
+	border: .5em solid #FFF;
+
+}
+
+
+.jul {
+	border: .5em solid #000;
+
+}
+
+
+.aug {
+	border: .5em solid #222;
+
+}
+
+
+.sept {
+	border: .5em solid #333;
+
+}
+
+
+.oct {
+	border: .5em solid #444;
+
+}
+
+
+.nov {
+	border: .5em solid #555;
+
+}
+
+
+.dec {
+	border: .5em solid #767;
+
+}
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++
+DAYS
++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*----------------General--------------------------*/
+.day {
+
+}
+
+/*----------------Each Day--------------------------*/
+
+.sun {
+
+}
+
+.mon {
+
+
+}
+.tues {
+
+}
+
+.wed {
+
+}
+
+.thur {
+
+}
+
+.fri {
+
+}
+
+.sat {
+
+}

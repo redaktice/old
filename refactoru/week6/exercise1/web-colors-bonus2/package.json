@@ -1,0 +1,14 @@
+{
+  "name": "web-colors-bonus2",
+  "version": "0.0.0",
+  "description": "Bonus II",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "request": "~2.45.0"
+  }
+}

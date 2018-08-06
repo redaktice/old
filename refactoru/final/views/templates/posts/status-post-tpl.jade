@@ -1,0 +1,130 @@
+script#status-post-template(type="text/x-handlebars-template").
+	<div class="status-post post template-post centering source-{{source}}" user-id="" data-post-id="{{statusID}}" id="">
+		<div class="col post-head">
+			<div class="col-sm-4 col-xs-12 inline-block post-icons">
+
+
+
+				{{#if socialvibe}}
+					{{#if mediaType.facebook}}
+						<div class="vibed-facebook hidden"></div>
+					{{/if}}
+					{{#if mediaType.twitter}}
+						<div class="vibed-twitter hidden"></div>
+					{{/if}}
+				{{/if}}
+
+				{{#if facebook}}
+						<i class="origin icon icon-btn facebook media-circle-md fa fa-facebook vibed-facebook"></i>
+					{{#if mediaType.twitter}}
+
+						<i class="origin icon icon-btn twitter media-circle-md fa fa-twitter vibed-twitter"></i>
+					{{else}}
+						<i class="push-twitter btn twitter btn-default btn-circle-xs fa fa-twitter icon"></i>
+					{{/if}}
+				{{/if}}
+
+
+
+				{{#if twitter}}
+						<i class="origin icon icon-btn twitter media-circle-md fa fa-twitter vibed-twitter"></i>
+					{{#if mediaType.facebook}}
+						<i class="origin icon icon-btn facebook media-circle-md fa fa-facebook vibed-facebook"></i>
+					{{else}}
+						<i class="push-facebook facebook btn btn-default btn-circle-xs fa fa-facebook icon"></i>
+					{{/if}}
+				{{/if}}
+
+
+
+
+			</div> 
+
+			<div class="col-sm-4 col-xs-12">
+				{{#if facebook}}
+					<a class="undecorated" target="_blank" href="http://www.facebook.com"><img class="img-circle img-user-md" src="{{userImage}}" alt="">
+				{{/if}}
+
+				{{#if twitter}}
+					<a class="" target="_blank" href="http://www.twitter.com"><img class="img-circle img-user-md" src="{{userImage}}" alt="">
+				{{/if}}
+
+					<span class="post-author">{{user}}</span>
+				
+
+				</a>
+			</div>
+			<div class="col-sm-4 col-xs-12 date inline-block text-center">
+				Created {{creationTime}}
+			</div>
+
+			{{#if revibed}}
+				<div class="col-sm-4 col-xs-12 date inline-block text-center">
+					Revibed {{updateTime}} - 
+					{{#each revibed}}
+						<span class="icon inline-block no-mgn"><i class="fa fa-{{this}}"></i></span>
+					{{/each}}
+				</div>
+			{{/if}}
+			<div>
+				{{#if comment}}
+					<span>{{comment.data.length}} <i class="fa fa-comments"></i></span>
+				{{/if}}
+				{{#if hashtag}}
+					<span>{{hashtag.length}} <i class="fa fa-tags"></i></span>
+				{{/if}}
+			</div>
+		</div>
+		
+		<!-- Main Post Content -->
+			<div class="post-content">
+				<h5 class="post-text">{{text}}</h5>
+			</div>
+
+		<div class="post-subcontent absent">
+			{{#if hashtag}}
+			<div class="page-header"></div>
+				<h4 class=""><i class="fa fa-tags"></i> <strong>Tags</strong></h4>
+					{{#if mediaType.facebook}}
+							<span class="icon inline-block no-mgn"><i class="fa fa-facebook"></i></span>
+						{{#each hashtag}}
+							<a target="_blank" href="https://facebook.com/hashtag/{{this}}"><span>#</span>{{this}}</a>
+						{{/each}}
+
+					{{/if}}
+
+					{{#if mediaType.twitter}}
+						<span class="icon inline-block no-mgn"><i class="fa fa-twitter"></i></span>
+					{{#each hashtag}}
+						<a target="_blank" href="https://twitter.com/hashtag/{{this}}?src=hash&lang=en"><span>#</span>{{this}}</a>
+					{{/each}}
+					
+					{{/if}}
+			{{/if}}
+
+			{{#if comment}}
+				<div class="page-header"></div>
+					<h4 class=""><i class="fa fa-comments"></i> <strong>Comments</strong></h4>
+						{{#if mediaType.facebook}}
+							<ul class="list-unstyled list-group">
+							{{#each comment.data}}
+								<li class="list-group-item">
+									<div class="comment">
+										<div class="inline-block btm-bord">
+											<a class="undecorated" target="_blank", href="http://www.facebook.com/{{from.id}}">
+												<h6 class="comment-author">
+													<img class="img-circle img-user-sm" src="http://graph.facebook.com/{{from.id}}/picture?type=large", alt=""/>
+													{{from.name}}
+												</h6>
+											</a>
+										</div><br><br>
+										<p class="comment-content">{{message}}</p>		
+									</div>
+								</li>
+							{{/each}}
+							</ul>
+						{{/if}}
+			{{/if}}
+		</div>
+
+	</div>

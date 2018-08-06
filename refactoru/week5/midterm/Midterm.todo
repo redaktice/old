@@ -1,0 +1,27 @@
+HTML:
+  ✔ Create basic framework/design @done (14-10-07 11:23)
+  ✔ Create login/home page @done (14-10-06 17:27)
+  ✔ Create fake (static) profile @done (14-10-07 11:23)
+  ☐ Create fake-data page
+  ☐ Refactor HTML to allow for dynamic page creation
+CSS:
+  ✔ Use Bootstrap to create initial page @done (14-10-07 11:23)
+  ☐ Style page to be specific
+  ☐ Refactor classes to keep generic for later customization
+JAVASCRIPT:
+  ✔ Create base user class @done (14-10-07 14:11)
+  ✔ Create login method and store user info @done (14-10-09 03:12)
+STORAGE:
+  ✔ Learn normal local storage @done (14-10-09 03:12)
+  ☐ Explore jStorage
+ FINALIZE:
+   ☐ Refactor Main-Page design
+   ☐ Refactor Login-Page design
+   ☐ Refactor Fak-Data design
+  BUGS:
+    ☐ Get Date for post has wrong digits for years
+    ☐ No automatic focus to the textarea for adding a post
+GENERAL:
+  ☐ Use event handlers to change booleans for selected media
+  ☐ Booleans determine how to filter postsArray
+  ☐ renderFeed using the filtered postsArray

@@ -1,0 +1,122 @@
+<<<<<<< HEAD
+ul {
+	height: 100%;
+	background-color: #AAA;
+}
+
+body {
+	background-color: #CCC;
+}
+
+/* -------- Control Button Container -------- */
+
+#btn-container {
+	height: 830px;
+	border-right: 5px solid #000;
+	/*float: left;*/
+}
+
+.page-head {
+	background-color: #AAA;
+	width: 100%;
+	border-bottom: 5px solid #000;
+}
+
+.btn-wrapper {
+	background-color: #AAA;
+}
+
+#animation-container {
+	height: 600px;
+	position: relative;
+	text-align: center;
+}
+
+.control-btn {
+	margin: auto;
+}
+
+.ani-btn {
+	margin-top: 2em;
+	margin-bottom: 3em;
+}
+
+
+/*MAC*/
+
+
+#demo {
+    width: 100%;
+    height: 300px;
+    background-color: #333;
+    /*padding: 8px;*/
+}
+#pikachu {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin-top:240px;
+    background: url(http://cdn.bulbagarden.net/upload/7/77/Spr_1y_025.png) no-repeat;
+}
+#pokeball {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background: url(http://cdn.bulbagarden.net/upload/9/93/Bag_Pok%C3%A9_Ball_Sprite.png) no-repeat;
+}
+
+/* -------- Animated Box -------- */
+
+#box {
+	background-color: #C11;
+	border: 3px solid #CA5;
+	border-radius: 10px;
+	margin: auto;
+	height: 200px;
+	width: 200px;
+	/*overflow: hidden;*/
+	padding-top: 80px;
+}
+
+#box h4 {
+	color: #CCC;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+
+
+#animation-container {
+	margin: auto;
+	top: 200px;
+	/*postion: static;*/
+=======
+body{
+/*    background-color: grey;*/
+/*background: url(http://cdn.bulbagarden.net/upload/7/77/Spr_1y_025.png) no-repeat;*/
+},
+
+#container {
+    width: 692px;
+    height: 300px;
+    margin-right: fixed;
+    margin-left: fixed;
+    background-color: red;
+    padding: 8px;
+},
+
+#tween {
+    width: 500px;
+    background-color: green;
+    margin-right: auto;
+    margin-left: auto;
+    border-right: 1px dashed #CCC;
+    border-left: 1px dashed #CCC;
+},
+
+#sprite{
+    position: relative;
+    width: 56px;
+    height: 56px;
+>>>>>>> 02eb995b333c09e9cf1d07d5b412cace50cbb2c3
+}

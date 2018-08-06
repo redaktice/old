@@ -1,0 +1,134 @@
+/*===================================================
+ELEMENTS
+=====================================================
+*/
+
+
+header {
+	overflow: hidden;
+	background-color: #BCB;
+	border: .5em solid #888;
+}
+
+
+section {
+	overflow: hidden;
+}
+/*===================================================
+CONTAINERS
+=====================================================
+*/
+
+.profile-container {
+	display: table;
+	margin: 1em 2em;
+}
+
+
+
+.profile-text {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+
+
+/*===================================================
+DEFAULT REMOVALS
+=====================================================
+*/
+
+
+/*Remove default padding*/
+.no-pad {
+	padding: 0;
+}
+
+
+/*===================================================
+FONT-MANIPULATION
+=====================================================
+*/
+
+
+/*Bold Font*/
+.bold {
+	font-weight: bold;
+}
+
+
+/*Grey Font*/
+.grey {
+	color: #777;
+}
+
+
+
+
+/*===================================================
+IMAGES
+=====================================================
+*/
+
+
+/*Profile picture*/
+.identifier-img {
+	float: left;
+	padding: 3px;
+	border: 2px solid #000;
+	margin-right: 2em;
+	display: table-cell;
+}
+
+
+
+/*===================================================
+CLASSES
+=====================================================
+*/
+
+
+/*Adjusts user profile text spacing*/
+.identifier {
+	display: block;
+	overflow: hidden;
+	padding: .25em 0;
+	margin: 0;
+}
+
+/*Create a container around the headers for the sections*/
+.section-head {
+	display: inline-block;
+	border-bottom: 2px solid #555;
+	padding: 0 2.5em 0 0;
+}
+
+/*Reduce bottom-margin of section headers*/
+.section-head h2 {
+	margin-bottom: 0;
+}
+
+
+/*Activities Section Container*/
+.activities {
+	background-color: #B0B2BA;
+	border: .5em solid #CAA;
+	padding-left: 2em;
+}
+
+
+/*Hobbies Section Container*/
+.hobbies {
+	background-color: #C2B0BA;
+	border: .5em solid #88A;
+	padding-left: 2em;
+}
+
+.editable {
+	border: 1px dotted #777;
+}
+/*Just some fun at the bottom of the page*/
+.cant-touch {
+	background-color: #F22;
+	height: 200px;
+}

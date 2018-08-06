@@ -1,0 +1,120 @@
+extends layout
+
+block content
+	div.main-page
+		div.container-fluid
+			//- Navigation
+			//- End Navigation
+
+			//- Main Content
+
+			div.relative.centering
+				div.absolute.page-front.login-front
+					//- div.title.tile-bar.clearfix
+						//- div.container.container-fluid
+							div.navbar-header
+								button.navbar-toggle.collapsed(data-toggle="collapse", data-target="#collapse-section")
+									span.icon-bar
+									span.icon-bar
+									span.icon-bar
+								//- a.navbar-brand(href="#") Media
+							div#collapse-section.collapse.navbar-collapse
+								div.centering
+					div.centering.title
+						h1.app-name.name-color SocialVibe
+										//- li.pad-md-right: i.instagram.media-circle-md.fa.fa-instagram
+										//- li.pad-md-right: i.linkedin.media-circle-md.fa.fa-linkedin
+
+					//- Login
+					div.login-container.login-container-avg
+						div.centering.media-inc
+							ul.nav.navbar-nav.inline-block.centered
+								li.pad-md-right: i.facebook.media-circle-md.fa.fa-facebook
+								li.pad-md-right: i.twitter.media-circle-md.fa.fa-twitter
+						div.inline-block.centering
+							a(href='/auth/facebook'): button.btn.btn-primary.btn-lg Login with Facebook
+							//- form#sign-in.center-form.form(action="/login", method="post")
+								div.absent.failed-login
+									p.bg-danger No matching username/password found
+									p.bg-danger Try again or create an account
+								div.form-group
+									//- input.input-username(required, name="username", type="username", placeholder="Username")
+								div.form-group
+									//- input.input-password(required, name="password", type="password", placeholder="Password")
+								div.form-group.container-fluid
+									//- button#login.btn.btn-primary.btn-lg Login with Face
+									//div.fb-login-button(data-size="xlarge", data-show-faces="false", data-auto-logout-link="false")
+									//- 
+								//- if error
+								//- 	p.bg-danger No matching username/password found
+								div.page-header
+								//- button#sign-up.btn.btn-success.btn-sm Sign Up
+								div.form-group.container-fluid
+									button.terms-of-use.btn.btn-info.btn-xs Terms of Use
+				//- Create Account
+				//- div.absolute.form-container.form-container-tall
+				//- 	div.inline-block.centering.form-container-wide
+				//- 		form#new-user.absent.center-form.form-wide(action="form", mehtod="post")
+				//- 			div.signup-prompt
+				//- 				p.bg-success Welcome!
+				//- 				p.bg-success Please Complete
+				//- 			div.form-group
+				//- 				input.centering.input-firstname(required, name="firstName", type="text", placeholder="First Name")
+				//- 			div.form-group
+				//- 				input.centering.input-lastname(required, name="lastName", type="text", placeholder="Last Name")
+				//- 			div.form-group
+				//- 				input.centering.input-age(required, name="age", type="text", placeholder="Age")
+				//- 			div.form-group
+				//- 				input.centering.input-email(required, type="email", placeholder="example@beingawesome.com")
+				//- 			div.form-group
+				//- 				input.centering.input-username(required, name="email", type="username", placeholder="Username")
+				//- 			div.form-group
+				//- 				input.centering.input-password(required, name="new-Passsword", type="password", placeholder="Password: At least 8 characters")
+				//- 				div.absent.form-group.failed-signup
+				//- 					p.bg-danger Please make password 8 or more characters
+				//- 			div.form-group.container-fluid
+				//- 				button#create.btn.btn-success.btn-lg Create!
+				//- 			div.form-group.container-fluid
+				//- 				a.terms-of-use.btn.btn-info.btn-xs(href="#") Terms of use
+				//- Carousel
+		div#login-page.carousel.slide(data-ride="carousel")
+			div.carousel-inner
+
+				//- Carousel Item
+				div.item.active.carousel-item-1
+					div.carousel-caption
+						h2 Organize Your Life
+					div.color
+
+				//- Carousel Item
+				div.item.carousel-item-2
+					div.carousel-caption
+						h2 Connect With The World
+					div.color
+
+				//- Carousel Item
+				div.item.carousel-item-3
+					div.carousel-caption
+						h2 Manage Digital Life
+					div.color
+
+				//- Carousel Item
+				div.item.carousel-item-4
+					div.carousel-caption
+						h2 Increase Your Presence
+					div.color
+			a.left.carousel-control(href="#login-page", role="button", data-slide="prev")
+			a.right.carousel-control(href="#login-page", role="button", data-slide="next")
+			//- Footer
+			div.absolute.page-foot.page-front
+				footer.text-center
+					div.page-header
+					ul.list-inline
+						li: a(href="#") About Us
+						li: a(href="#") Contact Us
+						li: a(href="#") FAQ
+						li: a(href="#") Terms of use
+					p © Company
+
+	script.
+		//- var key = #{key}
