@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Untitled</title>
+  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<header class="container title-section">
+			<h1 class="underliner">
+				<span class="title">Awesome and Inspirational "Quotes"</span>
+			</h1>
+	</header>
+
+
+
+	<!-- Add Quote Section -->
+	<section class="add container">
+		<h4 class="underliner horizontal">
+			<span class="section-head">Add a Quote!</span>
+		</h4>
+		<form id="quote-form">
+			<input type="text" name="Author" placeholder="Author Name">
+			<textarea rows="5" cols="30" name="Quote" placeholder="Enter Quote Here"></textarea>
+			<input type="submit" value="Add Quote">
+		</form>
+		<button class="horizontal add-quote">Quote</button>
+		<div class="random">
+			<button>Random Quote</button>
+		</div>
+	</section>
+
+
+
+	<!-- Main Container for Quotes -->
+	<section class="main-body container">
+		<div class="underliner">
+			<h1 class="section-head">Quotes</h1>
+			<h3 class="section-head">By Rank</h3>
+		</div>
+
+		<!-- General Quote List Goes Here  -->
+		<div class="centered-container">
+			<ul class="unstyled ranked">
+			
+			</ul>
+		</div>
+	</section>
+	
+
+	<!-- Quotes by Author -->
+
+	<footer class="container">
+		<div class="underliner">
+			<h2 class="section-head">Quotes by Author</h2>
+		</div>
+		<div class="centered-container">
+			<ul class="unstyled authored">
+			
+			</ul>
+		</div>
+	</footer>
+	
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+	<script src="main.js"></script>
+<div class="grey"></div>
+</body>
+</html>
+
+
+
+
+<!-- --------TEMPLATES---------- -->
+	<!-- Quote Template -->
+	<div class="template hidden">
+		<li id="quote-template" class="rank-organized">
+			<div class="quote-container">
+				<div class="text italics"></div>
+				<span class="author"></span>
+				<p class="rank" data-tag=""></p>
+			</div>
+		<button class="options">Rank/Remove</button>
+		<button class="delete hidden">Delete</button>
+		</li>
+	</div>
+	<!-- End Quote Template -->
+
+
+
+	<!-- Authored Template -->
+	<div class="template hidden">
+			<li id="authored-template" class="author-organized">
+				<h3 class="author"></h3>
+			
+				<ul class="unstyled authored-quotes hidden">
+					 <!-- quotes by this author go here -->
+				</ul>
+				<button class="show-quotes">Show Quotes</button>
+			</li>
+	</div>
+	<!-- End Authored Template -->
+
+
+
+
+	<!-- Random Quote Template -->
+	<div class="template hidden">
+		<div id="popup-template" class="popup-container">
+		<div class="popup-box">
+			<div class="popup">
+			</div>
+			<button class="close">Close</button>
+			</div>
+		</div>
+	</div>
+	<!-- End Random Quote Template -->
